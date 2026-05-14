@@ -12,25 +12,25 @@
     /* ============================================
        CSS VARIABLES — Global Theme
     ============================================ */
-    :root {
-      --gold: #c9a84c;
-      --gold-light: #e8c97a;
-      --gold-dim: #8a6d2a;
-      --obsidian: #09090b;
-      --obsidian-2: #0f0f12;
-      --surface: #141418;
-      --surface-2: #1c1c22;
-      --surface-3: #242430;
-      --glass-bg: rgba(20, 20, 26, 0.55);
-      --glass-border: rgba(201, 168, 76, 0.18);
-      --border: rgba(201,168,76,0.15);
-      --border-strong: rgba(201,168,76,0.35);
-      --text-primary: #f0ece0;
-      --text-secondary: #a09880;
-      --text-muted: #5a5448;
-      --profit: #4caf7d;
-      --profit-dim: #2d7a54;
-    }
+:root {
+  --gold: #C19B66; /* Muted Gold */
+  --gold-light: #D4BA95;
+  --gold-dim: #6E5334;
+  --obsidian: #000000; /* Absolute Black */
+  --obsidian-2: #080808;
+  --surface: #111111;
+  --surface-2: #181818;
+  --surface-3: #222222;
+  --glass-bg: rgba(0, 0, 0, 0.9);
+  --glass-border: rgba(193, 155, 102, 0.15);
+  --border: rgba(193, 155, 102, 0.08);
+  --border-strong: rgba(193, 155, 102, 0.25);
+  --text-primary: #E5E5E5;
+  --text-secondary: #888888;
+  --text-muted: #444444;
+  --profit: #00D084;
+  --profit-dim: #003321;
+}
 
     /* ============================================
        BASE RESET
@@ -40,7 +40,7 @@
     body {
       background: var(--obsidian);
       color: var(--text-primary);
-      font-family: 'Outfit', sans-serif;
+      font-family: 'Lexend', sans-serif;
       font-weight: 300;
       -webkit-font-smoothing: antialiased;
       overflow-x: hidden;
@@ -1376,92 +1376,8 @@
       <!-- Section Header -->
       <div style="text-align:center;margin-bottom:64px;">
         <p class="section-label reveal">Operational Handbook</p>
-        <h2 class="section-title reveal delay-100">Deployment <span class="text-gold-gradient">Protocol</span></h2>
-        <p class="section-desc reveal delay-200">From zero to live trading in three structured steps. No technical background required.</p>
-      </div>
-
-      <!-- Step 1: Cloud VPS Setup -->
-      <div class="accordion gold-border open reveal" id="acc1">
-        <button class="accordion-btn" onclick="toggleAccordion('acc1')">
-          <div class="accordion-step-icon">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/></svg>
-          </div>
-          <div>
-            <p class="accordion-step-num">Step 01</p>
-            <p class="accordion-title">Cloud VPS Setup — Oracle Free Tier</p>
-          </div>
-          <svg class="accordion-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
-        </button>
-        <div class="accordion-body">
-          <div class="accordion-content-inner">
-            <div class="accordion-divider"></div>
-            <p>Deploy AMRAX on a <strong style="color:var(--text-primary);">24/7 cloud server</strong> using Oracle's Always-Free VPS — zero hosting cost, enterprise-grade uptime. This eliminates PC dependency and ensures your EA never misses a trade signal.</p>
-            <div class="step-list">
-              <div class="step-item"><div class="step-num">1</div><div class="step-text">Register at <span style="color:var(--gold);">cloud.oracle.com</span> — select <strong style="color:var(--text-primary);">Pakistan</strong> as billing territory</div></div>
-              <div class="step-item"><div class="step-num">2</div><div class="step-text">Create instance in <strong style="color:var(--text-primary);">UK South (London)</strong> region — optimal latency to Exness servers</div></div>
-              <div class="step-item"><div class="step-num">3</div><div class="step-text">Select Windows Server image — minimum 2 vCPU / 4GB RAM</div></div>
-              <div class="step-item"><div class="step-num">4</div><div class="step-text">Note your public IP and RDP credentials from Oracle console</div></div>
-            </div>
-            <div class="tip-box">✦ London region provides sub-10ms latency to major Exness execution nodes — critical for order accuracy.</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Step 2: MetaTrader 5 Installation -->
-      <div class="accordion gold-border reveal delay-100" id="acc2">
-        <button class="accordion-btn" onclick="toggleAccordion('acc2')">
-          <div class="accordion-step-icon">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
-          </div>
-          <div>
-            <p class="accordion-step-num">Step 02</p>
-            <p class="accordion-title">MetaTrader 5 Installation via RDP</p>
-          </div>
-          <svg class="accordion-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
-        </button>
-        <div class="accordion-body">
-          <div class="accordion-content-inner">
-            <div class="accordion-divider"></div>
-            <p>Connect to your VPS via Remote Desktop Protocol and install the <strong style="color:var(--text-primary);">Exness MT5 Terminal</strong> — the designated broker for AMRAX's calibrated execution parameters.</p>
-            <div class="step-list">
-              <div class="step-item"><div class="step-num">1</div><div class="step-text">Open Remote Desktop Connection (Windows key → type "mstsc")</div></div>
-              <div class="step-item"><div class="step-num">2</div><div class="step-text">Enter your Oracle VPS IP address and login credentials</div></div>
-              <div class="step-item"><div class="step-num">3</div><div class="step-text">Inside VPS: download MT5 from exness.com/trading/platforms</div></div>
-              <div class="step-item"><div class="step-num">4</div><div class="step-text">Install and launch — log in with your Exness live account</div></div>
-              <div class="step-item"><div class="step-num">5</div><div class="step-text">Confirm server connection: green status bar in the bottom-right</div></div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Step 3: EA Activation -->
-      <div class="accordion gold-border reveal delay-200" id="acc3">
-        <button class="accordion-btn" onclick="toggleAccordion('acc3')">
-          <div class="accordion-step-icon">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
-          </div>
-          <div>
-            <p class="accordion-step-num">Step 03</p>
-            <p class="accordion-title">EA Activation & Smiley Face Confirmation</p>
-          </div>
-          <svg class="accordion-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
-        </button>
-        <div class="accordion-body">
-          <div class="accordion-content-inner">
-            <div class="accordion-divider"></div>
-            <p>Install the AMRAX EA file and configure MT5 to grant algorithmic trading permissions. The <strong style="color:var(--gold);">"Smiley Face"</strong> icon confirms your EA is live and trading autonomously.</p>
-            <div class="step-list">
-              <div class="step-item"><div class="step-num">1</div><div class="step-text">Place AMRAX.ex5 file in: MetaTrader 5 → MQL5 → Experts folder</div></div>
-              <div class="step-item"><div class="step-num">2</div><div class="step-text">In MT5: Tools → Options → Expert Advisors → Enable Algorithmic Trading</div></div>
-              <div class="step-item"><div class="step-num">3</div><div class="step-text">Drag AMRAX from Navigator panel onto your chart (XAUUSD or configured pair)</div></div>
-              <div class="step-item"><div class="step-num">4</div><div class="step-text">In EA properties: confirm "Allow Algo Trading" is checked → OK</div></div>
-              <div class="step-item"><div class="step-num">5</div><div class="step-text">Verify the Smiley Face (😊) appears on the chart — EA is active and running</div></div>
-            </div>
-            <div class="tip-box gold-tip">
-              ✦ The smiley face icon is your final confirmation. Frowning face = algo trading disabled. Confirm before stepping away from the terminal.
-            </div>
-          </div>
-        </div>
+        <h2 class="section-title reveal delay-100">AMRAX <span class="text-gold-gradient">Performance</span></h2>
+        <p class="section-desc reveal delay-200">Here is the Complete Video How AMRAX performs in the last 1 year period.</p>
       </div>
 
       <!-- YouTube Backtest Video (Embedded) -->
@@ -1482,7 +1398,7 @@
           </div>
           <!-- Video Footer -->
           <div class="video-card-footer">
-            <span>AMRAX v1.0 · Backtest Demonstration</span>
+            <span>AMRAX v1.0 Backtest </span>
             <div style="flex:1;height:1px;background:rgba(201,168,76,0.08);"></div>
             <span>Ahmad Ka AMRAX</span>
           </div>
