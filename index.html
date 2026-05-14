@@ -250,45 +250,88 @@
     .mobile-menu .btn-gold { display: flex; justify-content: center; margin-top: 20px; padding: 12px; width: 100%; }
 
 
-   <section id="hero">
-  <div class="hero-glow"></div>
-  <div class="hero-grid"></div>
+    /* ============================================
+       SECTION 2: HERO
+    ============================================ */
+    #hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      text-align: center;
+      padding: 96px 24px 80px;
+      overflow: hidden;
+    }
 
-  <div class="hero-container">
-    
-    <!-- Founder Image (Pointing towards text) -->
-    <div class="hero-image-wrap reveal">
-      <img src="Amrax founder.png" alt="Amrax Founder" class="founder-img">
-    </div>
+    /* --- Hero Background Effects --- */
+    .hero-glow {
+      position: absolute; inset: 0; pointer-events: none;
+      background: radial-gradient(ellipse 80% 50% at 50% 60%, rgba(201,168,76,0.07) 0%, transparent 70%);
+    }
+    .hero-grid {
+      position: absolute; inset: 0; pointer-events: none; opacity: 0.2;
+      background-image: linear-gradient(rgba(201,168,76,0.08) 1px, transparent 1px), linear-gradient(90deg, rgba(201,168,76,0.08) 1px, transparent 1px);
+      background-size: 80px 80px;
+      mask-image: radial-gradient(ellipse 70% 60% at 50% 50%, black 30%, transparent 80%);
+    }
 
-    <!-- Hero Content -->
-    <div class="hero-content">
-      <div class="hero-badge reveal">
-        <span class="live-dot"></span> NOW PUBLICLY AVAILABLE
-      </div>
-      
-      <h1 class="hero-title reveal delay-100">
-        Trade Like The <span style="display:block;">Top 1%</span>
-      </h1>
-      
-      <p class="hero-desc reveal delay-200">
-        Stop guessing. Start executing. Get access to the institutional-grade AI system designed for real market conditions.
-      </p>
+    /* --- Hero Badge --- */
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 10px;
+      padding: 8px 20px;
+      border-radius: 9999px;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase;
+      background: rgba(201,168,76,0.06); border: 1px solid rgba(201,168,76,0.18); color: var(--gold);
+      margin-bottom: 32px;
+    }
 
-      <div class="hero-ctas reveal delay-300">
-        <a href="#get-started" class="btn-primary" style="padding: 18px 40px; font-weight: 800;">GET AMRAX FOR FREE</a>
-        <a href="#live-monitoring" class="btn-secondary" style="padding: 18px 30px; font-family: 'DM Mono'; font-size: 0.75rem;">LIVE RESULTS</a>
-      </div>
-    </div>
+    /* --- Hero Title --- */
+    .hero-title {
+      font-family: 'Space Grotesk', serif;
+      font-size: clamp(4rem, 12vw, 9rem);
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      line-height: 0.9;
+      background: linear-gradient(135deg, var(--gold-light) 0%, var(--gold) 50%, var(--gold-dim) 100%);
+      -webkit-text-fill-color: transparent;
+      -webkit-background-clip: text;
+      background-clip: text;
+      margin-bottom: 12px;
+    }
+    .hero-version {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.8rem; letter-spacing: 0.5em; text-transform: uppercase;
+      color: var(--text-muted); margin-bottom: 24px;
+    }
 
-  </div>
+    /* --- Hero Tagline --- */
+    .hero-tagline {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.1rem, 2vw, 1.4rem);
+      font-weight: 300; font-style: italic;
+      color: var(--text-secondary);
+      max-width: 640px; line-height: 1.6; margin-bottom: 16px;
+    }
 
-  <!-- Scroll Hint -->
-  <div class="scroll-hint reveal delay-500">
-    <span>SCROLL TO EXPLORE</span>
-    <div style="width: 1px; height: 40px; background: var(--border-strong); margin-top: 10px;"></div>
-  </div>
-</section>
+    /* --- Hero Description --- */
+    .hero-desc {
+      font-size: 0.9rem; color: var(--text-muted);
+      max-width: 560px; line-height: 1.8; margin-bottom: 48px;
+    }
+
+    /* --- Hero Stats --- */
+    .hero-stats { display: flex; flex-wrap: wrap; justify-content: center; gap: 32px; margin-bottom: 48px; }
+    .hero-stat-value { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.5rem, 3vw, 1.9rem); font-weight: 600; color: var(--gold-light); }
+    .hero-stat-label { font-family: 'DM Mono', monospace; font-size: 0.65rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-muted); margin-top: 4px; }
+
+    /* --- Hero CTA Buttons --- */
+    .hero-ctas { display: flex; flex-direction: column; gap: 16px; align-items: center; }
+    @media (min-width: 576px) { .hero-ctas { flex-direction: row; } }
+
+    /* --- Scroll Hint --- */
+    .scroll-hint { position: absolute; bottom: 32px; left: 50%; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 8px; opacity: 0.4; }
+    .scroll-hint span { font-family: 'DM Mono', monospace; font-size: 0.65rem; letter-spacing: 0.2em; color: var(--text-muted); }
+
 
     /* ============================================
        SECTION 3: PERFORMANCE DASHBOARD
