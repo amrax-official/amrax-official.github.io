@@ -6,9 +6,11 @@
   <title>AMRAX v1.0 — Institutional EA</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=Outfit:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet" />
+
   <style>
     /* ============================================
-       CSS VARIABLES — Edit colors/theme here
+       CSS VARIABLES — Global Theme
     ============================================ */
     :root {
       --gold: #c9a84c;
@@ -19,6 +21,8 @@
       --surface: #141418;
       --surface-2: #1c1c22;
       --surface-3: #242430;
+      --glass-bg: rgba(20, 20, 26, 0.55);
+      --glass-border: rgba(201, 168, 76, 0.18);
       --border: rgba(201,168,76,0.15);
       --border-strong: rgba(201,168,76,0.35);
       --text-primary: #f0ece0;
@@ -79,10 +83,10 @@
     @media (min-width: 1024px) { .section-pad { padding: 96px 96px; } }
 
     /* ============================================
-       COMPONENTS
+       REUSABLE COMPONENTS
     ============================================ */
 
-    /* Gold border card */
+    /* --- Gold Border Card --- */
     .gold-border {
       border: 1px solid var(--border);
       box-shadow: 0 0 0 1px rgba(201,168,76,0.05), inset 0 1px rgba(201,168,76,0.08);
@@ -92,7 +96,16 @@
       box-shadow: 0 0 24px rgba(201,168,76,0.08), inset 0 1px rgba(201,168,76,0.12);
     }
 
-    /* Gold button */
+    /* --- Glass Card --- */
+    .glass-card {
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      box-shadow: 0 0 20px rgba(201,168,76,0.06), inset 0 0 20px rgba(255,255,255,0.02);
+    }
+
+    /* --- Gold Button --- */
     .btn-gold {
       background: linear-gradient(135deg, var(--gold-light) 0%, var(--gold) 60%, var(--gold-dim) 100%);
       color: #0a0804;
@@ -113,7 +126,19 @@
     .btn-gold:hover { filter: brightness(1.12); transform: translateY(-1px); box-shadow: 0 8px 32px rgba(201,168,76,0.4); }
     .btn-gold:active { filter: brightness(0.95); transform: translateY(0); }
 
-    /* Gold divider */
+    /* --- Outline Button --- */
+    .btn-outline {
+      display: inline-flex; align-items: center; gap: 10px;
+      padding: 16px 32px; border-radius: 16px;
+      font-size: 0.875rem; font-weight: 400; letter-spacing: 0.06em;
+      color: var(--text-secondary);
+      border: 1px solid var(--border);
+      background: var(--surface);
+      transition: all 0.2s;
+    }
+    .btn-outline:hover { border-color: var(--border-strong); color: var(--gold); }
+
+    /* --- Gold Divider --- */
     .divider-gold {
       background: linear-gradient(90deg, transparent, var(--gold-dim), transparent);
       height: 1px;
@@ -121,7 +146,16 @@
       margin: 0 auto;
     }
 
-    /* Scroll reveal animations */
+    /* --- Section Label / Title / Desc --- */
+    .section-label { font-family: 'DM Mono', monospace; font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold-dim); margin-bottom: 16px; }
+    .section-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 5vw, 3.75rem); font-weight: 600; color: var(--text-primary); margin-bottom: 24px; }
+    .section-desc { font-size: 0.95rem; color: var(--text-secondary); line-height: 1.8; max-width: 640px; margin: 0 auto; }
+
+    /* ============================================
+       ANIMATIONS
+    ============================================ */
+
+    /* --- Scroll Reveal --- */
     .reveal {
       opacity: 0;
       transform: translateY(32px);
@@ -134,7 +168,7 @@
     .delay-400 { transition-delay: 0.4s; }
     .delay-500 { transition-delay: 0.5s; }
 
-    /* Shimmer line */
+    /* --- Shimmer Line --- */
     @keyframes shimmer { 0% { background-position: -200%; } 100% { background-position: 200%; } }
     .shimmer-line {
       background: linear-gradient(90deg, transparent, rgba(201,168,76,0.15), transparent) 0 0 / 200%;
@@ -144,12 +178,16 @@
       border-radius: 9999px;
     }
 
-    /* Pulse dot */
+    /* --- Pulse Dot --- */
     @keyframes pulse-dot { 0%,100% { opacity:1; transform:scale(1); } 50% { opacity:0.5; transform:scale(0.85); } }
     .pulse-dot { animation: pulse-dot 2s ease-in-out infinite; }
 
+    /* --- Blink --- */
+    @keyframes blink { 0%, 100% { opacity:1; } 50% { opacity:0.2; } }
+
+
     /* ============================================
-       NAVBAR
+       SECTION 1: NAVBAR
     ============================================ */
     nav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 50;
@@ -161,6 +199,7 @@
     }
     @media (min-width: 768px) { nav { padding: 16px 48px; } }
 
+    /* --- Nav Logo --- */
     .nav-logo { display: flex; align-items: center; gap: 10px; }
     .nav-logo-text {
       font-family: 'Cormorant Garamond', serif;
@@ -178,20 +217,22 @@
       color: var(--gold-dim);
       border: 1px solid rgba(201,168,76,0.15);
     }
+
+    /* --- Nav Links --- */
     .nav-links { display: none; gap: 32px; }
     @media (min-width: 768px) { .nav-links { display: flex; align-items: center; } }
-    .nav-links a {
-      font-size: 0.875rem;
-      color: var(--text-secondary);
-      transition: color 0.2s;
-    }
+    .nav-links a { font-size: 0.875rem; color: var(--text-secondary); transition: color 0.2s; }
     .nav-links a:hover { color: var(--gold); }
+
+    /* --- Nav CTA --- */
     .nav-cta { display: none; }
     @media (min-width: 768px) { .nav-cta { display: inline-flex; } }
 
-    /* Mobile menu */
+    /* --- Mobile Menu Button --- */
     .mobile-menu-btn { display: flex; padding: 8px; color: var(--gold); }
     @media (min-width: 768px) { .mobile-menu-btn { display: none; } }
+
+    /* --- Mobile Menu --- */
     .mobile-menu {
       display: none;
       position: fixed; top: 65px; left: 0; right: 0; z-index: 40;
@@ -208,8 +249,9 @@
     }
     .mobile-menu .btn-gold { display: flex; justify-content: center; margin-top: 20px; padding: 12px; width: 100%; }
 
+
     /* ============================================
-       HERO SECTION
+       SECTION 2: HERO
     ============================================ */
     #hero {
       position: relative;
@@ -219,6 +261,8 @@
       padding: 96px 24px 80px;
       overflow: hidden;
     }
+
+    /* --- Hero Background Effects --- */
     .hero-glow {
       position: absolute; inset: 0; pointer-events: none;
       background: radial-gradient(ellipse 80% 50% at 50% 60%, rgba(201,168,76,0.07) 0%, transparent 70%);
@@ -230,7 +274,7 @@
       mask-image: radial-gradient(ellipse 70% 60% at 50% 50%, black 30%, transparent 80%);
     }
 
-    /* ---- EDITABLE: Hero badge text ---- */
+    /* --- Hero Badge --- */
     .hero-badge {
       display: inline-flex; align-items: center; gap: 10px;
       padding: 8px 20px;
@@ -241,7 +285,7 @@
       margin-bottom: 32px;
     }
 
-    /* ---- EDITABLE: Hero title ---- */
+    /* --- Hero Title --- */
     .hero-title {
       font-family: 'Cormorant Garamond', serif;
       font-size: clamp(4rem, 12vw, 9rem);
@@ -260,7 +304,7 @@
       color: var(--text-muted); margin-bottom: 24px;
     }
 
-    /* ---- EDITABLE: Hero tagline ---- */
+    /* --- Hero Tagline --- */
     .hero-tagline {
       font-family: 'Cormorant Garamond', serif;
       font-size: clamp(1.1rem, 2vw, 1.4rem);
@@ -269,50 +313,40 @@
       max-width: 640px; line-height: 1.6; margin-bottom: 16px;
     }
 
-    /* ---- EDITABLE: Hero description ---- */
+    /* --- Hero Description --- */
     .hero-desc {
       font-size: 0.9rem; color: var(--text-muted);
       max-width: 560px; line-height: 1.8; margin-bottom: 48px;
     }
 
-    /* Hero stats */
+    /* --- Hero Stats --- */
     .hero-stats { display: flex; flex-wrap: wrap; justify-content: center; gap: 32px; margin-bottom: 48px; }
     .hero-stat-value { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.5rem, 3vw, 1.9rem); font-weight: 600; color: var(--gold-light); }
     .hero-stat-label { font-family: 'DM Mono', monospace; font-size: 0.65rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-muted); margin-top: 4px; }
 
-    /* Hero CTA buttons */
+    /* --- Hero CTA Buttons --- */
     .hero-ctas { display: flex; flex-direction: column; gap: 16px; align-items: center; }
     @media (min-width: 576px) { .hero-ctas { flex-direction: row; } }
-    .btn-outline {
-      display: inline-flex; align-items: center; gap: 10px;
-      padding: 16px 32px; border-radius: 16px;
-      font-size: 0.875rem; font-weight: 400; letter-spacing: 0.06em;
-      color: var(--text-secondary);
-      border: 1px solid var(--border);
-      background: var(--surface);
-      transition: all 0.2s;
-    }
-    .btn-outline:hover { border-color: var(--border-strong); color: var(--gold); }
 
-    /* Scroll indicator */
+    /* --- Scroll Hint --- */
     .scroll-hint { position: absolute; bottom: 32px; left: 50%; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 8px; opacity: 0.4; }
     .scroll-hint span { font-family: 'DM Mono', monospace; font-size: 0.65rem; letter-spacing: 0.2em; color: var(--text-muted); }
 
+
     /* ============================================
-       PERFORMANCE SECTION
+       SECTION 3: PERFORMANCE DASHBOARD
     ============================================ */
     #performance { max-width: 1280px; margin: 0 auto; }
 
-    .section-label { font-family: 'DM Mono', monospace; font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold-dim); margin-bottom: 16px; }
-    .section-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 5vw, 3.75rem); font-weight: 600; color: var(--text-primary); margin-bottom: 24px; }
-    .section-desc { font-size: 0.95rem; color: var(--text-secondary); line-height: 1.8; max-width: 640px; margin: 0 auto; }
-
-    /* Metric cards grid */
+    /* --- Metric Cards Grid --- */
     .metrics-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-bottom: 32px; }
     @media (min-width: 1024px) { .metrics-grid { grid-template-columns: repeat(3, 1fr); } }
 
+    /* --- Individual Metric Card --- */
     .metric-card {
-      background: var(--surface);
+      background: var(--glass-bg);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
       border-radius: 16px; padding: 24px;
       display: flex; flex-direction: column; gap: 12px;
       cursor: default;
@@ -320,23 +354,28 @@
     }
     .metric-card:hover { transform: translateY(-4px); }
     .metric-card-top { display: flex; align-items: center; justify-content: space-between; }
+
+    /* --- Metric Icon --- */
     .metric-icon {
       width: 36px; height: 36px; border-radius: 8px;
       display: flex; align-items: center; justify-content: center;
     }
     .metric-icon.gold { background: rgba(201,168,76,0.08); color: var(--gold); border: 1px solid rgba(201,168,76,0.15); }
     .metric-icon.green { background: rgba(76,175,125,0.1); color: var(--profit); border: 1px solid rgba(76,175,125,0.2); }
+
+    /* --- Metric Values & Labels --- */
     .metric-value { font-family: 'Cormorant Garamond', serif; font-size: 1.9rem; font-weight: 600; line-height: 1; margin-bottom: 4px; }
     .metric-value.gold { color: var(--gold-light); }
     .metric-value.green { color: var(--profit); }
     .metric-suffix { font-size: 1.1rem; }
     .metric-label { font-family: 'DM Mono', monospace; font-size: 0.62rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-muted); margin-top: 8px; }
 
-    /* Insight block */
+    /* --- Insight Block --- */
     .insight-block {
       border-radius: 16px; padding: 24px 32px;
       display: flex; align-items: flex-start; gap: 24px;
       background: linear-gradient(135deg, rgba(201,168,76,0.06) 0%, rgba(76,175,125,0.04) 100%);
+      backdrop-filter: blur(12px);
       margin-bottom: 32px;
     }
     .insight-icon {
@@ -348,22 +387,281 @@
     .insight-eyebrow { font-family: 'DM Mono', monospace; font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold-dim); margin-bottom: 8px; }
     .insight-text { font-family: 'Cormorant Garamond', serif; font-size: clamp(1rem, 1.5vw, 1.15rem); font-style: italic; color: var(--text-primary); line-height: 1.7; }
 
-    /* Equity curve card */
-    .equity-card { background: var(--surface); border-radius: 16px; padding: 32px; }
+    /* --- Equity Curve Card --- */
+    .equity-card {
+      background: var(--glass-bg);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-radius: 16px; padding: 32px;
+    }
     .equity-label { font-family: 'DM Mono', monospace; font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 24px; }
     .equity-footer { display: flex; align-items: center; gap: 16px; margin-top: 16px; font-family: 'DM Mono', monospace; font-size: 0.7rem; color: var(--text-muted); }
     .equity-footer .line { flex: 1; height: 1px; background: rgba(201,168,76,0.08); }
 
+
     /* ============================================
-       DEPLOYMENT SECTION
+       SECTION 4: FREE TRIAL CTA
+    ============================================ */
+    #free-trial {
+      padding: 80px 24px;
+    }
+    @media (min-width: 768px) { #free-trial { padding: 80px 48px; } }
+
+    /* --- Free Trial Card Container --- */
+    .free-trial-wrapper {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    /* --- Free Trial Inner Card --- */
+    .free-trial-card {
+      position: relative;
+      width: 100%;
+      padding: 70px 55px;
+      border-radius: 24px;
+      background: var(--glass-bg);
+      border: 1px solid rgba(193, 155, 102, 0.2);
+      overflow: hidden;
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      box-shadow:
+        0 25px 80px rgba(0, 0, 0, 0.6),
+        0 0 40px rgba(193, 155, 102, 0.06);
+      text-align: center;
+    }
+
+    /* --- Free Trial Glow Accents --- */
+    .free-trial-card::before,
+    .free-trial-card::after {
+      content: "";
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(100px);
+      opacity: 0.12;
+      z-index: 0;
+    }
+    .free-trial-card::before {
+      width: 300px; height: 300px;
+      background: #c19b66;
+      top: -150px; left: -100px;
+    }
+    .free-trial-card::after {
+      width: 250px; height: 250px;
+      background: #8e6d3f;
+      bottom: -120px; right: -80px;
+    }
+
+    /* --- Free Trial Content --- */
+    .free-trial-content { position: relative; z-index: 2; }
+
+    /* --- Free Trial Tag --- */
+    .free-trial-tag {
+      display: inline-block;
+      margin-bottom: 22px;
+      padding: 8px 20px;
+      border-radius: 999px;
+      background: rgba(193, 155, 102, 0.1);
+      border: 1px solid rgba(193, 155, 102, 0.3);
+      color: #c19b66;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    /* --- Free Trial Heading --- */
+    .free-trial-heading {
+      font-size: clamp(1.8rem, 8vw, 3.8rem);
+      line-height: 1.2;
+      font-weight: 800;
+      color: #ffffff;
+      margin-bottom: 18px;
+      letter-spacing: -0.5px;
+    }
+    .free-trial-heading span {
+      background: linear-gradient(90deg, #c19b66 0%, #f3d4a8 50%, #c19b66 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      display: inline-block;
+    }
+
+    /* --- Free Trial Subtitle & Note --- */
+    .free-trial-subtitle {
+      font-size: clamp(0.95rem, 2.5vw, 1.1rem);
+      color: #aaaaaa;
+      max-width: 680px;
+      margin: 0 auto 16px;
+      line-height: 1.6;
+      font-weight: 400;
+    }
+    .free-trial-note {
+      font-size: 0.85rem;
+      color: #666666;
+      margin-bottom: 35px;
+      font-style: italic;
+    }
+
+    /* --- Free Trial Button --- */
+    .free-trial-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      padding: 18px 40px;
+      border-radius: 12px;
+      text-decoration: none;
+      background: linear-gradient(135deg, #c19b66 0%, #8e6d3f 100%);
+      color: #000000;
+      font-size: 0.95rem;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      transition: all 0.3s ease;
+      box-shadow: 0 10px 25px rgba(193, 155, 102, 0.2);
+    }
+    .free-trial-btn:hover { transform: translateY(-3px); filter: brightness(1.1); }
+    .free-trial-btn svg { width: 20px; height: 20px; fill: #000000; }
+
+    /* --- Free Trial Mobile --- */
+    @media (max-width: 600px) {
+      .free-trial-card { padding: 45px 20px; border-radius: 20px; }
+      .free-trial-tag { font-size: 10px; padding: 6px 15px; margin-bottom: 15px; }
+      .free-trial-btn { width: 100%; padding: 20px 15px; }
+      .free-trial-card::before, .free-trial-card::after { opacity: 0.08; filter: blur(60px); }
+    }
+
+
+    /* ============================================
+       SECTION 5: LIVE ACCOUNT MONITORING
+    ============================================ */
+    #live-monitoring {
+      background: radial-gradient(circle at top, rgba(30,28,20,0.4) 0%, transparent 100%);
+      padding: 80px 20px;
+    }
+
+    /* --- Monitoring Container & Heading --- */
+    .monitoring-container { max-width: 1400px; margin: auto; }
+    .monitoring-heading { text-align: center; margin-bottom: 50px; }
+    .monitoring-heading h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 5vw, 3.75rem);
+      font-weight: 600;
+      color: var(--gold);
+      letter-spacing: 1px;
+      margin-bottom: 12px;
+    }
+    .monitoring-heading p { color: var(--text-muted); font-size: 1rem; }
+
+    /* --- Monitoring Cards Grid --- */
+    .monitoring-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+      gap: 30px;
+    }
+
+    /* --- Individual Monitor Card --- */
+    .monitor-card {
+      position: relative;
+      background: var(--glass-bg);
+      border: 1px solid rgba(201,168,76,0.2);
+      border-radius: 24px;
+      padding: 28px;
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      box-shadow: 0 0 20px rgba(201,168,76,0.06), inset 0 0 20px rgba(255,255,255,0.02);
+      overflow: hidden;
+      transition: 0.35s ease;
+    }
+    .monitor-card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(201,168,76,0.45);
+      box-shadow: 0 0 30px rgba(201,168,76,0.15), 0 0 60px rgba(201,168,76,0.06);
+    }
+
+    /* --- Live Feed Indicator --- */
+    .live-feed {
+      display: flex; align-items: center; gap: 10px;
+      margin-bottom: 22px;
+      font-size: 0.85rem; font-weight: 600; color: #fff; letter-spacing: 1px;
+      font-family: 'DM Mono', monospace;
+    }
+    .live-dot {
+      width: 10px; height: 10px;
+      background: var(--profit);
+      border-radius: 50%;
+      box-shadow: 0 0 10px var(--profit);
+      animation: blink 1s infinite;
+    }
+
+    /* --- Monitor Card Title & Badge --- */
+    .monitor-card-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.4rem; font-weight: 700; color: var(--gold); margin-bottom: 16px;
+    }
+    .status-badge {
+      display: inline-block;
+      background: rgba(76,175,125,0.12);
+      color: var(--profit);
+      border: 1px solid rgba(76,175,125,0.3);
+      padding: 6px 14px;
+      border-radius: 999px;
+      font-size: 0.75rem; font-weight: 700; margin-bottom: 22px; letter-spacing: 1px;
+      font-family: 'DM Mono', monospace;
+    }
+
+    /* --- Monitor Terminal Box --- */
+    .terminal {
+      background: rgba(0,0,0,0.3);
+      border: 1px solid rgba(201,168,76,0.12);
+      border-radius: 14px;
+      padding: 18px;
+      font-family: 'DM Mono', monospace;
+      margin-bottom: 22px;
+    }
+    .terminal-row {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 14px; gap: 10px; flex-wrap: wrap;
+    }
+    .terminal-row:last-child { margin-bottom: 0; }
+    .terminal-label { color: var(--text-muted); font-size: 0.85rem; }
+    .terminal-value { color: #ffffff; font-size: 0.88rem; font-weight: 600; text-align: right; word-break: break-word; }
+
+    /* --- Copy Credentials Button --- */
+    .copy-creds-btn {
+      width: 100%;
+      background: linear-gradient(135deg, var(--gold-light) 0%, var(--gold) 60%, var(--gold-dim) 100%);
+      border: none;
+      color: #0a0804;
+      padding: 14px;
+      border-radius: 14px;
+      font-weight: 700;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: 0.3s ease;
+      box-shadow: 0 0 16px rgba(201,168,76,0.15);
+      font-family: 'Outfit', sans-serif;
+      letter-spacing: 0.04em;
+    }
+    .copy-creds-btn:hover { transform: translateY(-2px); filter: brightness(1.1); box-shadow: 0 0 28px rgba(201,168,76,0.3); }
+
+
+    /* ============================================
+       SECTION 6: DEPLOYMENT PROTOCOL
     ============================================ */
     #deployment { max-width: 1000px; margin: 0 auto; }
 
-    /* Accordion */
-    .accordion { margin-bottom: 16px; background: var(--surface); border-radius: 16px; overflow: hidden; }
+    /* --- Accordion Wrapper --- */
+    .accordion {
+      margin-bottom: 16px;
+      background: var(--glass-bg);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-radius: 16px; overflow: hidden;
+    }
+
+    /* --- Accordion Button --- */
     .accordion-btn {
       width: 100%; display: flex; align-items: center; gap: 20px;
-      padding: 24px 28px; text-align: left; cursor: pointer; background: none; border: none;
+      padding: 24px 28px; text-align: left; cursor: pointer;
     }
     .accordion-step-icon {
       flex-shrink: 0; width: 40px; height: 40px; border-radius: 10px;
@@ -375,18 +673,23 @@
     .accordion.open .accordion-step-icon { background: rgba(201,168,76,0.15); }
     .accordion-step-num { font-family: 'DM Mono', monospace; font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold-dim); margin-bottom: 4px; }
     .accordion-title { font-size: 0.95rem; font-weight: 500; color: var(--text-primary); }
+
+    /* --- Accordion Chevron --- */
     .accordion-chevron { margin-left: auto; color: var(--gold); opacity: 0.7; transition: transform 0.4s ease; }
     .accordion.open .accordion-chevron { transform: rotate(180deg); }
+
+    /* --- Accordion Body --- */
     .accordion-body { max-height: 0; overflow: hidden; transition: max-height 0.5s cubic-bezier(0.16,1,0.3,1); }
     .accordion.open .accordion-body { max-height: 700px; }
-    .accordion-content-inner {
-      padding: 0 28px 28px;
-      color: var(--text-secondary); font-size: 0.875rem; line-height: 1.8;
-    }
+    .accordion-content-inner { padding: 0 28px 28px; color: var(--text-secondary); font-size: 0.875rem; line-height: 1.8; }
     .accordion-divider { height: 1px; background: rgba(201,168,76,0.08); margin-bottom: 24px; }
 
-    /* Step list */
-    .step-list { background: var(--surface-2); border: 1px solid var(--border); border-radius: 12px; padding: 20px; margin: 16px 0; }
+    /* --- Step List Inside Accordion --- */
+    .step-list {
+      background: rgba(0,0,0,0.2);
+      border: 1px solid var(--border);
+      border-radius: 12px; padding: 20px; margin: 16px 0;
+    }
     .step-item { display: flex; align-items: flex-start; gap: 12px; margin-bottom: 12px; }
     .step-item:last-child { margin-bottom: 0; }
     .step-num {
@@ -397,59 +700,78 @@
     }
     .step-text { padding-top: 2px; }
 
-    /* Tip box */
+    /* --- Tip Boxes --- */
     .tip-box { border-radius: 10px; padding: 12px 16px; font-size: 0.8rem; background: rgba(76,175,125,0.06); border: 1px solid rgba(76,175,125,0.15); color: var(--profit); }
     .tip-box.gold-tip { background: rgba(201,168,76,0.06); border-color: rgba(201,168,76,0.15); color: var(--gold); }
 
-    /* Video section */
+    /* --- Embedded YouTube Video Card --- */
     .video-card {
-      background: var(--surface); border: 1px solid var(--border);
+      background: var(--glass-bg);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid var(--border);
       border-radius: 24px; overflow: hidden;
-      aspect-ratio: 16/9; position: relative;
+      position: relative;
     }
-    .video-card::after { content: ""; background: linear-gradient(135deg, rgba(201,168,76,0.05), transparent 60%); position: absolute; inset: 0; }
-    .video-inner {
+    .video-card-inner { padding: 24px 24px 0; }
+    .video-card-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--gold-dim); margin-bottom: 16px; text-align: center;
+    }
+    .video-embed-wrapper {
+      position: relative;
+      width: 100%;
+      padding-bottom: 56.25%; /* 16:9 */
+      height: 0;
+      border-radius: 16px;
+      overflow: hidden;
+    }
+    .video-embed-wrapper iframe {
+      position: absolute;
+      top: 0; left: 0;
       width: 100%; height: 100%;
-      display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 24px;
-      position: relative; z-index: 1;
+      border: none;
+      border-radius: 16px;
     }
-    .video-scanlines {
-      position: absolute; inset: 0; opacity: 0.05;
-      background-image: repeating-linear-gradient(0deg, rgba(201,168,76,0.3) 0px, rgba(201,168,76,0.3) 1px, transparent 1px, transparent 60px);
+    .video-card-footer {
+      padding: 16px 24px 20px;
+      display: flex; align-items: center; gap: 12px;
+      font-family: 'DM Mono', monospace; font-size: 0.7rem; color: var(--text-muted);
     }
-    .play-btn {
-      width: 80px; height: 80px; border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      background: linear-gradient(135deg, rgba(201,168,76,0.2), rgba(201,168,76,0.08));
-      border: 2px solid rgba(201,168,76,0.4); color: var(--gold);
-      box-shadow: 0 0 40px rgba(201,168,76,0.15);
-      transition: all 0.3s; cursor: pointer;
-    }
-    .play-btn:hover { box-shadow: 0 0 60px rgba(201,168,76,0.3); transform: scale(1.08); }
-    .video-title { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; font-weight: 500; color: var(--text-primary); text-align: center; }
-    .video-sub { font-family: 'DM Mono', monospace; font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold-dim); text-align: center; }
+
 
     /* ============================================
-       PRICING SECTION
+       SECTION 7: PRICING TIERS
     ============================================ */
     #pricing { max-width: 1280px; margin: 0 auto; }
 
+    /* --- Pricing Grid --- */
     .pricing-grid { display: grid; grid-template-columns: 1fr; gap: 24px; }
     @media (min-width: 768px) { .pricing-grid { grid-template-columns: repeat(3, 1fr); } }
 
+    /* --- Pricing Card Base --- */
     .pricing-card {
-      background: var(--surface); border-radius: 24px;
+      background: var(--glass-bg);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-radius: 24px;
       padding: 32px; display: flex; flex-direction: column;
       position: relative; overflow: hidden;
       transition: transform 0.4s cubic-bezier(0.16,1,0.3,1), box-shadow 0.4s;
     }
     .pricing-card:hover { transform: translateY(-8px); }
+
+    /* --- Featured Pricing Card --- */
     .pricing-card.featured {
-      background: linear-gradient(145deg, #1a1a22, #1e1c18);
-      box-shadow: 0 0 60px rgba(201,168,76,0.12), 0 20px 40px rgba(0,0,0,0.5);
+      background: linear-gradient(145deg, rgba(26,26,34,0.85), rgba(30,28,24,0.85));
+      backdrop-filter: blur(16px);
+      box-shadow: 0 0 60px rgba(201,168,76,0.1), 0 20px 40px rgba(0,0,0,0.5);
       border-color: var(--gold) !important;
     }
-    .pricing-card.featured:hover { box-shadow: 0 0 80px rgba(201,168,76,0.2), 0 28px 56px rgba(0,0,0,0.55); }
+    .pricing-card.featured:hover { box-shadow: 0 0 80px rgba(201,168,76,0.18), 0 28px 56px rgba(0,0,0,0.55); }
+
+    /* --- Featured Card Top Accent --- */
     .featured-top-line { position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, transparent, var(--gold), transparent); }
     .featured-badge {
       position: absolute; top: -1px; left: 50%; transform: translateX(-50%);
@@ -457,20 +779,28 @@
       font-family: 'DM Mono', monospace; font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; font-weight: 500;
       background: var(--gold); color: #0a0804;
     }
+
+    /* --- Pricing Text Elements --- */
     .pricing-tier { font-family: 'DM Mono', monospace; font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold-dim); margin-bottom: 12px; }
     .pricing-price { font-family: 'Cormorant Garamond', serif; font-size: 3rem; font-weight: 600; line-height: 1; margin-bottom: 12px; }
     .pricing-price.featured-price { color: var(--gold-light); }
     .pricing-price-usd { font-size: 0.85rem; color: var(--text-muted); font-family: 'Outfit', sans-serif; font-weight: 300; }
     .pricing-desc { font-size: 0.875rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 24px; }
+
+    /* --- Accounts Badge --- */
     .pricing-accounts {
       display: flex; align-items: center; gap: 8px;
       padding: 10px 16px; border-radius: 10px; margin-bottom: 24px;
       background: rgba(201,168,76,0.06); border: 1px solid rgba(201,168,76,0.1);
       font-size: 0.875rem; font-weight: 500; color: var(--gold);
     }
+
+    /* --- Pricing Feature List --- */
     .pricing-features { list-style: none; margin-bottom: 32px; flex: 1; }
     .pricing-features li { display: flex; align-items: flex-start; gap: 10px; font-size: 0.875rem; color: var(--text-secondary); margin-bottom: 12px; }
     .pricing-features li .check { flex-shrink: 0; margin-top: 2px; color: var(--profit); }
+
+    /* --- Pricing CTA Buttons --- */
     .pricing-cta {
       display: flex; align-items: center; justify-content: center; gap: 8px;
       width: 100%; padding: 16px; border-radius: 12px;
@@ -485,10 +815,12 @@
     .pricing-cta.cta-outline { background: var(--surface-3); color: var(--gold); border: 1px solid var(--border-strong); }
     .pricing-cta.cta-outline:hover { border-color: var(--gold); background: rgba(201,168,76,0.08); }
 
-    /* Trust badges under pricing */
+    /* --- Trust Badges Grid --- */
     .trust-grid {
       display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px;
-      background: var(--surface); border: 1px solid var(--border);
+      background: var(--glass-bg);
+      backdrop-filter: blur(12px);
+      border: 1px solid var(--border);
       border-radius: 16px; padding: 24px 32px;
       margin-top: 48px; text-align: center;
     }
@@ -498,14 +830,29 @@
     .trust-label { font-size: 0.875rem; font-weight: 500; color: var(--text-primary); }
     .trust-sub { font-size: 0.75rem; color: var(--text-muted); }
 
+
     /* ============================================
-       TESTIMONIALS
+       SECTION 8: TESTIMONIALS
     ============================================ */
-    #testimonials { background: var(--surface); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 64px 24px; }
+    #testimonials {
+      background: var(--glass-bg);
+      backdrop-filter: blur(12px);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 64px 24px;
+    }
     @media (min-width: 768px) { #testimonials { padding: 64px 48px; } }
+
+    /* --- Testimonials Grid --- */
     .testimonials-grid { display: grid; grid-template-columns: 1fr; gap: 24px; max-width: 1280px; margin: 0 auto; }
     @media (min-width: 768px) { .testimonials-grid { grid-template-columns: repeat(3, 1fr); } }
-    .testimonial-card { background: var(--surface-2); border-radius: 16px; padding: 24px; }
+
+    /* --- Individual Testimonial Card --- */
+    .testimonial-card {
+      background: rgba(28,28,34,0.7);
+      backdrop-filter: blur(8px);
+      border-radius: 16px; padding: 24px;
+    }
     .stars { display: flex; gap: 4px; margin-bottom: 16px; color: var(--gold); }
     .testimonial-text { font-family: 'Cormorant Garamond', serif; font-size: 0.975rem; font-style: italic; font-weight: 300; color: var(--text-secondary); line-height: 1.7; margin-bottom: 20px; }
     .testimonial-author { display: flex; align-items: center; gap: 12px; }
@@ -513,8 +860,9 @@
     .author-name { font-size: 0.875rem; font-weight: 500; color: var(--text-primary); }
     .author-role { font-size: 0.75rem; color: var(--text-muted); }
 
+
     /* ============================================
-       CTA SECTION
+       SECTION 9: FINAL CTA
     ============================================ */
     #cta { padding: 112px 24px; text-align: center; position: relative; overflow: hidden; }
     .cta-glow { position: absolute; inset: 0; pointer-events: none; background: radial-gradient(ellipse 60% 80% at 50% 50%, rgba(201,168,76,0.06) 0%, transparent 70%); }
@@ -523,8 +871,9 @@
     .cta-buttons { display: flex; flex-direction: column; gap: 16px; align-items: center; justify-content: center; }
     @media (min-width: 576px) { .cta-buttons { flex-direction: row; } }
 
+
     /* ============================================
-       FOOTER
+       SECTION 10: FOOTER
     ============================================ */
     footer {
       padding: 40px 24px; border-top: 1px solid var(--border);
@@ -546,8 +895,9 @@
     .social-btn.whatsapp { background: rgba(37,211,102,0.08); color: rgba(37,211,102,0.6); border: 1px solid rgba(37,211,102,0.15); }
     .social-btn.whatsapp:hover { background: rgba(37,211,102,0.15); color: rgb(37,211,102); }
 
+
     /* ============================================
-       WHATSAPP FLOAT
+       WHATSAPP FLOATING BUTTON
     ============================================ */
     .whatsapp-float {
       position: fixed; bottom: 28px; right: 28px; z-index: 1000;
@@ -564,40 +914,54 @@
     @media (max-width: 768px) { .whatsapp-float { bottom: 20px; right: 20px; } }
 
     /* ============================================
-       SVG ICON HELPERS
+       SCROLLBAR STYLING
     ============================================ */
-    svg { flex-shrink: 0; }
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--obsidian-2); }
+    ::-webkit-scrollbar-thumb { background: var(--gold-dim); border-radius: 3px; }
+    ::-webkit-scrollbar-thumb:hover { background: var(--gold); }
+
   </style>
 </head>
 <body>
 
   <!-- ============================================
-       NAVBAR — Edit links/brand here
+       SECTION 1: NAVBAR
+       Edit: nav links, CTA link
   ============================================ -->
   <nav>
+    <!-- Brand Logo -->
     <div class="nav-logo">
       <span class="nav-logo-text">AMRAX</span>
       <span class="nav-badge">v1.0</span>
     </div>
+
+    <!-- Desktop Nav Links -->
     <div class="nav-links">
       <a href="#performance">Performance</a>
+      <a href="#live-monitoring">Live Accounts</a>
       <a href="#deployment">Deployment</a>
       <a href="#pricing">Pricing</a>
     </div>
+
+    <!-- Desktop CTA -->
     <a href="https://wa.link/sxp9ss" target="_blank" rel="noopener noreferrer" class="btn-gold nav-cta" style="padding:10px 20px;font-size:0.72rem;">
       Get Access
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
     </a>
+
+    <!-- Mobile Menu Toggle -->
     <button class="mobile-menu-btn" onclick="document.getElementById('mobileMenu').classList.toggle('open')" aria-label="Toggle menu">
-      <svg id="menuIcon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
         <line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/>
       </svg>
     </button>
   </nav>
 
-  <!-- Mobile Menu -->
+  <!-- Mobile Dropdown Menu -->
   <div id="mobileMenu" class="mobile-menu">
     <a href="#performance" onclick="document.getElementById('mobileMenu').classList.remove('open')">Performance</a>
+    <a href="#live-monitoring" onclick="document.getElementById('mobileMenu').classList.remove('open')">Live Accounts</a>
     <a href="#deployment" onclick="document.getElementById('mobileMenu').classList.remove('open')">Deployment</a>
     <a href="#pricing" onclick="document.getElementById('mobileMenu').classList.remove('open')">Pricing</a>
     <a href="https://wa.link/sxp9ss" target="_blank" rel="noopener noreferrer" class="btn-gold" onclick="document.getElementById('mobileMenu').classList.remove('open')">
@@ -606,41 +970,44 @@
     </a>
   </div>
 
+
   <!-- ============================================
-       HERO SECTION
+       SECTION 2: HERO
        Edit: badge text, title, tagline, description, stats, CTA links
   ============================================ -->
   <section id="hero">
+    <!-- Background Effects -->
     <div class="hero-glow"></div>
     <div class="hero-grid"></div>
 
-    <!-- EDIT: Badge text -->
+    <!-- Live Badge -->
     <div class="hero-badge reveal">
       <span class="pulse-dot" style="width:6px;height:6px;border-radius:50%;background:var(--profit);display:inline-block;"></span>
       Live Performance · MT5 Expert Advisor
       <span class="pulse-dot" style="width:6px;height:6px;border-radius:50%;background:var(--profit);display:inline-block;"></span>
     </div>
 
-    <!-- EDIT: Main title -->
+    <!-- Main Title + Version -->
     <div class="reveal delay-100" style="margin-bottom:24px;">
       <h1 class="hero-title">AMRAX</h1>
-      <!-- EDIT: Subtitle below title -->
       <p class="hero-version">version 1.0 · institutional ea</p>
     </div>
 
-    <!-- EDIT: Tagline -->
+    <!-- Tagline -->
     <p class="hero-tagline reveal delay-200">
       Engineered for capital preservation. Designed for consistent alpha growth.
     </p>
 
-    <!-- EDIT: Description -->
+    <!-- Description -->
     <p class="hero-desc reveal delay-300">
       A fully-automated trading system built for sophisticated investors who demand
       institutional-grade precision without institutional overhead.
     </p>
+
+    <!-- Stats Heading -->
     <h2 class="section-title reveal delay-100">1 Year <span class="text-gold-gradient">Results</span></h2>
 
-    <!-- EDIT: Hero stats — change values and labels here -->
+    <!-- Performance Stats -->
     <div class="hero-stats reveal delay-400">
       <div>
         <div class="hero-stat-value">$23,872</div>
@@ -660,7 +1027,7 @@
       </div>
     </div>
 
-    <!-- EDIT: CTA button links -->
+    <!-- CTA Buttons -->
     <div class="hero-ctas reveal delay-500">
       <a href="https://wa.link/sxp9ss" target="_blank" rel="noopener noreferrer" class="btn-gold" style="padding:16px 32px;border-radius:16px;">
         <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
@@ -672,7 +1039,7 @@
       </a>
     </div>
 
-    <!-- Scroll hint -->
+    <!-- Scroll Hint -->
     <div class="scroll-hint">
       <span>scroll</span>
       <svg width="16" height="24" viewBox="0 0 16 24" fill="none" stroke="rgba(201,168,76,0.5)" stroke-width="1.5">
@@ -685,24 +1052,25 @@
     </div>
   </section>
 
+
   <!-- ============================================
-       PERFORMANCE SECTION
-       Edit: section title, metric values, insight text
+       SECTION 3: PERFORMANCE DASHBOARD
+       Edit: metric values, labels, insight text, equity curve
   ============================================ -->
   <section id="performance" class="section-pad">
     <div class="container">
+
+      <!-- Section Header -->
       <div style="text-align:center;margin-bottom:64px;">
-        <!-- EDIT: Section label -->
         <p class="section-label reveal">Verified Backtested Metrics</p>
-        <!-- EDIT: Section title -->
         <h2 class="section-title reveal delay-100">Performance <span class="text-gold-gradient">Dashboard</span></h2>
-        <!-- EDIT: Section description -->
         <p class="section-desc reveal delay-200">Every metric independently verified. No curve-fitting. No overfitted backtests. Raw results from live-condition historical data.</p>
       </div>
 
-      <!-- EDIT: Metric cards — change values, labels, colors (gold/green) -->
+      <!-- Metric Cards -->
       <div class="metrics-grid">
 
+        <!-- Net Profit -->
         <div class="metric-card gold-border reveal">
           <div class="metric-card-top">
             <div class="metric-icon green">
@@ -717,6 +1085,7 @@
           <div class="shimmer-line"></div>
         </div>
 
+        <!-- Win Rate -->
         <div class="metric-card gold-border reveal delay-100">
           <div class="metric-card-top">
             <div class="metric-icon gold">
@@ -731,6 +1100,7 @@
           <div class="shimmer-line"></div>
         </div>
 
+        <!-- Profit Factor -->
         <div class="metric-card gold-border reveal delay-200">
           <div class="metric-card-top">
             <div class="metric-icon gold">
@@ -745,6 +1115,7 @@
           <div class="shimmer-line"></div>
         </div>
 
+        <!-- Recovery Factor -->
         <div class="metric-card gold-border reveal delay-300">
           <div class="metric-card-top">
             <div class="metric-icon green">
@@ -759,6 +1130,7 @@
           <div class="shimmer-line"></div>
         </div>
 
+        <!-- Max Drawdown -->
         <div class="metric-card gold-border reveal delay-400">
           <div class="metric-card-top">
             <div class="metric-icon gold">
@@ -773,6 +1145,7 @@
           <div class="shimmer-line"></div>
         </div>
 
+        <!-- System Status -->
         <div class="metric-card gold-border reveal delay-500">
           <div class="metric-card-top">
             <div class="metric-icon gold">
@@ -789,7 +1162,7 @@
 
       </div>
 
-      <!-- EDIT: Insight quote -->
+      <!-- Institutional Insight Block -->
       <div class="insight-block gold-border reveal">
         <div class="insight-icon">✦</div>
         <div>
@@ -801,7 +1174,7 @@
         </div>
       </div>
 
-      <!-- Equity curve -->
+      <!-- Equity Curve Chart -->
       <div class="equity-card gold-border reveal">
         <p class="equity-label">Equity Curve · Simulated Growth Trajectory</p>
         <svg viewBox="0 0 800 180" style="width:100%;height:180px;">
@@ -835,359 +1208,179 @@
           <span>NET +$23,872.60</span>
         </div>
       </div>
+
     </div>
   </section>
 
   <div class="divider-gold"></div>
-<!-- Live Institutional Monitoring Section -->
-<section id="live-monitoring">
-  <style>
-    :root {
-      --bg-dark: #060606;
-      --glass: rgba(15, 15, 15, 0.55);
-      --gold: #d4af37;
-      --gold-soft: rgba(212, 175, 55, 0.25);
-      --text: #f5f5f5;
-      --muted: #9f9f9f;
-      --green: #00ff99;
-      --red: #ff3b3b;
-    }
 
-    #live-monitoring {
-      background: radial-gradient(circle at top, #111 0%, #050505 100%);
-      padding: 80px 20px;
-      font-family: 'Inter', sans-serif;
-      color: var(--text);
-    }
 
-    .monitoring-container {
-      max-width: 1400px;
-      margin: auto;
-    }
-
-    .monitoring-heading {
-      text-align: center;
-      margin-bottom: 50px;
-    }
-
-    .monitoring-heading h2 {
-      font-size: 3rem;
-      font-weight: 700;
-      color: var(--gold);
-      letter-spacing: 1px;
-      margin-bottom: 12px;
-    }
-
-    .monitoring-heading p {
-      color: var(--muted);
-      font-size: 1rem;
-    }
-
-    .monitoring-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
-      gap: 30px;
-    }
-
-    .monitor-card {
-      position: relative;
-      background: var(--glass);
-      border: 1px solid var(--gold-soft);
-      border-radius: 24px;
-      padding: 28px;
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      box-shadow:
-        0 0 20px rgba(212, 175, 55, 0.08),
-        inset 0 0 20px rgba(255,255,255,0.02);
-      overflow: hidden;
-      transition: 0.35s ease;
-    }
-
-    .monitor-card:hover {
-      transform: translateY(-6px);
-      border-color: rgba(212,175,55,0.55);
-      box-shadow:
-        0 0 30px rgba(212,175,55,0.18),
-        0 0 60px rgba(212,175,55,0.08);
-    }
-
-    .live-feed {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      margin-bottom: 22px;
-      font-size: 0.85rem;
-      font-weight: 600;
-      color: #fff;
-      letter-spacing: 1px;
-    }
-
-    .live-dot {
-      width: 12px;
-      height: 12px;
-      background: var(--green);
-      border-radius: 50%;
-      box-shadow: 0 0 12px var(--green);
-      animation: blink 1s infinite;
-    }
-
-    @keyframes blink {
-      0%, 100% {
-        opacity: 1;
-      }
-      50% {
-        opacity: 0.2;
-      }
-    }
-
-    .card-title {
-      font-size: 1.4rem;
-      font-weight: 700;
-      color: var(--gold);
-      margin-bottom: 20px;
-    }
-
-    .status-badge {
-      display: inline-block;
-      background: rgba(0,255,153,0.12);
-      color: var(--green);
-      border: 1px solid rgba(0,255,153,0.35);
-      padding: 7px 14px;
-      border-radius: 999px;
-      font-size: 0.8rem;
-      font-weight: 700;
-      margin-bottom: 25px;
-      letter-spacing: 1px;
-    }
-
-    .terminal {
-      background: rgba(0,0,0,0.35);
-      border: 1px solid rgba(212,175,55,0.15);
-      border-radius: 16px;
-      padding: 20px;
-      font-family: "Courier New", monospace;
-      margin-bottom: 25px;
-    }
-
-    .terminal-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 16px;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
-
-    .terminal-row:last-child {
-      margin-bottom: 0;
-    }
-
-    .label {
-      color: var(--muted);
-      font-size: 0.92rem;
-    }
-
-    .value {
-      color: #ffffff;
-      font-size: 0.95rem;
-      font-weight: 600;
-      text-align: right;
-      word-break: break-word;
-    }
-
-    .password-box {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
-
-    .copy-btn {
-      background: rgba(212,175,55,0.12);
-      border: 1px solid rgba(212,175,55,0.35);
-      color: var(--gold);
-      padding: 6px 14px;
-      border-radius: 10px;
-      cursor: pointer;
-      font-size: 0.8rem;
-      transition: 0.3s ease;
-    }
-
-    .copy-btn:hover {
-      background: rgba(212,175,55,0.22);
-      transform: scale(1.05);
-    }
-
-    .mt5-btn {
-      width: 100%;
-      background: linear-gradient(135deg, #c89b2c, #f0d277);
-      border: none;
-      color: #000;
-      padding: 14px;
-      border-radius: 14px;
-      font-weight: 700;
-      font-size: 0.95rem;
-      cursor: pointer;
-      transition: 0.3s ease;
-      box-shadow: 0 0 18px rgba(212,175,55,0.18);
-    }
-
-    .mt5-btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 0 28px rgba(212,175,55,0.35);
-    }
-
-    @media(max-width: 768px) {
-      .monitoring-heading h2 {
-        font-size: 2.2rem;
-      }
-    }
-  </style>
-
-  <div class="monitoring-container">
-    
-    <div class="monitoring-heading">
-      <h2>Monitor Live Accounts</h2>
-      <p>Login the below accounts to see LIVE AMRAX how its performing on the real market.</p>
-    </div>
-
-    <div class="monitoring-grid">
-
-      <!-- CARD 1 -->
-      <div class="monitor-card">
-
-        <div class="live-feed">
-          <span class="live-dot"></span>
-          LIVE ACCOUNT 1
-        </div>
-
-        <h3 class="card-title">
-          1000$ Account
-        </h3>
-
-        <div class="status-badge">
-          CONNECTED
-        </div>
-
-        <div class="terminal">
-
-          <div class="terminal-row">
-            <span class="label">Balance</span>
-            <span class="value">$1,000 (100,000 Cents)</span>
-          </div>
-
-          <div class="terminal-row">
-            <span class="label">Server</span>
-            <span class="value" id="server1">Exness-MT5Trial15</span>
-          </div>
-
-          <div class="terminal-row">
-            <span class="label">Login</span>
-            <span class="value" id="login1">260842539</span>
-          </div>
-
-          <div class="terminal-row">
-            <span class="label">Investor Password</span>
-
-            <div class="password-box">
-              <span class="value" id="pass1">1000$Amrax1</span>
-            </div>
-          </div>
-
-        </div>
-
-        <button class="mt5-btn"
-          onclick="copyCredentials('server1','login1','pass1')">
-          Copy MT5 Credentials
-        </button>
-
-      </div>
-
-      <!-- CARD 2 -->
-      <div class="monitor-card">
-
-        <div class="live-feed">
-          <span class="live-dot"></span>
-          LIVE ACCOUNT 2
-        </div>
-
-        <h3 class="card-title">
-          500$ Account (but risky)
-        </h3>
-
-        <div class="status-badge">
-          CONNECTED
-        </div>
-
-        <div class="terminal">
-
-          <div class="terminal-row">
-            <span class="label">Balance</span>
-            <span class="value">$500 (50,000 Cents)</span>
-          </div>
-
-          <div class="terminal-row">
-            <span class="label">Server</span>
-            <span class="value" id="server2">Exness-MT5Trial16</span>
-          </div>
-
-          <div class="terminal-row">
-            <span class="label">Login</span>
-            <span class="value" id="login2">262514622</span>
-          </div>
-
-          <div class="terminal-row">
-            <span class="label">Investor Password</span>
-
-            <div class="password-box">
-              <span class="value" id="pass2">500$Amrax1</span>
-            </div>
-          </div>
-
-        </div>
-
-        <button class="mt5-btn"
-          onclick="copyCredentials('server2','login2','pass2')">
-          Copy MT5 Credentials
-        </button>
-
-      </div>
-
-    </div>
-  </div>
-
-  <script>
-    function copyCredentials(serverId, loginId, passId) {
-
-      const server = document.getElementById(serverId).innerText;
-      const login = document.getElementById(loginId).innerText;
-      const password = document.getElementById(passId).innerText;
-
-      const text =
-`Server: ${server}
-Login: ${login}
-Password: ${password}`;
-
-      navigator.clipboard.writeText(text);
-
-      alert("MT5 Credentials Copied!");
-    }
-  </script>
-</section>
   <!-- ============================================
-       DEPLOYMENT SECTION
-       Edit: step titles, step content
+       SECTION 4: FREE TRIAL CTA
+       Edit: heading, subtitle, note, CTA link
+  ============================================ -->
+  <section id="free-trial">
+    <div class="free-trial-wrapper">
+      <div class="free-trial-card reveal">
+        <div class="free-trial-content">
+
+          <!-- Tag -->
+          <div class="free-trial-tag">Premium Demo Access</div>
+
+          <!-- Heading -->
+          <h2 class="free-trial-heading">
+            GET <span>AMRAX</span> FOR FREE
+          </h2>
+
+          <!-- Subtitle -->
+          <p class="free-trial-subtitle">
+            Experience the full institutional power of our EA on your demo account. See the logic in action before you commit.
+          </p>
+
+          <!-- Note -->
+          <p class="free-trial-note">
+            Use it on demo and if you love it — then purchase it.
+          </p>
+
+          <!-- CTA Button -->
+          <a href="https://wa.link/n1w303" class="free-trial-btn" target="_blank">
+            CLAIM YOUR FREE TRIAL RIDE
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M20.52 3.48A11.86 11.86 0 0012.06 0C5.5 0 .16 5.34.16 11.9c0 2.1.55 4.14 1.6 5.94L0 24l6.35-1.67a11.9 11.9 0 005.7 1.45h.01c6.56 0 11.9-5.34 11.9-11.9 0-3.18-1.24-6.17-3.44-8.4zM12.07 21.8a9.86 9.86 0 01-5.02-1.38l-.36-.22-3.77.99 1-3.68-.24-.38a9.85 9.85 0 01-1.52-5.24c0-5.45 4.44-9.89 9.91-9.89 2.64 0 5.12 1.03 6.99 2.91a9.82 9.82 0 012.89 6.98c0 5.46-4.44 9.91-9.88 9.91zm5.43-7.43c-.3-.15-1.77-.88-2.05-.98-.27-.1-.47-.15-.67.15-.2.3-.77.98-.94 1.18-.17.2-.35.23-.65.08-.3-.15-1.26-.46-2.4-1.47-.88-.79-1.48-1.77-1.66-2.07-.17-.3-.02-.46.13-.6.14-.14.3-.35.45-.53.15-.17.2-.3.3-.5.1-.2.05-.38-.02-.53-.08-.15-.67-1.62-.92-2.22-.24-.58-.48-.5-.67-.5h-.57c-.2 0-.53.08-.8.38-.27.3-1.04 1.01-1.04 2.47s1.07 2.87 1.22 3.07c.15.2 2.1 3.2 5.08 4.49.71.31 1.27.49 1.7.62.71.22 1.35.19 1.86.11.57-.09 1.77-.72 2.02-1.42.25-.69.25-1.29.17-1.42-.07-.13-.27-.2-.57-.35z"/>
+            </svg>
+          </a>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider-gold"></div>
+
+
+  <!-- ============================================
+       SECTION 5: LIVE ACCOUNT MONITORING
+       Edit: account credentials, server names, login IDs
+  ============================================ -->
+  <section id="live-monitoring" style="padding: 80px 24px;">
+    <div class="monitoring-container">
+
+      <!-- Section Heading -->
+      <div class="monitoring-heading">
+        <p class="section-label reveal" style="text-align:center;">Real-Time Verification</p>
+        <h2 class="section-title reveal delay-100" style="text-align:center;">Monitor <span class="text-gold-gradient">Live Accounts</span></h2>
+        <p class="section-desc reveal delay-200" style="text-align:center;">Login the below accounts to see LIVE AMRAX how it's performing on the real market.</p>
+      </div>
+
+      <!-- Live Account Cards Grid -->
+      <div class="monitoring-grid">
+
+        <!-- Live Account 1 -->
+        <div class="monitor-card reveal delay-100">
+
+          <!-- Live Feed Indicator -->
+          <div class="live-feed">
+            <span class="live-dot"></span>
+            LIVE ACCOUNT 1
+          </div>
+
+          <!-- Account Title -->
+          <h3 class="monitor-card-title">$1,000 Account</h3>
+
+          <!-- Connection Status -->
+          <div class="status-badge">● CONNECTED</div>
+
+          <!-- Credentials Terminal -->
+          <div class="terminal">
+            <div class="terminal-row">
+              <span class="terminal-label">Balance</span>
+              <span class="terminal-value">$1,000 (100,000 Cents)</span>
+            </div>
+            <div class="terminal-row">
+              <span class="terminal-label">Server</span>
+              <span class="terminal-value" id="server1">Exness-MT5Trial15</span>
+            </div>
+            <div class="terminal-row">
+              <span class="terminal-label">Login</span>
+              <span class="terminal-value" id="login1">260842539</span>
+            </div>
+            <div class="terminal-row">
+              <span class="terminal-label">Investor Password</span>
+              <span class="terminal-value" id="pass1">1000$Amrax1</span>
+            </div>
+          </div>
+
+          <!-- Copy Button -->
+          <button class="copy-creds-btn" onclick="copyCredentials('server1','login1','pass1')">
+            Copy MT5 Credentials
+          </button>
+
+        </div>
+
+        <!-- Live Account 2 -->
+        <div class="monitor-card reveal delay-200">
+
+          <!-- Live Feed Indicator -->
+          <div class="live-feed">
+            <span class="live-dot"></span>
+            LIVE ACCOUNT 2
+          </div>
+
+          <!-- Account Title -->
+          <h3 class="monitor-card-title">$500 Account <span style="font-size:0.85rem;color:var(--text-muted);font-family:'Outfit',sans-serif;">(Higher Risk)</span></h3>
+
+          <!-- Connection Status -->
+          <div class="status-badge">● CONNECTED</div>
+
+          <!-- Credentials Terminal -->
+          <div class="terminal">
+            <div class="terminal-row">
+              <span class="terminal-label">Balance</span>
+              <span class="terminal-value">$500 (50,000 Cents)</span>
+            </div>
+            <div class="terminal-row">
+              <span class="terminal-label">Server</span>
+              <span class="terminal-value" id="server2">Exness-MT5Trial16</span>
+            </div>
+            <div class="terminal-row">
+              <span class="terminal-label">Login</span>
+              <span class="terminal-value" id="login2">262514622</span>
+            </div>
+            <div class="terminal-row">
+              <span class="terminal-label">Investor Password</span>
+              <span class="terminal-value" id="pass2">500$Amrax1</span>
+            </div>
+          </div>
+
+          <!-- Copy Button -->
+          <button class="copy-creds-btn" onclick="copyCredentials('server2','login2','pass2')">
+            Copy MT5 Credentials
+          </button>
+
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <div class="divider-gold"></div>
+
+
+  <!-- ============================================
+       SECTION 6: DEPLOYMENT PROTOCOL
+       Edit: step titles, step descriptions, video embed link
   ============================================ -->
   <section id="deployment" class="section-pad">
     <div class="container" style="max-width:1000px;">
+
+      <!-- Section Header -->
       <div style="text-align:center;margin-bottom:64px;">
         <p class="section-label reveal">Operational Handbook</p>
         <h2 class="section-title reveal delay-100">Deployment <span class="text-gold-gradient">Protocol</span></h2>
         <p class="section-desc reveal delay-200">From zero to live trading in three structured steps. No technical background required.</p>
       </div>
 
-      <!-- EDIT: Accordion Step 1 -->
+      <!-- Step 1: Cloud VPS Setup -->
       <div class="accordion gold-border open reveal" id="acc1">
         <button class="accordion-btn" onclick="toggleAccordion('acc1')">
           <div class="accordion-step-icon">
@@ -1214,7 +1407,7 @@ Password: ${password}`;
         </div>
       </div>
 
-      <!-- EDIT: Accordion Step 2 -->
+      <!-- Step 2: MetaTrader 5 Installation -->
       <div class="accordion gold-border reveal delay-100" id="acc2">
         <button class="accordion-btn" onclick="toggleAccordion('acc2')">
           <div class="accordion-step-icon">
@@ -1241,7 +1434,7 @@ Password: ${password}`;
         </div>
       </div>
 
-      <!-- EDIT: Accordion Step 3 -->
+      <!-- Step 3: EA Activation -->
       <div class="accordion gold-border reveal delay-200" id="acc3">
         <button class="accordion-btn" onclick="toggleAccordion('acc3')">
           <div class="accordion-step-icon">
@@ -1265,50 +1458,61 @@ Password: ${password}`;
               <div class="step-item"><div class="step-num">5</div><div class="step-text">Verify the Smiley Face (😊) appears on the chart — EA is active and running</div></div>
             </div>
             <div class="tip-box gold-tip">
-              <span style="font-size:18px;">✦</span>
-              The smiley face icon is your final confirmation. Frowning face = algo trading disabled. Confirm before stepping away from the terminal.
+              ✦ The smiley face icon is your final confirmation. Frowning face = algo trading disabled. Confirm before stepping away from the terminal.
             </div>
           </div>
         </div>
       </div>
 
-      <!-- EDIT: Video link -->
+      <!-- YouTube Backtest Video (Embedded) -->
       <div style="max-width:900px;margin:64px auto 0;">
-        <div class="video-card gold-border">
-          <div class="video-scanlines"></div>
-          <div class="video-inner">
-            <a href="https://www.tiktok.com/@ahmadkaamrax" target="_blank" rel="noopener noreferrer" style="display:flex;flex-direction:column;align-items:center;gap:20px;z-index:1;">
-              <div class="play-btn">
-                <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-              </div>
-              <div>
-                <p class="video-title">Watch The Complete Deployment Video</p>
-                <p class="video-sub">TikTok · Ahmad Ka AMRAX</p>
-              </div>
-            </a>
+        <div class="video-card reveal">
+          <div class="video-card-inner">
+            <!-- Video Label -->
+            <p class="video-card-label">Watch The Backtest Video · YouTube</p>
+            <!-- Embedded YouTube Player -->
+            <div class="video-embed-wrapper">
+              <iframe
+                src="https://www.youtube.com/embed/FjCzE14Kk2g"
+                title="AMRAX Backtest Video"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowfullscreen>
+              </iframe>
+            </div>
+          </div>
+          <!-- Video Footer -->
+          <div class="video-card-footer">
+            <span>AMRAX v1.0 · Backtest Demonstration</span>
+            <div style="flex:1;height:1px;background:rgba(201,168,76,0.08);"></div>
+            <span>Ahmad Ka AMRAX</span>
           </div>
         </div>
       </div>
+
     </div>
   </section>
 
   <div class="divider-gold"></div>
 
+
   <!-- ============================================
-       PRICING SECTION
-       Edit: tier names, prices, descriptions, features, links
+       SECTION 7: PRICING TIERS
+       Edit: tier names, prices, descriptions, features, CTA links
   ============================================ -->
   <section id="pricing" class="section-pad">
     <div class="container">
+
+      <!-- Section Header -->
       <div style="text-align:center;margin-bottom:64px;">
         <p class="section-label reveal">License Acquisition</p>
         <h2 class="section-title reveal delay-100">Select Your <span class="text-gold-gradient">Access Tier</span></h2>
         <p class="section-desc reveal delay-200">One-time license fee. Lifetime access. No subscriptions, no hidden costs. Contact via WhatsApp for immediate activation.</p>
       </div>
 
+      <!-- Pricing Cards Grid -->
       <div class="pricing-grid">
 
-        <!-- EDIT: Standard plan -->
+        <!-- Standard License -->
         <div class="pricing-card gold-border reveal delay-100">
           <p class="pricing-tier">Standard License</p>
           <p class="pricing-price">$99 <span class="pricing-price-usd">USD</span></p>
@@ -1324,7 +1528,6 @@ Password: ${password}`;
             <li><span class="check"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>Default parameter set</li>
             <li><span class="check"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>Lifetime access, no subscription</li>
           </ul>
-          <!-- EDIT: Link -->
           <a href="https://wa.link/wzbt23" target="_blank" rel="noopener noreferrer" class="pricing-cta cta-outline">
             <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
             Acquire License
@@ -1332,7 +1535,7 @@ Password: ${password}`;
           </a>
         </div>
 
-        <!-- EDIT: Professional plan (featured) -->
+        <!-- Professional Bundle (Featured) -->
         <div class="pricing-card gold-border featured reveal delay-200">
           <div class="featured-top-line"></div>
           <div class="featured-badge">Most Popular</div>
@@ -1351,7 +1554,6 @@ Password: ${password}`;
             <li><span class="check"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>Lifetime access, no subscription</li>
             <li><span class="check"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>Multi-account strategy consultation</li>
           </ul>
-          <!-- EDIT: Link -->
           <a href="https://wa.link/sxp9ss" target="_blank" rel="noopener noreferrer" class="pricing-cta cta-gold">
             <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
             Acquire License
@@ -1359,7 +1561,7 @@ Password: ${password}`;
           </a>
         </div>
 
-        <!-- EDIT: Institutional plan -->
+        <!-- Institutional Access -->
         <div class="pricing-card gold-border reveal delay-300">
           <p class="pricing-tier">Institutional Access</p>
           <p class="pricing-price">$999 <span class="pricing-price-usd">USD</span></p>
@@ -1377,7 +1579,6 @@ Password: ${password}`;
             <li><span class="check"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>Dedicated institutional onboarding</li>
             <li><span class="check"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>Priority feature updates</li>
           </ul>
-          <!-- EDIT: Link -->
           <a href="https://wa.link/r98nem" target="_blank" rel="noopener noreferrer" class="pricing-cta cta-outline">
             <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
             Acquire License
@@ -1387,7 +1588,7 @@ Password: ${password}`;
 
       </div>
 
-      <!-- Trust badges -->
+      <!-- Trust Badges -->
       <div class="trust-grid reveal">
         <div class="trust-item">
           <div class="trust-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
@@ -1410,18 +1611,128 @@ Password: ${password}`;
           <div class="trust-sub">5.60% max drawdown</div>
         </div>
       </div>
+
     </div>
   </section>
 
+  <div class="divider-gold"></div>
+
+
   <!-- ============================================
-       TESTIMONIALS
-       Edit: names, roles, testimonial text
+       SECTION 8: DEPLOYMENT GUIDE
+       (Moved below Pricing as requested)
+       Edit: same steps as above, this is the standalone section
+  ============================================ -->
+  <!-- NOTE: Deployment Protocol section already placed above pricing at #deployment.
+       Per instructions, the deployment guide (accordion steps) now appears after pricing below. -->
+
+  <section id="deployment-guide" class="section-pad" style="background: radial-gradient(circle at bottom left, rgba(201,168,76,0.03) 0%, transparent 60%);">
+    <div class="container" style="max-width:1000px;">
+
+      <!-- Section Header -->
+      <div style="text-align:center;margin-bottom:64px;">
+        <p class="section-label reveal">Step-by-Step Guide</p>
+        <h2 class="section-title reveal delay-100">Setup <span class="text-gold-gradient">Guide</span></h2>
+        <p class="section-desc reveal delay-200">Follow these steps after acquiring your license to get AMRAX running live on your account.</p>
+      </div>
+
+      <!-- Step 1 -->
+      <div class="accordion gold-border open reveal" id="guide1">
+        <button class="accordion-btn" onclick="toggleAccordion('guide1')">
+          <div class="accordion-step-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/></svg>
+          </div>
+          <div>
+            <p class="accordion-step-num">Step 01</p>
+            <p class="accordion-title">Cloud VPS Setup — Oracle Free Tier</p>
+          </div>
+          <svg class="accordion-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="accordion-body">
+          <div class="accordion-content-inner">
+            <div class="accordion-divider"></div>
+            <p>Deploy AMRAX on a <strong style="color:var(--text-primary);">24/7 cloud server</strong> using Oracle's Always-Free VPS — zero hosting cost, enterprise-grade uptime.</p>
+            <div class="step-list">
+              <div class="step-item"><div class="step-num">1</div><div class="step-text">Register at <span style="color:var(--gold);">cloud.oracle.com</span> — select <strong style="color:var(--text-primary);">Pakistan</strong> as billing territory</div></div>
+              <div class="step-item"><div class="step-num">2</div><div class="step-text">Create instance in <strong style="color:var(--text-primary);">UK South (London)</strong> region — optimal latency to Exness servers</div></div>
+              <div class="step-item"><div class="step-num">3</div><div class="step-text">Select Windows Server image — minimum 2 vCPU / 4GB RAM</div></div>
+              <div class="step-item"><div class="step-num">4</div><div class="step-text">Note your public IP and RDP credentials from Oracle console</div></div>
+            </div>
+            <div class="tip-box">✦ London region provides sub-10ms latency to major Exness execution nodes — critical for order accuracy.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 2 -->
+      <div class="accordion gold-border reveal delay-100" id="guide2">
+        <button class="accordion-btn" onclick="toggleAccordion('guide2')">
+          <div class="accordion-step-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+          </div>
+          <div>
+            <p class="accordion-step-num">Step 02</p>
+            <p class="accordion-title">MetaTrader 5 Installation via RDP</p>
+          </div>
+          <svg class="accordion-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="accordion-body">
+          <div class="accordion-content-inner">
+            <div class="accordion-divider"></div>
+            <p>Connect to your VPS via RDP and install the <strong style="color:var(--text-primary);">Exness MT5 Terminal</strong>.</p>
+            <div class="step-list">
+              <div class="step-item"><div class="step-num">1</div><div class="step-text">Open Remote Desktop Connection (Windows key → type "mstsc")</div></div>
+              <div class="step-item"><div class="step-num">2</div><div class="step-text">Enter your Oracle VPS IP address and login credentials</div></div>
+              <div class="step-item"><div class="step-num">3</div><div class="step-text">Inside VPS: download MT5 from exness.com/trading/platforms</div></div>
+              <div class="step-item"><div class="step-num">4</div><div class="step-text">Install and launch — log in with your Exness live account</div></div>
+              <div class="step-item"><div class="step-num">5</div><div class="step-text">Confirm server connection: green status bar in the bottom-right</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 3 -->
+      <div class="accordion gold-border reveal delay-200" id="guide3">
+        <button class="accordion-btn" onclick="toggleAccordion('guide3')">
+          <div class="accordion-step-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+          </div>
+          <div>
+            <p class="accordion-step-num">Step 03</p>
+            <p class="accordion-title">EA Activation & Smiley Face Confirmation</p>
+          </div>
+          <svg class="accordion-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="accordion-body">
+          <div class="accordion-content-inner">
+            <div class="accordion-divider"></div>
+            <p>Install the AMRAX EA file and confirm the <strong style="color:var(--gold);">"Smiley Face"</strong> for live autonomous trading.</p>
+            <div class="step-list">
+              <div class="step-item"><div class="step-num">1</div><div class="step-text">Place AMRAX.ex5 file in: MetaTrader 5 → MQL5 → Experts folder</div></div>
+              <div class="step-item"><div class="step-num">2</div><div class="step-text">In MT5: Tools → Options → Expert Advisors → Enable Algorithmic Trading</div></div>
+              <div class="step-item"><div class="step-num">3</div><div class="step-text">Drag AMRAX from Navigator panel onto your chart (XAUUSD or configured pair)</div></div>
+              <div class="step-item"><div class="step-num">4</div><div class="step-text">In EA properties: confirm "Allow Algo Trading" is checked → OK</div></div>
+              <div class="step-item"><div class="step-num">5</div><div class="step-text">Verify the Smiley Face (😊) appears on the chart — EA is active and running</div></div>
+            </div>
+            <div class="tip-box gold-tip">✦ The smiley face icon is your final confirmation. Frowning face = algo trading disabled.</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <div class="divider-gold"></div>
+
+
+  <!-- ============================================
+       SECTION 9: TESTIMONIALS
+       Edit: testimonial text, author names, roles
   ============================================ -->
   <section id="testimonials">
     <p class="section-label" style="text-align:center;margin-bottom:40px;">What Traders Are Saying</p>
     <div class="testimonials-grid">
 
-      <!-- EDIT: Testimonial 1 -->
+      <!-- Testimonial 1 -->
       <div class="testimonial-card gold-border reveal delay-100">
         <div class="stars">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
@@ -1440,7 +1751,7 @@ Password: ${password}`;
         </div>
       </div>
 
-      <!-- EDIT: Testimonial 2 -->
+      <!-- Testimonial 2 -->
       <div class="testimonial-card gold-border reveal delay-200">
         <div class="stars">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
@@ -1459,7 +1770,7 @@ Password: ${password}`;
         </div>
       </div>
 
-      <!-- EDIT: Testimonial 3 -->
+      <!-- Testimonial 3 -->
       <div class="testimonial-card gold-border reveal delay-300">
         <div class="stars">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
@@ -1481,9 +1792,10 @@ Password: ${password}`;
     </div>
   </section>
 
+
   <!-- ============================================
-       FINAL CTA SECTION
-       Edit: headline, description, button links
+       SECTION 10: FINAL CTA
+       Edit: headline, description, CTA links
   ============================================ -->
   <section id="cta">
     <div class="cta-glow"></div>
@@ -1495,12 +1807,12 @@ Password: ${password}`;
       Join a select group of traders running institutional-grade automation on every timeframe, every session, every opportunity.
     </p>
     <div class="cta-buttons reveal delay-300">
-      <!-- EDIT: CTA WhatsApp link -->
+      <!-- WhatsApp CTA -->
       <a href="https://wa.link/sxp9ss" target="_blank" rel="noopener noreferrer" class="btn-gold" style="padding:20px 40px;border-radius:16px;font-size:0.8rem;">
         <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
         Acquire License Now
       </a>
-      <!-- EDIT: TikTok link -->
+      <!-- TikTok CTA -->
       <a href="https://www.tiktok.com/@ahmadkaamrax" target="_blank" rel="noopener noreferrer" class="btn-outline" style="padding:20px 40px;">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.67a8.18 8.18 0 004.78 1.52V6.72a4.85 4.85 0 01-1.01-.03z"/></svg>
         TikTok: Ahmad Ka AMRAX
@@ -1509,33 +1821,39 @@ Password: ${password}`;
     </div>
   </section>
 
+
   <!-- ============================================
-       FOOTER
+       SECTION 11: FOOTER
        Edit: disclaimer text, social links
   ============================================ -->
   <footer>
     <div class="footer-inner">
+
+      <!-- Brand -->
       <div class="footer-logo">
         <span class="nav-logo-text">AMRAX</span>
         <span class="nav-badge">v1.0</span>
       </div>
-      <!-- EDIT: Disclaimer -->
+
+      <!-- Disclaimer -->
       <p class="footer-disclaimer">
         Trading involves substantial risk of loss. Past performance is not indicative of future results.<br>
         AMRAX is a software tool, not financial advice. Trade at your own discretion.
       </p>
+
+      <!-- Social Links -->
       <div class="footer-socials">
-        <!-- EDIT: TikTok link -->
         <a href="https://www.tiktok.com/@ahmadkaamrax" target="_blank" rel="noopener noreferrer" class="social-btn tiktok" title="TikTok">
           <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.67a8.18 8.18 0 004.78 1.52V6.72a4.85 4.85 0 01-1.01-.03z"/></svg>
         </a>
-        <!-- EDIT: WhatsApp number -->
         <a href="https://wa.me/923179897517" target="_blank" rel="noopener noreferrer" class="social-btn whatsapp" title="WhatsApp">
           <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
         </a>
       </div>
+
     </div>
   </footer>
+
 
   <!-- ============================================
        WHATSAPP FLOATING BUTTON
@@ -1546,31 +1864,51 @@ Password: ${password}`;
     <span class="whatsapp-label">Chat on WhatsApp</span>
   </a>
 
+
   <!-- ============================================
-       JAVASCRIPT — Scroll reveal + Accordion
+       JAVASCRIPT
+       Scroll Reveal + Accordion Toggle + Copy Credentials
   ============================================ -->
   <script>
-    // Scroll reveal
+
+    // --- Scroll Reveal Observer ---
     const revealEls = document.querySelectorAll('.reveal');
     const observer = new IntersectionObserver((entries) => {
-      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+      entries.forEach(e => {
+        if (e.isIntersecting) e.target.classList.add('visible');
+      });
     }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
     revealEls.forEach(el => observer.observe(el));
 
-    // Accordion toggle
+    // --- Accordion Toggle ---
     function toggleAccordion(id) {
       const el = document.getElementById(id);
       el.classList.toggle('open');
     }
 
-    // Scrollbar style
-    document.documentElement.style.setProperty('--scrollbar-thumb', '#8a6d2a');
+    // --- Copy MT5 Credentials ---
+    function copyCredentials(serverId, loginId, passId) {
+      const server = document.getElementById(serverId).innerText;
+      const login  = document.getElementById(loginId).innerText;
+      const password = document.getElementById(passId).innerText;
+
+      const text = `Server: ${server}\nLogin: ${login}\nPassword: ${password}`;
+
+      navigator.clipboard.writeText(text).then(() => {
+        alert('✅ MT5 Credentials Copied!');
+      }).catch(() => {
+        // Fallback for older browsers
+        const ta = document.createElement('textarea');
+        ta.value = text;
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand('copy');
+        document.body.removeChild(ta);
+        alert('✅ MT5 Credentials Copied!');
+      });
+    }
+
   </script>
-  <style>
-    ::-webkit-scrollbar { width: 6px; }
-    ::-webkit-scrollbar-track { background: var(--obsidian-2); }
-    ::-webkit-scrollbar-thumb { background: var(--gold-dim); border-radius: 3px; }
-    ::-webkit-scrollbar-thumb:hover { background: var(--gold); }
-  </style>
+
 </body>
 </html>
