@@ -6,7 +6,6 @@
   <title>AMRAX v1.0 — Institutional EA</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Outfit:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
   <style>
     /* ============================================
        CSS VARIABLES — Edit colors/theme here
@@ -631,7 +630,7 @@
 
     <!-- EDIT: Tagline -->
     <p class="hero-tagline reveal delay-200">
-      Engineered for capital preservation. Designed for consistent alpha.
+      Engineered for capital preservation. Designed for consistent alpha growth.
     </p>
 
     <!-- EDIT: Description -->
@@ -639,6 +638,7 @@
       A fully-automated trading system built for sophisticated investors who demand
       institutional-grade precision without institutional overhead.
     </p>
+    <h2 class="section-title reveal delay-100">1 Year <span class="text-gold-gradient">Results</span></h2>
 
     <!-- EDIT: Hero stats — change values and labels here -->
     <div class="hero-stats reveal delay-400">
@@ -839,7 +839,342 @@
   </section>
 
   <div class="divider-gold"></div>
+<!-- Live Institutional Monitoring Section -->
+<section id="live-monitoring">
+  <style>
+    :root {
+      --bg-dark: #060606;
+      --glass: rgba(15, 15, 15, 0.55);
+      --gold: #d4af37;
+      --gold-soft: rgba(212, 175, 55, 0.25);
+      --text: #f5f5f5;
+      --muted: #9f9f9f;
+      --green: #00ff99;
+      --red: #ff3b3b;
+    }
 
+    #live-monitoring {
+      background: radial-gradient(circle at top, #111 0%, #050505 100%);
+      padding: 80px 20px;
+      font-family: 'Inter', sans-serif;
+      color: var(--text);
+    }
+
+    .monitoring-container {
+      max-width: 1400px;
+      margin: auto;
+    }
+
+    .monitoring-heading {
+      text-align: center;
+      margin-bottom: 50px;
+    }
+
+    .monitoring-heading h2 {
+      font-size: 3rem;
+      font-weight: 700;
+      color: var(--gold);
+      letter-spacing: 1px;
+      margin-bottom: 12px;
+    }
+
+    .monitoring-heading p {
+      color: var(--muted);
+      font-size: 1rem;
+    }
+
+    .monitoring-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+      gap: 30px;
+    }
+
+    .monitor-card {
+      position: relative;
+      background: var(--glass);
+      border: 1px solid var(--gold-soft);
+      border-radius: 24px;
+      padding: 28px;
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      box-shadow:
+        0 0 20px rgba(212, 175, 55, 0.08),
+        inset 0 0 20px rgba(255,255,255,0.02);
+      overflow: hidden;
+      transition: 0.35s ease;
+    }
+
+    .monitor-card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(212,175,55,0.55);
+      box-shadow:
+        0 0 30px rgba(212,175,55,0.18),
+        0 0 60px rgba(212,175,55,0.08);
+    }
+
+    .live-feed {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 22px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: #fff;
+      letter-spacing: 1px;
+    }
+
+    .live-dot {
+      width: 12px;
+      height: 12px;
+      background: var(--green);
+      border-radius: 50%;
+      box-shadow: 0 0 12px var(--green);
+      animation: blink 1s infinite;
+    }
+
+    @keyframes blink {
+      0%, 100% {
+        opacity: 1;
+      }
+      50% {
+        opacity: 0.2;
+      }
+    }
+
+    .card-title {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--gold);
+      margin-bottom: 20px;
+    }
+
+    .status-badge {
+      display: inline-block;
+      background: rgba(0,255,153,0.12);
+      color: var(--green);
+      border: 1px solid rgba(0,255,153,0.35);
+      padding: 7px 14px;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      margin-bottom: 25px;
+      letter-spacing: 1px;
+    }
+
+    .terminal {
+      background: rgba(0,0,0,0.35);
+      border: 1px solid rgba(212,175,55,0.15);
+      border-radius: 16px;
+      padding: 20px;
+      font-family: "Courier New", monospace;
+      margin-bottom: 25px;
+    }
+
+    .terminal-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .terminal-row:last-child {
+      margin-bottom: 0;
+    }
+
+    .label {
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .value {
+      color: #ffffff;
+      font-size: 0.95rem;
+      font-weight: 600;
+      text-align: right;
+      word-break: break-word;
+    }
+
+    .password-box {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .copy-btn {
+      background: rgba(212,175,55,0.12);
+      border: 1px solid rgba(212,175,55,0.35);
+      color: var(--gold);
+      padding: 6px 14px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 0.8rem;
+      transition: 0.3s ease;
+    }
+
+    .copy-btn:hover {
+      background: rgba(212,175,55,0.22);
+      transform: scale(1.05);
+    }
+
+    .mt5-btn {
+      width: 100%;
+      background: linear-gradient(135deg, #c89b2c, #f0d277);
+      border: none;
+      color: #000;
+      padding: 14px;
+      border-radius: 14px;
+      font-weight: 700;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: 0.3s ease;
+      box-shadow: 0 0 18px rgba(212,175,55,0.18);
+    }
+
+    .mt5-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 28px rgba(212,175,55,0.35);
+    }
+
+    @media(max-width: 768px) {
+      .monitoring-heading h2 {
+        font-size: 2.2rem;
+      }
+    }
+  </style>
+
+  <div class="monitoring-container">
+    
+    <div class="monitoring-heading">
+      <h2>Monitor Live Accounts</h2>
+      <p>Login the below accounts to see LIVE AMRAX how its performing on the real market.</p>
+    </div>
+
+    <div class="monitoring-grid">
+
+      <!-- CARD 1 -->
+      <div class="monitor-card">
+
+        <div class="live-feed">
+          <span class="live-dot"></span>
+          LIVE ACCOUNT 1
+        </div>
+
+        <h3 class="card-title">
+          1000$ Account
+        </h3>
+
+        <div class="status-badge">
+          CONNECTED
+        </div>
+
+        <div class="terminal">
+
+          <div class="terminal-row">
+            <span class="label">Balance</span>
+            <span class="value">$1,000 (100,000 Cents)</span>
+          </div>
+
+          <div class="terminal-row">
+            <span class="label">Server</span>
+            <span class="value" id="server1">Exness-MT5Trial15</span>
+          </div>
+
+          <div class="terminal-row">
+            <span class="label">Login</span>
+            <span class="value" id="login1">260842539</span>
+          </div>
+
+          <div class="terminal-row">
+            <span class="label">Investor Password</span>
+
+            <div class="password-box">
+              <span class="value" id="pass1">1000$Amrax1</span>
+            </div>
+          </div>
+
+        </div>
+
+        <button class="mt5-btn"
+          onclick="copyCredentials('server1','login1','pass1')">
+          Copy MT5 Credentials
+        </button>
+
+      </div>
+
+      <!-- CARD 2 -->
+      <div class="monitor-card">
+
+        <div class="live-feed">
+          <span class="live-dot"></span>
+          LIVE ACCOUNT 2
+        </div>
+
+        <h3 class="card-title">
+          500$ Account (but risky)
+        </h3>
+
+        <div class="status-badge">
+          CONNECTED
+        </div>
+
+        <div class="terminal">
+
+          <div class="terminal-row">
+            <span class="label">Balance</span>
+            <span class="value">$500 (50,000 Cents)</span>
+          </div>
+
+          <div class="terminal-row">
+            <span class="label">Server</span>
+            <span class="value" id="server2">Exness-MT5Trial16</span>
+          </div>
+
+          <div class="terminal-row">
+            <span class="label">Login</span>
+            <span class="value" id="login2">262514622</span>
+          </div>
+
+          <div class="terminal-row">
+            <span class="label">Investor Password</span>
+
+            <div class="password-box">
+              <span class="value" id="pass2">500$Amrax1</span>
+            </div>
+          </div>
+
+        </div>
+
+        <button class="mt5-btn"
+          onclick="copyCredentials('server2','login2','pass2')">
+          Copy MT5 Credentials
+        </button>
+
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    function copyCredentials(serverId, loginId, passId) {
+
+      const server = document.getElementById(serverId).innerText;
+      const login = document.getElementById(loginId).innerText;
+      const password = document.getElementById(passId).innerText;
+
+      const text =
+`Server: ${server}
+Login: ${login}
+Password: ${password}`;
+
+      navigator.clipboard.writeText(text);
+
+      alert("MT5 Credentials Copied!");
+    }
+  </script>
+</section>
   <!-- ============================================
        DEPLOYMENT SECTION
        Edit: step titles, step content
