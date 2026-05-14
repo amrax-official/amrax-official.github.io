@@ -306,7 +306,7 @@
 
     /* --- Hero Tagline --- */
     .hero-tagline {
-      font-family: 'Cormorant Garamond', serif;
+      font-family: 'Space Grotesk', serif;
       font-size: clamp(1.1rem, 2vw, 1.4rem);
       font-weight: 300; font-style: italic;
       color: var(--text-secondary);
@@ -321,7 +321,7 @@
 
     /* --- Hero Stats --- */
     .hero-stats { display: flex; flex-wrap: wrap; justify-content: center; gap: 32px; margin-bottom: 48px; }
-    .hero-stat-value { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.5rem, 3vw, 1.9rem); font-weight: 600; color: var(--gold-light); }
+    .hero-stat-value { font-family: 'Space Grotesk', serif; font-size: clamp(1.5rem, 3vw, 1.9rem); font-weight: 600; color: var(--gold-light); }
     .hero-stat-label { font-family: 'DM Mono', monospace; font-size: 0.65rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-muted); margin-top: 4px; }
 
     /* --- Hero CTA Buttons --- */
@@ -364,7 +364,7 @@
     .metric-icon.green { background: rgba(76,175,125,0.1); color: var(--profit); border: 1px solid rgba(76,175,125,0.2); }
 
     /* --- Metric Values & Labels --- */
-    .metric-value { font-family: 'Cormorant Garamond', serif; font-size: 1.9rem; font-weight: 600; line-height: 1; margin-bottom: 4px; }
+    .metric-value { font-family: 'Space Grotesk', serif; font-size: 1.9rem; font-weight: 600; line-height: 1; margin-bottom: 4px; }
     .metric-value.gold { color: var(--gold-light); }
     .metric-value.green { color: var(--profit); }
     .metric-suffix { font-size: 1.1rem; }
@@ -542,10 +542,10 @@
     .monitoring-container { max-width: 1400px; margin: auto; }
     .monitoring-heading { text-align: center; margin-bottom: 50px; }
     .monitoring-heading h2 {
-      font-family: 'Cormorant Garamond', serif;
+      font-family: 'Space Grotesk', serif;
       font-size: clamp(2rem, 5vw, 3.75rem);
       font-weight: 600;
-      color: var(--gold);
+      color: var(--);
       letter-spacing: 1px;
       margin-bottom: 12px;
     }
@@ -582,7 +582,7 @@
       display: flex; align-items: center; gap: 10px;
       margin-bottom: 22px;
       font-size: 0.85rem; font-weight: 600; color: #fff; letter-spacing: 1px;
-      font-family: 'JetBrains Mono', monospace;
+      font-family: 'Space Grotesk', serif;
     }
     .live-dot {
       width: 10px; height: 10px;
@@ -594,7 +594,7 @@
 
     /* --- Monitor Card Title & Badge --- */
     .monitor-card-title {
-      font-family: 'Cormorant Garamond', serif;
+      font-family: 'Space Grotesk', serif;
       font-size: 1.4rem; font-weight: 700; color: var(--gold); margin-bottom: 16px;
     }
     .status-badge {
@@ -776,7 +776,7 @@
     .featured-badge {
       position: absolute; top: -1px; left: 50%; transform: translateX(-50%);
       padding: 4px 16px; border-radius: 0 0 8px 8px;
-      font-family: 'DM Mono', monospace; font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; font-weight: 500;
+      font-family: 'Space Grotesk', serif; font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; font-weight: 500;
       background: var(--gold); color: #0a0804;
     }
 
@@ -784,7 +784,7 @@
     .pricing-tier { font-family: 'DM Mono', monospace; font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold-dim); margin-bottom: 12px; }
     .pricing-price { font-family: 'Cormorant Garamond', serif; font-size: 3rem; font-weight: 600; line-height: 1; margin-bottom: 12px; }
     .pricing-price.featured-price { color: var(--gold-light); }
-    .pricing-price-usd { font-size: 0.85rem; color: var(--text-muted); font-family: 'Outfit', sans-serif; font-weight: 300; }
+    .pricing-price-usd { font-size: 0.85rem; color: var(--text-muted); font-family: 'Space Grotesk', serif; font-weight: 300; }
     .pricing-desc { font-size: 0.875rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 24px; }
 
     /* --- Accounts Badge --- */
@@ -1421,7 +1421,7 @@
       <!-- Section Header -->
       <div style="text-align:center;margin-bottom:64px;">
         <p class="section-label reveal">License Acquisition</p>
-        <h2 class="section-title reveal delay-100">Select Your <span class="text-gold-gradient">Access Tier</span></h2>
+        <h2 class="section-title reveal delay-100">Select Your <span class="text-gold-gradient">Plan</span></h2>
         <p class="section-desc reveal delay-200">One-time license fee. Lifetime access. No subscriptions, no hidden costs. Contact via WhatsApp for immediate activation.</p>
       </div>
 
@@ -1430,6 +1430,7 @@
 
         <!-- Standard License -->
         <div class="pricing-card gold-border reveal delay-100">
+            <div class="featured-badge">Best For Solo</div>
           <p class="pricing-tier">Standard License</p>
           <p class="pricing-price">$99 <span class="pricing-price-usd">USD</span></p>
           <p class="pricing-desc">Entry point for individual traders testing AMRAX on a single account.</p>
@@ -1479,6 +1480,7 @@
 
         <!-- Institutional Access -->
         <div class="pricing-card gold-border reveal delay-300">
+            <div class="featured-badge">Advance Scaling</div>
           <p class="pricing-tier">Institutional Access</p>
           <p class="pricing-price">$999 <span class="pricing-price-usd">USD</span></p>
           <p class="pricing-desc">Built for fund managers, prop firms, and multi-account operations.</p>
