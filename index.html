@@ -980,12 +980,34 @@
     <div class="hero-glow"></div>
     <div class="hero-grid"></div>
 
-    <!-- Live Badge -->
-    <div class="hero-badge reveal">
-      <span class="pulse-dot" style="width:6px;height:6px;border-radius:50%;background:var(--profit);display:inline-block;"></span>
-      Live Performance · MT5 Expert Advisor
-      <span class="pulse-dot" style="width:6px;height:6px;border-radius:50%;background:var(--profit);display:inline-block;"></span>
-    </div>
+<div class="hero-badge reveal variant-glass">
+  <span class="live-pulse-green"></span>
+  <span class="badge-text">BUILT FOR <span class="divider">|</span> <span class="bold">METATRADER 5</span></span>
+</div>
+
+<style>
+.variant-glass {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(193, 155, 102, 0.2);
+  padding: 8px 20px;
+  border-radius: 100px;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.7rem;
+  letter-spacing: 1.5px;
+  color: var(--text-secondary);
+}
+.live-pulse-green {
+  width: 8px; height: 8px; background: var(--profit); border-radius: 50%;
+  box-shadow: 0 0 10px var(--profit);
+  animation: pulse-glow 2s infinite;
+}
+@keyframes pulse-glow { 0% { opacity: 1; } 50% { opacity: 0.4; } 100% { opacity: 1; } }
+</style>
 
     <!-- Main Title + Version -->
     <div class="reveal delay-100" style="margin-bottom:4px;">
