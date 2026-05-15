@@ -982,7 +982,7 @@
 
 <div class="hero-badge reveal variant-glass">
   <span class="live-pulse-green"></span>
-  <span class="badge-text">BUILT FOR <span class="divider">|</span> <span class="bold">METATRADER 5</span></span>
+  <span class="badge-text">BUILT FOR <span class="divider"></span> <span class="bold">METATRADER 5 (MT5)</span></span>
 </div>
 
 <style>
@@ -1015,11 +1015,69 @@
       <p class="hero-version">version 1.0 · institutional ea</p>
     </div>
 
-    <!-- Description -->
-    <p class="hero-tagline reveal delay-200">
-      A fully-automated trading system built for sophisticated investors who demand
-      institutional-grade precision without institutional overhead.
-    </p>
+<p class="hero-tagline reveal delay-200">
+  <span class="soft-glow-highlight">A fully-automated trading system</span> built for sophisticated 
+  <span class="soft-glow-highlight">investors who demand daily, weekly, monthly and yearly</span> 
+  growth on their <span class="soft-glow-highlight">portfolio investements</span>.
+
+  <style>
+    .hero-tagline {
+        line-height: 1.8;
+        color: var(--text-secondary);
+    }
+
+    .soft-glow-highlight {
+        /* Text Style */
+        font-weight: 700; /* Just Bold */
+        color: var(--gold-light);
+        position: relative;
+        display: inline-block;
+        padding: 0 6px;
+        border-radius: 4px; /* Rounded corners */
+        
+        /* Subtle Background with Animated Gradient */
+        background: linear-gradient(
+            90deg, 
+            rgba(193, 155, 102, 0.05) 0%, 
+            rgba(193, 155, 102, 0.15) 50%, 
+            rgba(193, 155, 102, 0.05) 100%
+        );
+        background-size: 200% auto;
+        
+        /* The "Hawa" / Wind Animation */
+        animation: windSweep 4s ease-in-out infinite;
+        
+        /* Smooth transition */
+        transition: color 0.3s ease;
+    }
+
+    @keyframes windSweep {
+        0% {
+            background-position: -100% 0;
+        }
+        50% {
+            background-position: 100% 0;
+        }
+        100% {
+            background-position: 300% 0;
+        }
+    }
+
+    /* Hover effect to make it feel interactive */
+    .soft-glow-highlight:hover {
+        color: #fff;
+        background: rgba(193, 155, 102, 0.2);
+    }
+
+    /* Responsive for Mobile */
+    @media (max-width: 768px) {
+        .soft-glow-highlight {
+            display: inline; /* Mobile par wrap hone ke liye */
+            padding: 2px 4px;
+        }
+    }
+  </style>
+</p>
     
     <!-- Tagline -->
     <p class="hero-desc reveal delay-300">
