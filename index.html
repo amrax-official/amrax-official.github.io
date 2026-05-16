@@ -1008,7 +1008,6 @@
 }
 @keyframes pulse-glow { 0% { opacity: 1; } 50% { opacity: 0.4; } 100% { opacity: 1; } }
 </style>
-
     <!-- Main Title + Version -->
     <div class="reveal delay-100" style="margin-bottom:4px;">
       <h1 class="hero-title">AMRAX</h1>
@@ -1132,37 +1131,25 @@
     </div>
   </section>
 
-  <!-- ============================================
-       SECTION 6: Welcome Introduction Video
-       Edit: step titles, step descriptions, video embed link
-  ============================================ -->
   <section id="deployment" class="section-pad">
     <div class="container" style="max-width:1000px;">
 
-      <!-- Section Header -->
       <div style="text-align:center;margin-bottom:64px;">
         <p class="section-label reveal">The Intro You Should not miss</p>
         <h2 class="section-title reveal delay-100">Welcome To <span class="text-gold-gradient">AMRAX</span></h2>
         <p class="section-desc reveal delay-200">From the A-Z, a complete beginner friendly video about AMRAX and how you can avail it for free.</p>
       </div>
 
-      <!-- YouTube Backtest Video (Embedded) -->
       <div style="max-width:900px;margin:64px auto 0;">
         <div class="video-card reveal">
           <div class="video-card-inner">
-            <!-- Video Label -->
             <p class="video-card-label">Watch The Intro · Video</p>
-            <!-- Embedded YouTube Player -->
+            
             <div class="video-embed-wrapper">
-              <iframe
-                src="https://www.youtube.com/watch?v=ALI0EwBhfJI"
-                title="AMRAX Backtest Video"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                allowfullscreen>
-              </iframe>
+              <iframe width="560" height="315" src="https://www.youtube.com/embed/ALI0EwBhfJI?si=KSfM19trt9ZWpiZR" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
             </div>
+            
           </div>
-          <!-- Video Footer -->
           <div class="video-card-footer">
             <span>AMRAX v1.0 Introduction </span>
             <div style="flex:1;height:1px;background:rgba(201,168,76,0.08);"></div>
@@ -1172,6 +1159,24 @@
       </div>
 
     </div>
+
+    <style>
+      .video-embed-wrapper {
+        position: relative;
+        padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+        height: 0;
+        overflow: hidden;
+        width: 100%;
+      }
+      .video-embed-wrapper iframe {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100% !important;
+        height: 100% !important;
+        border: 0;
+      }
+    </style>
   </section>
 
   <div class="divider-gold"></div>
