@@ -2,7 +2,11 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#000000" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <title>AMRAX v1.0 — Institutional EA | Automated Forex Trading</title>
   <meta name="description" content="AMRAX v1.0 — Fully-automated institutional-grade Expert Advisor for MetaTrader 5. $17,256 net profit from live market. 10-15% average drawdown. Start trading today." />
   <meta name="keywords" content="AMRAX, forex EA, MetaTrader 5, automated trading, institutional EA, expert advisor, gold trading, XAUUSD" />
@@ -66,6 +70,7 @@
       font-weight: 300;
       -webkit-font-smoothing: antialiased;
       overflow-x: hidden;
+      padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
     }
     body::before {
       content: "";
@@ -279,7 +284,7 @@
     /* --- Mobile Menu --- */
     .mobile-menu {
       display: none;
-      position: fixed; top: 72px; left: 12px; right: 12px; z-index: 40;
+      position: fixed; top: 72px; left: 12px; right: 12px; z-index: 55;
       padding: 24px;
       background: linear-gradient(135deg, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0.02) 100%);
       backdrop-filter: blur(24px) saturate(1.4);
@@ -287,14 +292,22 @@
       border: 1px solid rgba(255,255,255,0.08);
       border-radius: 16px;
       box-shadow: 0 12px 40px rgba(0,0,0,0.4);
+      animation: menuSlideDown 0.3s cubic-bezier(0.16,1,0.3,1);
+    }
+    @keyframes menuSlideDown {
+      from { opacity: 0; transform: translateY(-8px); }
+      to { opacity: 1; transform: translateY(0); }
     }
     .mobile-menu.open { display: block; }
     .mobile-menu a {
-      display: block; padding: 16px 0;
+      display: block; padding: 14px 0;
       font-size: 0.875rem; color: var(--text-secondary);
       border-bottom: 1px solid rgba(201,168,76,0.06);
+      transition: color 0.2s;
     }
-    .mobile-menu .btn-gold { display: flex; justify-content: center; margin-top: 20px; padding: 12px; width: 100%; }
+    .mobile-menu a:hover,
+    .mobile-menu a:active { color: var(--gold); }
+    .mobile-menu .btn-gold { display: flex; justify-content: center; margin-top: 20px; padding: 14px; width: 100%; border-radius: 12px; }
 
 
     /* ============================================
@@ -768,7 +781,7 @@
       border: 1px solid rgba(201,168,76,0.12);
       border-radius: 14px;
       padding: 18px;
-      font-family: ;
+      font-family: 'DM Mono', monospace;
       margin-bottom: 22px;
     }
     .terminal-row {
@@ -1065,7 +1078,6 @@
     .whatsapp-float:hover { transform: scale(1.1) translateY(-3px); }
     .whatsapp-label { display: none; }
     @media (min-width: 576px) { .whatsapp-label { display: inline; } }
-    @media (max-width: 768px) { .whatsapp-float { bottom: 20px; right: 20px; } }
 
     /* ============================================
        SCROLLBAR STYLING
@@ -1075,121 +1087,205 @@
     ::-webkit-scrollbar-thumb { background: var(--gold-dim); border-radius: 3px; }
     ::-webkit-scrollbar-thumb:hover { background: var(--gold); }
 
+    /* --- Touch Optimization: Remove 300ms tap delay --- */
+    @media (pointer: coarse) {
+      * { touch-action: manipulation; }
+    }
+    html { overscroll-behavior: none; }
+    body { word-wrap: break-word; overflow-wrap: break-word; -webkit-text-size-adjust: 100%; }
+
     /* ============================================
-       COMPREHENSIVE MOBILE RESPONSIVE
+       MOBILE RESPONSIVE — Comprehensive
     ============================================ */
 
-    /* --- Global Mobile --- */
+    /* --- Touch Target Minimum (44px for all interactive) --- */
     @media (max-width: 768px) {
-      .section-pad { padding: 60px 16px !important; }
-      .section-title { font-size: clamp(1.6rem, 6vw, 2.2rem) !important; }
-      .section-desc { font-size: 0.85rem !important; padding: 0 8px; }
-      .section-label { font-size: 0.65rem !important; }
-
-      /* --- Nav Mobile --- */
-      nav { padding: 10px 14px !important; gap: 12px !important; }
-      .nav-badge { display: none !important; }
-
-      /* --- Hero Mobile --- */
-      #hero { padding: 90px 16px 50px !important; min-height: auto !important; }
-      .hero-title { font-size: clamp(3rem, 18vw, 5rem) !important; }
-      .hero-version { font-size: 0.6rem !important; letter-spacing: 0.3em !important; }
-      .hero-tagline { font-size: 1rem !important; padding: 0 4px; }
-      .hero-desc { font-size: 0.72rem !important; padding: 0 8px; }
-      .hero-stats-heading { font-size: 1.6rem !important; }
-      .hero-stats-wrapper { max-width: 100% !important; }
-      .hero-stats { gap: 10px !important; }
-      .hero-stat-card { min-width: 140px !important; max-width: 100% !important; flex: 1 1 calc(50% - 10px) !important; padding: 20px 12px 16px !important; }
-      .hero-stat-value { font-size: 1.4rem !important; }
-      .hero-stat-label { font-size: 0.5rem !important; }
-      .hero-ctas { width: 100% !important; }
-      .hero-ctas .btn-gold,
-      .hero-ctas .btn-outline { width: 100% !important; justify-content: center !important; padding: 14px 20px !important; }
-      .live-trust-bar { gap: 6px !important; font-size: 0.6rem !important; }
-      .scroll-hint { display: none !important; }
-
-      /* --- Monitoring Mobile --- */
-      #live-monitoring { padding: 60px 16px !important; }
-      .monitoring-grid { grid-template-columns: 1fr !important; gap: 16px !important; }
-      .monitor-card { padding: 20px !important; }
-      .broker-logos { flex-direction: column !important; gap: 8px !important; }
-      .lot-size-box { padding: 12px 16px !important; font-size: 0.7rem !important; }
-
-      /* --- Features Mobile --- */
-      #features .container > div:last-child { grid-template-columns: 1fr !important; gap: 16px !important; }
-      #features .container > div:first-child { margin-bottom: 40px !important; }
-
-      /* --- Comparison Mobile --- */
-      .comparison-table-wrapper { overflow-x: auto !important; -webkit-overflow-scrolling: touch !important; margin: 0 -16px !important; padding: 0 16px !important; }
-      .comparison-table { min-width: 600px !important; font-size: 0.75rem !important; }
-      .comparison-table th,
-      .comparison-table td { padding: 10px 8px !important; }
-
-      /* --- Pricing Mobile --- */
-      .pricing-grid { grid-template-columns: 1fr !important; gap: 20px !important; }
-      .pricing-card { padding: 28px 20px !important; }
-      .pricing-price { font-size: 2.2rem !important; }
-      .setup-steps .step-text { font-size: 0.78rem !important; }
-
-      /* --- Trust Mobile --- */
-      .trust-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 12px !important; }
-      .trust-item { padding: 16px 12px !important; }
-      .trust-icon { width: 40px !important; height: 40px !important; }
-      .trust-text { font-size: 0.72rem !important; }
-
-      /* --- Testimonials Mobile --- */
-      #testimonials { padding: 60px 16px !important; }
-      .testimonials-grid { grid-template-columns: 1fr !important; gap: 16px !important; }
-      .testimonial-card { padding: 24px 18px !important; }
-      .testimonial-text { font-size: 0.88rem !important; }
-
-      /* --- Free Trial Mobile --- */
-      .free-trial-card { padding: 40px 20px !important; }
-      .free-trial-title { font-size: 1.5rem !important; }
-      .free-trial-desc { font-size: 0.82rem !important; }
-
-      /* --- CTA Section Mobile --- */
-      #cta { padding: 60px 16px !important; }
-      .cta-title { font-size: clamp(1.5rem, 5vw, 2rem) !important; }
-      .cta-buttons { flex-direction: column !important; gap: 12px !important; }
-      .cta-buttons a { width: 100% !important; justify-content: center !important; }
-
-      /* --- Footer Mobile --- */
-      footer { padding: 40px 16px 20px !important; }
-      .footer-inner { flex-direction: column !important; gap: 24px !important; text-align: center !important; }
-      .footer-disclaimer { font-size: 0.6rem !important; line-height: 1.6 !important; }
-      .footer-disclaimer p { font-size: 0.6rem !important; }
-
-      /* --- WhatsApp Float Mobile --- */
-      .whatsapp-float { bottom: 16px !important; right: 16px !important; padding: 10px 16px 10px 14px !important; }
-      .whatsapp-float svg { width: 20px !important; height: 20px !important; }
-
-      /* --- Accordion Mobile --- */
-      .accordion-header { padding: 16px !important; }
-      .accordion-body { padding: 0 16px 16px !important; }
-
-      /* --- Lot Size Box Mobile --- */
-      .lot-size-box { text-align: center !important; }
-
-      /* --- Features Grid Fix --- */
-      #features .container > div[style*="grid"] { grid-template-columns: 1fr !important; }
-
-      /* --- Pricing Section Header Mobile --- */
-      #pricing > .container > div:first-child { margin-bottom: 40px !important; }
-
-      /* --- Monitoring Heading Mobile --- */
-      .monitoring-heading { margin-bottom: 30px !important; }
-      .monitoring-heading h2 { font-size: 1.5rem !important; }
+      a, button, .btn-gold, .btn-outline, .pricing-cta, .accordion-btn, .copy-creds-btn, .mobile-menu-btn, .whatsapp-float, .free-trial-btn, .social-btn {
+        min-height: 44px;
+        min-width: 44px;
+      }
     }
 
-    /* --- Small Mobile --- */
+    /* --- Reduced Motion Preference --- */
+    @media (prefers-reduced-motion: reduce) {
+      .reveal { opacity: 1 !important; transform: none !important; transition: none !important; }
+      .shimmer-line { animation: none !important; }
+      .pulse-dot { animation: none !important; }
+      .live-dot { animation: none !important; }
+      .live-pulse-green { animation: none !important; }
+      .footer-watermark span { animation: none !important; }
+      .footer-glitch span { animation: none !important; }
+      .footer-scanline { animation: none !important; display: none !important; }
+      .footer-trading-grid svg * { animation: none !important; }
+      html { scroll-behavior: auto !important; }
+    }
+
+    /* --- Mobile: 768px and below --- */
+    @media (max-width: 768px) {
+
+      /* -- Global Spacing -- */
+      .section-pad { padding: 56px 16px; }
+      .section-title { font-size: clamp(1.6rem, 6vw, 2.2rem); }
+      .section-desc { font-size: 0.85rem; padding: 0 8px; }
+      .section-label { font-size: 0.65rem; }
+
+      /* -- Navbar -- */
+      nav { padding: 10px 14px; gap: 12px; }
+      .nav-badge { display: none; }
+
+      /* -- Hero -- */
+      #hero { padding: 88px 16px 48px; min-height: auto; }
+      .hero-title { font-size: clamp(2.8rem, 16vw, 5rem); letter-spacing: 0.04em; }
+      .hero-version { font-size: 0.6rem; letter-spacing: 0.3em; }
+      .hero-tagline { font-size: 0.95rem; padding: 0 4px; line-height: 1.7; }
+      .hero-desc { font-size: 0.72rem; padding: 0 8px; }
+      .hero-stats-heading { font-size: 1.5rem; margin-bottom: 20px; }
+      .hero-stats-wrapper { max-width: 100%; }
+      .hero-stats { gap: 10px; }
+      .hero-stat-card {
+        min-width: 0;
+        max-width: 100%;
+        flex: 1 1 calc(50% - 10px);
+        padding: 18px 12px 14px;
+        border-radius: 12px;
+      }
+      .hero-stat-value { font-size: 1.35rem; }
+      .hero-stat-label { font-size: 0.5rem; }
+      .hero-stat-sub { font-size: 0.42rem; }
+      .hero-stat-chart { height: 50px; }
+      .hero-ctas { width: 100%; gap: 12px; }
+      .hero-ctas .btn-gold,
+      .hero-ctas .btn-outline {
+        width: 100%;
+        justify-content: center;
+        padding: 14px 20px;
+        border-radius: 12px;
+      }
+      .live-trust-bar { gap: 6px; font-size: 0.6rem; }
+      .scroll-hint { display: none; }
+
+      /* -- Features Grid -- */
+      #features [style*="grid-template-columns:repeat(auto-fit"] {
+        grid-template-columns: 1fr !important;
+        gap: 16px;
+      }
+      #features .container > div:first-child { margin-bottom: 40px; }
+
+      /* -- Comparison Table -- */
+      #comparison [style*="overflow-x"] { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+
+      /* -- Live Monitoring -- */
+      #live-monitoring { padding: 56px 16px; }
+      .monitoring-grid { grid-template-columns: 1fr; gap: 16px; }
+      .monitor-card { padding: 20px; border-radius: 16px; }
+      .monitor-card-title { font-size: 1.2rem; }
+      .terminal { padding: 14px; border-radius: 10px; }
+      .terminal-label { font-size: 0.78rem; }
+      .terminal-value { font-size: 0.82rem; }
+      .monitoring-heading { margin-bottom: 30px; }
+      .monitoring-heading h2 { font-size: 1.5rem; }
+
+      /* -- Pricing -- */
+      .pricing-grid { grid-template-columns: 1fr; gap: 20px; }
+      .pricing-card { padding: 28px 20px; border-radius: 16px; }
+      .pricing-price { font-size: 2.2rem; }
+      .pricing-features li { font-size: 0.82rem; margin-bottom: 10px; }
+      .pricing-cta { padding: 14px; font-size: 0.72rem; }
+      .featured-badge { font-size: 0.6rem; padding: 3px 12px; }
+
+      /* -- Trust Grid -- */
+      .trust-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; padding: 20px 16px; margin-top: 32px; }
+      .trust-item { padding: 14px 10px; }
+      .trust-icon { width: 36px; height: 36px; }
+      .trust-label { font-size: 0.78rem; }
+      .trust-sub { font-size: 0.68rem; }
+
+      /* -- Testimonials -- */
+      #testimonials { padding: 56px 16px; }
+      .testimonials-grid { grid-template-columns: 1fr; gap: 16px; }
+      .testimonial-card { padding: 20px 16px; border-radius: 12px; }
+      .testimonial-text { font-size: 0.88rem; }
+
+      /* -- Free Trial -- */
+      #free-trial { padding: 56px 16px; }
+      .free-trial-card { padding: 40px 20px; border-radius: 16px; }
+      .free-trial-heading { font-size: clamp(1.5rem, 6vw, 2.2rem); }
+      .free-trial-subtitle { font-size: 0.88rem; }
+      .free-trial-note { font-size: 0.78rem; margin-bottom: 28px; }
+      .free-trial-btn { width: 100%; padding: 16px; font-size: 0.85rem; border-radius: 10px; }
+      .free-trial-card::before,
+      .free-trial-card::after { opacity: 0.06; filter: blur(60px); }
+
+      /* -- CTA Section -- */
+      #cta { padding: 56px 16px; }
+      .cta-title { font-size: clamp(1.5rem, 5vw, 2rem); }
+      .cta-desc { font-size: 0.88rem; margin-bottom: 32px; }
+      .cta-buttons { flex-direction: column; gap: 12px; }
+      .cta-buttons a { width: 100%; justify-content: center; padding: 16px 24px; }
+
+      /* -- Accordion -- */
+      .accordion-btn { padding: 18px 20px; gap: 14px; }
+      .accordion-step-icon { width: 36px; height: 36px; border-radius: 8px; }
+      .accordion-content-inner { padding: 0 20px 20px; font-size: 0.82rem; }
+      .accordion-title { font-size: 0.88rem; }
+      .step-list { padding: 14px; }
+      .step-text { font-size: 0.78rem; }
+
+      /* -- Footer -- */
+      footer { padding: 80px 16px 30px; }
+      .footer-inner { flex-direction: column; gap: 16px; text-align: center; min-height: auto; }
+      .footer-disclaimer { font-size: 0.62rem; line-height: 1.6; }
+      .footer-watermark span,
+      .footer-glitch span { font-size: 3rem; }
+      .footer-trading-grid { display: none; }
+
+      /* -- WhatsApp Float -- */
+      .whatsapp-float { bottom: 16px; right: 16px; padding: 12px 16px 12px 14px; border-radius: 50px; }
+      .whatsapp-float svg { width: 22px; height: 22px; }
+
+      /* -- Video Embeds -- */
+      .video-card { border-radius: 16px; }
+      .video-card-inner { padding: 16px 16px 0; }
+      .video-card-footer { padding: 12px 16px 16px; font-size: 0.65rem; }
+
+      /* -- Insight Block -- */
+      .insight-block { padding: 18px 16px; border-radius: 12px; flex-direction: column; gap: 14px; }
+      .insight-icon { width: 36px; height: 36px; font-size: 1.1rem; }
+      .insight-text { font-size: 0.88rem; }
+
+      /* -- Metric Cards -- */
+      .metrics-grid { grid-template-columns: 1fr 1fr; gap: 12px; }
+      .metric-card { padding: 18px; border-radius: 12px; }
+      .metric-value { font-size: 1.5rem; }
+      .metric-label { font-size: 0.55rem; }
+
+      /* -- Equity Card -- */
+      .equity-card { padding: 20px; border-radius: 12px; }
+      .equity-label { font-size: 0.6rem; }
+      .equity-footer { font-size: 0.62rem; }
+
+      /* -- Lot Size Info -- */
+      .reveal[style*="max-width:600px"] { flex-direction: column; text-align: center; }
+    }
+
+    /* --- Small Mobile: 400px and below --- */
     @media (max-width: 400px) {
-      .hero-title { font-size: 2.6rem !important; }
-      .hero-stat-card { min-width: 120px !important; flex: 1 1 calc(50% - 8px) !important; padding: 16px 10px 14px !important; }
-      .hero-stat-value { font-size: 1.2rem !important; }
-      .hero-stat-label { font-size: 0.45rem !important; }
-      .btn-gold, .btn-outline { padding: 12px 16px !important; font-size: 0.7rem !important; }
-      .trust-grid { grid-template-columns: 1fr !important; }
+      .hero-title { font-size: 2.5rem; letter-spacing: 0.03em; }
+      .hero-tagline { font-size: 0.88rem; }
+      .hero-stat-card { flex: 1 1 calc(50% - 6px); padding: 14px 8px 12px; }
+      .hero-stat-value { font-size: 1.15rem; }
+      .hero-stat-label { font-size: 0.42rem; }
+      .btn-gold, .btn-outline { padding: 12px 16px; font-size: 0.7rem; border-radius: 10px; }
+      .trust-grid { grid-template-columns: 1fr; }
+      .metrics-grid { grid-template-columns: 1fr; }
+      .free-trial-heading { font-size: 1.3rem; }
+      .pricing-card { padding: 24px 16px; }
+      .pricing-price { font-size: 1.9rem; }
+      .terminal-row { flex-direction: column; align-items: flex-start; gap: 4px; }
+      .terminal-value { text-align: left; font-size: 0.78rem; }
+      .accordion-btn { padding: 16px; gap: 12px; }
+      .accordion-step-num { font-size: 0.55rem; }
+      .accordion-title { font-size: 0.82rem; }
     }
 
   </style>
@@ -1558,7 +1654,7 @@
 
       <div class="gold-border reveal delay-200" style="border-radius:16px;overflow:hidden;background:var(--glass-bg);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);">
         <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;">
-        <div style="min-width:600px;">
+        <div style="min-width:580px;">
 
         <!-- Table Header -->
         <div style="display:grid;grid-template-columns:2fr 1fr 1fr 1fr;border-bottom:1px solid var(--border);background:rgba(193,155,102,0.06);">
@@ -1913,7 +2009,7 @@
        SECTION 5: LIVE ACCOUNT MONITORING
        Edit: account credentials, server names, login IDs
   ============================================ -->
-  <section id="live-monitoring" style="padding: 80px 24px;">
+  <section id="live-monitoring" class="section-pad">
     <div class="monitoring-container">
 
       <!-- Section Heading -->
@@ -2421,7 +2517,7 @@
        SECTION 11: FOOTER
        Edit: disclaimer text, social links
   ============================================ -->
-  <footer style="position:relative;overflow:hidden;padding:120px 24px 50px;border-top:1px solid var(--border);background:var(--obsidian-2);">
+  <footer style="position:relative;overflow:hidden;border-top:1px solid var(--border);background:var(--obsidian-2);padding:100px 24px 40px;">
 
     <!-- Watermark AMRAX -->
     <div class="footer-watermark" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none;user-select:none;z-index:0;">
@@ -2615,25 +2711,12 @@
       .footer-watermark span {
         animation: glowPulse 3s ease-in-out infinite;
       }
-      .footer-inner { position: relative; z-index: 2; }
-
-      @media (max-width: 768px) {
-        .footer-watermark span,
-        .footer-glitch span {
-          font-size: 4rem;
-        }
-      }
     </style>
 
-    <div class="footer-inner" style="position:relative;z-index:2;flex-direction:column;gap:0;justify-content:flex-end;min-height:180px;">
-
-      <!-- Spacer -->
-      <div style="flex:1;"></div>
+    <div class="footer-inner" style="position:relative;z-index:2;flex-direction:column;gap:0;justify-content:flex-end;">
 
       <!-- Disclaimer -->
       <p style="font-size:0.68rem;color:#fff;text-align:center;line-height:1.6;letter-spacing:0.03em;opacity:0.55;">Trading involves substantial risk of loss. Past performance is not indicative of future results. AMRAX is a software tool, not financial advice. Trade at your own discretion.</p>
-
-    </div>
 
     </div>
   </footer>
@@ -2732,6 +2815,71 @@
         accountEl.textContent = v;
       }
     }, 12000);
+
+    // --- Mobile Performance: Reduce Animations ---
+    (function() {
+      const isMobile = window.innerWidth <= 768;
+      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      if (isMobile || prefersReducedMotion) {
+        // Disable heavy SVG animations on mobile
+        document.querySelectorAll('.footer-trading-grid svg animate').forEach(el => {
+          el.setAttribute('dur', '0s');
+        });
+        document.querySelectorAll('.footer-trading-grid svg [style*="animation"]').forEach(el => {
+          el.style.animation = 'none';
+        });
+      }
+
+      // Lazy load YouTube iframes on mobile
+      if (isMobile) {
+        document.querySelectorAll('.video-embed-wrapper iframe').forEach(iframe => {
+          const src = iframe.getAttribute('src');
+          if (src) {
+            iframe.setAttribute('data-src', src);
+            iframe.removeAttribute('src');
+            iframe.classList.add('lazy-iframe');
+          }
+        });
+
+        // Load iframe when visible
+        const videoObserver = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              const iframe = entry.target;
+              if (iframe.classList.contains('lazy-iframe')) {
+                iframe.src = iframe.getAttribute('data-src');
+                iframe.classList.remove('lazy-iframe');
+              }
+              videoObserver.unobserve(iframe);
+            }
+          });
+        }, { rootMargin: '200px' });
+
+        document.querySelectorAll('.lazy-iframe').forEach(iframe => {
+          videoObserver.observe(iframe);
+        });
+      }
+    })();
+
+    // --- Mobile Menu: Close on outside click ---
+    document.addEventListener('click', function(e) {
+      const menu = document.getElementById('mobileMenu');
+      const btn = document.querySelector('.mobile-menu-btn');
+      if (menu && menu.classList.contains('open') && !menu.contains(e.target) && !btn.contains(e.target)) {
+        menu.classList.remove('open');
+      }
+    });
+
+    // --- Mobile Menu: Close on Escape key ---
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        const menu = document.getElementById('mobileMenu');
+        if (menu && menu.classList.contains('open')) {
+          menu.classList.remove('open');
+        }
+      }
+    });
 
     // --- License Count Decrease ---
     const licenseEl = document.getElementById('licenseCount');
