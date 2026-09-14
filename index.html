@@ -812,6 +812,36 @@
     .free-trial-btn:hover { transform: translateY(-3px); filter: brightness(1.1); }
     .free-trial-btn svg { width: 20px; height: 20px; fill: #000000; }
 
+    /* --- Free Trial Video --- */
+    .free-trial-video {
+      position: relative;
+      z-index: 2;
+      margin: 36px auto 0;
+      width: 100%;
+      max-width: 320px;
+      aspect-ratio: 9 / 16;
+      border-radius: 14px;
+      overflow: hidden;
+      background: #000;
+      border: 1px solid rgba(193, 155, 102, 0.35);
+      box-shadow:
+        0 20px 60px rgba(0, 0, 0, 0.5),
+        0 0 30px rgba(193, 155, 102, 0.1);
+    }
+    .free-trial-video iframe {
+      display: block;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+    @media (max-width: 600px) {
+      .free-trial-video {
+        margin-top: 28px;
+        max-width: 280px;
+        border-radius: 12px;
+      }
+    }
+
     /* --- Free Trial Mobile --- */
     @media (max-width: 600px) {
       .free-trial-card { padding: 45px 20px; border-radius: 20px; }
@@ -2252,6 +2282,11 @@
               <line x1="12" y1="15" x2="12" y2="3"/>
             </svg>
           </a>
+
+          <!-- Backtest Video -->
+          <div class="free-trial-video">
+            <iframe src="https://www.youtube.com/embed/wNwDRA4wOGM" title="AMRAX Backtest Video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen loading="lazy"></iframe>
+          </div>
 
         </div>
       </div>
