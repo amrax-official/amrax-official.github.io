@@ -69,7 +69,7 @@
        BASE RESET
     ============================================ */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
+    html { scroll-behavior: smooth; -webkit-overflow-scrolling: touch; }
     body {
       background: var(--obsidian);
       color: var(--text-primary);
@@ -77,6 +77,8 @@
       font-weight: 300;
       -webkit-font-smoothing: antialiased;
       overflow-x: hidden;
+      -webkit-overflow-scrolling: touch;
+      overscroll-behavior-y: none;
       padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
     }
     body::before {
@@ -1630,6 +1632,7 @@
       border-bottom: 1px solid rgba(255,224,138,0.25);
       color: #f3e6c6;
       overflow: hidden;
+      contain: paint;
       font-family: 'Space Grotesk', sans-serif;
     }
     .announce-ticker {
@@ -1640,9 +1643,7 @@
     .ticker-track {
       display: flex; align-items: center; white-space: nowrap;
       width: max-content;
-      transform: translateZ(0);
-      will-change: transform;
-      animation: tickerScroll 26s linear infinite;
+      animation: tickerScroll 30s linear infinite;
     }
     .ticker-group {
       display: inline-flex; align-items: center; gap: 20px;
@@ -1787,11 +1788,11 @@
           <span class="tg-dot"></span>
           <span class="tg-feat">2% Max DD Per Basket</span>
           <span class="tg-dot"></span>
-          <span class="tg-feat">Per Month 12-20% ROI</span>
+          <span class="tg-feat">Per Month 20-50% ROI</span>
           <span class="tg-dot"></span>
           <span class="tg-feat">Daily Max DD 5%</span>
           <span class="tg-dot"></span>
-          <span class="tg-feat">175% in 9 Months</span>
+          <span class="tg-feat">500% in 9 Months</span>
           <span class="tg-dot"></span>
           <span class="tag-simple">MAX DD 23%</span>
           <span class="tg-dot"></span>
@@ -1805,11 +1806,11 @@
           <span class="tg-dot"></span>
           <span class="tg-feat">2% Max DD Per Basket</span>
           <span class="tg-dot"></span>
-          <span class="tg-feat">Per Month 12-20% ROI</span>
+          <span class="tg-feat">Per Month 20-50% ROI</span>
           <span class="tg-dot"></span>
           <span class="tg-feat">Daily Max DD 5%</span>
           <span class="tg-dot"></span>
-          <span class="tg-feat">175% in 9 Months</span>
+          <span class="tg-feat">500% in 9 Months</span>
           <span class="tg-dot"></span>
           <span class="tag-simple">MAX DD 23%</span>
           <span class="tg-dot"></span>
