@@ -32,7 +32,7 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Space+Grotesk:wght@300..700&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,100..900&family=Space+Grotesk:wght@300..700&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet" />
 
   <style>
     /* ============================================
@@ -57,6 +57,13 @@
   --profit: #00D084;
   --profit-dim: #003321;
 }
+
+    /* --- Performance: skip rendering offscreen sections --- */
+    #features, #comparison, #deployment, #free-trial, #live-monitoring, #pricing,
+    #deployment-guide, #testimonials, #cta {
+      content-visibility: auto;
+      contain-intrinsic-size: auto 900px;
+    }
 
     /* ============================================
        BASE RESET
@@ -1633,6 +1640,8 @@
     .ticker-track {
       display: flex; align-items: center; white-space: nowrap;
       width: max-content;
+      transform: translateZ(0);
+      will-change: transform;
       animation: tickerScroll 26s linear infinite;
     }
     .ticker-group {
@@ -1911,7 +1920,7 @@
           <div class="hero-image-ring"></div>
           <div class="hero-image-ring"></div>
           <div class="hero-image-inner">
-            <img src="founder.png" alt="AMRAX Founder" loading="eager">
+            <img src="founder.png" alt="AMRAX Founder" loading="eager" fetchpriority="high" decoding="async">
           </div>
 
           <!-- Developer Introduction Badge -->
@@ -1944,7 +1953,7 @@
     <div class="container" style="max-width:1000px;">
 
       <div style="text-align:center;margin-bottom:48px;">
-        <h2 class="hero-stats-heading reveal" style="font-size:clamp(1.8rem,4vw,2.8rem);margin-bottom:8px;">9 Months <span class="text-gold-gradient">Verified Market Results</span></h2>
+        <h2 class="hero-stats-heading reveal" style="font-size:clamp(1.8rem,4vw,2.8rem);margin-bottom:8px;">Expected &amp; Average <span class="text-gold-gradient">AMRAX ROI Per month</span></h2>
       </div>
 
       <div class="hero-stats-wrapper reveal delay-200">
@@ -1954,7 +1963,7 @@
               <path d="M0,100 C15,95 30,92 50,85 C70,78 85,82 100,72 C115,62 130,66 150,52 C170,38 185,42 200,28 L200,120 L0,120 Z" fill="rgba(0,208,132,0.2)"/>
               <path d="M0,100 C15,95 30,92 50,85 C70,78 85,82 100,72 C115,62 130,66 150,52 C170,38 185,42 200,28" fill="none" stroke="rgba(0,208,132,0.8)" stroke-width="2.5" stroke-linecap="round"/>
             </svg>
-            <div class="hero-stat-value">110%</div>
+            <div class="hero-stat-value">20-30%</div>
             <div class="hero-stat-label">Net Return · Low Risk</div>
           </div>
           <div class="hero-stat-card green-card">
@@ -1965,7 +1974,7 @@
               <rect x="128" y="25" width="24" height="95" rx="3" fill="rgba(0,208,132,0.35)"/>
               <rect x="164" y="15" width="24" height="105" rx="3" fill="rgba(0,208,132,0.4)"/>
             </svg>
-            <div class="hero-stat-value">175%</div>
+            <div class="hero-stat-value">35-50%</div>
             <div class="hero-stat-label">ROI · Medium Risk</div>
           </div>
           <div class="hero-stat-card gold-card">
@@ -2212,7 +2221,7 @@
             <p class="video-card-label">Watch The Intro · Video</p>
 
             <div class="video-embed-wrapper">
-              <iframe width="560" height="315" src="https://www.youtube.com/embed/ALI0EwBhfJI?si=KSfM19trt9ZWpiZR" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+              <iframe width="560" height="315" loading="lazy" src="https://www.youtube.com/embed/ALI0EwBhfJI?si=KSfM19trt9ZWpiZR" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
             </div>
 
           </div>
@@ -2273,8 +2282,8 @@
             <div class="pulse-dot" style="width:8px;height:8px;border-radius:50%;background:var(--profit);"></div>
           </div>
           <div>
-            <div class="metric-value green">110<span class="metric-suffix" style="color:var(--profit-dim);">%</span></div>
-            <div class="metric-label">Net Return · Low Risk (9 Months)</div>
+            <div class="metric-value green">20-30<span class="metric-suffix" style="color:var(--profit-dim);">%</span></div>
+            <div class="metric-label">Net Return · Low Risk (Per Month)</div>
           </div>
           <div class="shimmer-line"></div>
         </div>
@@ -2288,8 +2297,8 @@
             <div class="pulse-dot" style="width:8px;height:8px;border-radius:50%;background:var(--gold);"></div>
           </div>
           <div>
-            <div class="metric-value gold">175<span class="metric-suffix" style="color:var(--gold-dim);">%</span></div>
-            <div class="metric-label">ROI · Medium Risk (9 Months)</div>
+            <div class="metric-value gold">35-50<span class="metric-suffix" style="color:var(--gold-dim);">%</span></div>
+            <div class="metric-label">ROI · Medium Risk (Per Month)</div>
           </div>
           <div class="shimmer-line"></div>
         </div>
@@ -2559,7 +2568,7 @@
             <p class="video-card-label">Watch The · Video</p>
             
             <div class="video-embed-wrapper">
-              <iframe width="560" height="315" src="https://www.youtube.com/embed/eN3R6Vm6xWk?si=EZtBKLhcWWzBdO-i" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+              <iframe width="560" height="315" loading="lazy" src="https://www.youtube.com/embed/eN3R6Vm6xWk?si=EZtBKLhcWWzBdO-i" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
             </div>
             
           </div>
