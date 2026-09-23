@@ -2503,6 +2503,50 @@
 
         </div>
 
+        <!-- Live Account 2 -->
+        <div class="monitor-card reveal delay-200">
+
+          <!-- Live Feed Indicator -->
+          <div class="live-feed" style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
+            <span style="display:flex;align-items:center;gap:6px;"><span class="live-dot"></span>LIVE ACCOUNT 2</span>
+            <span class="running-time" data-start="2026-09-22" style="font-size:0.62rem;color:var(--profit);font-family:'DM Mono',monospace;letter-spacing:0.05em;"></span>
+          </div>
+
+          <!-- Account Title -->
+          <h3 class="monitor-card-title" style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
+            $1,000 Account
+          </h3>
+
+          <!-- Connection Status -->
+          <div class="status-badge">● CONNECTED</div>
+
+          <!-- Credentials Terminal -->
+          <div class="terminal">
+            <div class="terminal-row">
+              <span class="terminal-label">Balance</span>
+              <span class="terminal-value">$1,000 (100,000 Cents)</span>
+            </div>
+            <div class="terminal-row">
+              <span class="terminal-label">Server</span>
+              <span class="terminal-value" id="server2">Exness-MT5Trial16</span>
+            </div>
+            <div class="terminal-row">
+              <span class="terminal-label">Login</span>
+              <span class="terminal-value" id="login2">472787444</span>
+            </div>
+            <div class="terminal-row">
+              <span class="terminal-label">Investor Password</span>
+              <span class="terminal-value" id="pass2">Amrax$100</span>
+            </div>
+          </div>
+
+          <!-- Copy Button -->
+          <button class="copy-creds-btn" onclick="copyCredentials('server2','login2','pass2')">
+            Copy MT5 Credentials
+          </button>
+
+        </div>
+
       </div>
     </div>
   </section>
