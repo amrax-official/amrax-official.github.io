@@ -713,11 +713,29 @@
       position: relative;
       z-index: 2;
       font-family: 'DM Mono', monospace;
-      font-size: 0.48rem;
-      letter-spacing: 0.08em;
-      color: rgba(255,255,255,0.3);
-      margin-top: 5px;
+      font-size: 0.62rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      color: #FFD87A;
+      margin-top: 6px;
+      text-shadow: 0 0 10px rgba(255,216,122,0.45);
     }
+    .hero-stat-card.green-card .hero-stat-sub {
+      color: var(--profit);
+      text-shadow: 0 0 10px rgba(0,208,132,0.45);
+    }
+    .hero-stat-caption {
+      position: relative;
+      z-index: 2;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.62rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #F2C875;
+      margin-bottom: 8px;
+    }
+    .hero-stat-card.green-card .hero-stat-caption { color: var(--profit); }
 
     /* --- Hero CTA Buttons --- */
     .hero-ctas { display: flex; flex-direction: column; gap: 16px; align-items: flex-start; margin-top: 8px; }
@@ -1989,6 +2007,42 @@
             <div class="hero-stat-value">45%</div>
             <div class="hero-stat-label">Max DD · Backtest Crash</div>
           </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============================================
+       SECTION: CAPITAL — Minimum & Recommended Capital
+  ============================================ -->
+  <section class="section-pad" style="padding-top:0;">
+    <div class="container" style="max-width:1000px;">
+
+      <div style="text-align:center;margin-bottom:48px;">
+        <p class="section-label reveal" style="color:var(--gold-light);">Capital Guide</p>
+        <h2 class="hero-stats-heading reveal delay-100" style="font-size:clamp(1.8rem,4vw,2.8rem);margin-bottom:8px;">Capital <span class="text-gold-gradient">Requirements</span></h2>
+        <p class="section-desc reveal delay-200" style="font-size:0.8rem;color:#888;max-width:640px;margin:10px auto 4px;">Minimum and Recommended Capital Required to Start with AMRAX</p>
+        <p class="section-desc reveal delay-300" style="font-size:0.9rem;color:#888;max-width:620px;">Choose the account size that fits your risk profile — cents accounts fully supported.</p>
+      </div>
+
+      <div class="hero-stats-wrapper reveal delay-300">
+        <div class="hero-stats" style="justify-content:center;">
+
+          <div class="hero-stat-card gold-card" style="flex:1;min-width:240px;max-width:320px;">
+            <div class="hero-stat-caption">High Risk</div>
+            <div class="hero-stat-value">$500</div>
+            <div class="hero-stat-label">Base Capital</div>
+            <div class="hero-stat-sub">= 50,000 Cents</div>
+          </div>
+
+          <div class="hero-stat-card green-card" style="flex:1;min-width:240px;max-width:320px;">
+            <div class="hero-stat-caption">Low Risk</div>
+            <div class="hero-stat-value">$1,000</div>
+            <div class="hero-stat-label">Recommended Capital</div>
+            <div class="hero-stat-sub">= 100,000 Cents</div>
+          </div>
+
         </div>
       </div>
 
