@@ -7,24 +7,24 @@
   <meta name="mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-  <title>AMRAX v2.0 — Institutional EA | Automated Forex Trading</title>
-  <meta name="description" content="AMRAX v2.0 — Fully-automated institutional-grade Expert Advisor for MetaTrader 5. Live-tested results: 4-5% average monthly ROI with 5-15% average drawdown. Start trading today." />
+  <title>AMRAX v3.0 — Institutional EA | Automated Forex Trading</title>
+  <meta name="description" content="AMRAX v3.0 — Fully-automated institutional-grade Expert Advisor for MetaTrader 5. Risk-based monthly ROI: 5-10% Low, 25-30% Medium, 50-70% High, with 5-10% average drawdown. Start trading today." />
   <meta name="keywords" content="AMRAX, forex EA, MetaTrader 5, automated trading, institutional EA, expert advisor, gold trading, XAUUSD" />
   <meta name="author" content="AMRAX Trading Systems" />
 
   <!-- Open Graph / Social Sharing -->
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://amrax-official.github.io/" />
-  <meta property="og:title" content="AMRAX v2.0 — Institutional EA | Automated Forex Trading" />
-  <meta property="og:description" content="Fully-automated trading system built for sophisticated investors. Live-tested results: 4-5% average monthly ROI with 5-15% average drawdown." />
+  <meta property="og:title" content="AMRAX v3.0 — Institutional EA | Automated Forex Trading" />
+  <meta property="og:description" content="Fully-automated trading system built for sophisticated investors. Risk-based monthly ROI: 5-10% Low, 25-30% Medium, 50-70% High, with 5-10% average drawdown." />
   <meta property="og:image" content="https://amrax-official.github.io/Amrax%20founder.png" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="AMRAX v2.0 — Institutional EA" />
-  <meta name="twitter:description" content="Fully-automated trading system. Live-tested results: 4-5% average monthly ROI, 5-15% average drawdown. Start trading today." />
+  <meta name="twitter:title" content="AMRAX v3.0 — Institutional EA" />
+  <meta name="twitter:description" content="Fully-automated trading system. Risk-based monthly ROI: 5-10% Low, 25-30% Medium, 50-70% High, with 5-10% average drawdown. Start trading today." />
   <meta name="twitter:image" content="https://amrax-official.github.io/Amrax%20founder.png" />
 
   <!-- Favicon -->
@@ -69,7 +69,7 @@
        BASE RESET
     ============================================ */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; -webkit-overflow-scrolling: touch; }
+    html { scroll-behavior: smooth; -webkit-overflow-scrolling: touch; scroll-padding-top: 140px; }
     body {
       background: var(--obsidian);
       color: var(--text-primary);
@@ -225,7 +225,7 @@
        SECTION 1: NAVBAR — Liquid Glass
     ============================================ */
     nav {
-      position: fixed; top: 72px; left: 12px; right: 12px; z-index: 50;
+      position: fixed; top: 66px; left: 12px; right: 12px; z-index: 50;
       display: flex; align-items: center; justify-content: space-between; gap: 12px;
       max-width: 1080px; margin: 0 auto;
       padding: 12px 24px;
@@ -293,7 +293,7 @@
     /* --- Mobile Menu --- */
     .mobile-menu {
       display: none;
-      position: fixed; top: 132px; left: 12px; right: 12px; z-index: 55;
+      position: fixed; top: 140px; left: 12px; right: 12px; z-index: 55;
       padding: 24px;
       background: linear-gradient(135deg, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0.02) 100%);
       backdrop-filter: blur(24px) saturate(1.4);
@@ -729,6 +729,75 @@
       margin-bottom: 8px;
     }
     .hero-stat-card.green-card .hero-stat-caption { color: var(--profit); }
+
+    /* --- Expected ROI Table --- */
+    .expect-table-wrap {
+      max-width: 860px;
+      margin: 0 auto;
+      border-radius: 18px;
+      border: 1px solid rgba(193,155,102,0.18);
+      background: linear-gradient(180deg, rgba(120,80,20,0.12) 0%, rgba(0,0,0,0.6) 100%);
+      box-shadow: 0 8px 40px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.04);
+      overflow: hidden;
+    }
+    .expect-table { width: 100%; border-collapse: collapse; }
+    .expect-table thead th {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.6rem; letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--gold-light); text-align: left;
+      padding: 16px 24px;
+      background: rgba(193,155,102,0.07);
+      border-bottom: 1px solid rgba(193,155,102,0.16);
+    }
+    .expect-table thead th:last-child { text-align: right; }
+    .expect-table tbody td {
+      padding: 18px 24px;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      vertical-align: middle;
+    }
+    .expect-table tbody tr:last-child td { border-bottom: none; }
+    .expect-table tbody tr { transition: background 0.25s ease; }
+    .expect-table tbody tr:hover { background: rgba(193,155,102,0.06); }
+    .expect-table th:not(:first-child), .expect-table td:not(:first-child) { text-align: right; }
+    .expect-capital {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.05rem; font-weight: 600;
+      color: var(--gold-light);
+    }
+    .expect-capital small {
+      display: block; margin-top: 4px;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.52rem; letter-spacing: 0.06em; font-weight: 400;
+      color: var(--text-secondary);
+    }
+    .expect-risk {
+      display: flex; align-items: center; gap: 10px;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1rem; font-weight: 600; color: var(--text-primary);
+    }
+    .risk-dot { width: 9px; height: 9px; border-radius: 50%; flex-shrink: 0; }
+    .risk-dot.low { background: var(--profit); box-shadow: 0 0 12px rgba(0,208,132,0.8); }
+    .risk-dot.med { background: #F2C875; box-shadow: 0 0 12px rgba(242,200,117,0.8); }
+    .risk-dot.high { background: #FF7A45; box-shadow: 0 0 12px rgba(255,122,69,0.8); }
+    .expect-note {
+      display: block; margin-top: 4px; padding-left: 19px;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.6rem; letter-spacing: 0.06em;
+      color: var(--text-secondary);
+    }
+    .expect-return {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(1.35rem, 3vw, 1.7rem);
+      font-weight: 600; line-height: 1;
+    }
+    .expect-return.low { color: #5ee8b0; text-shadow: 0 2px 14px rgba(0,208,132,0.35); }
+    .expect-return.med { color: #F2C875; text-shadow: 0 2px 14px rgba(242,200,117,0.35); }
+    .expect-return.high { color: #FF9A6B; text-shadow: 0 2px 14px rgba(255,122,69,0.35); }
+    @media (max-width: 520px) {
+      .expect-table thead th, .expect-table tbody td { padding: 14px 16px; }
+      .expect-risk { font-size: 0.9rem; }
+      .expect-note { font-size: 0.52rem; }
+    }
 
     /* --- Hero CTA Buttons --- */
     .hero-ctas { display: flex; flex-direction: column; gap: 16px; align-items: flex-start; margin-top: 8px; }
@@ -1302,6 +1371,25 @@
     .stars { display: flex; gap: 4px; margin-bottom: 16px; color: var(--gold); }
     .testimonial-text { font-family: 'Space Grotesk', sans-serif; font-size: 0.975rem; font-style: italic; font-weight: 300; color: #ffffff; line-height: 1.7; margin-bottom: 20px; }
     .testimonial-author { display: flex; align-items: center; gap: 12px; }
+    .wa-badge-row { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; }
+    .wa-badge {
+      display: inline-flex; align-items: center; gap: 7px;
+      font-family: 'DM Mono', monospace; font-size: 0.68rem; font-weight: 600;
+      letter-spacing: 0.05em; color: #25D366;
+      background: rgba(37,211,102,0.1);
+      border: 1px solid rgba(37,211,102,0.4);
+      padding: 5px 10px; border-radius: 8px; white-space: nowrap;
+    }
+    .wa-shot {
+      display: block; width: 100%; height: auto;
+      border-radius: 10px;
+      border: 1px solid rgba(201,155,102,0.25);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .testimonial-card a:hover .wa-shot {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.4);
+    }
     .author-avatar { width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.875rem; font-weight: 600; background: rgba(201,168,76,0.12); color: var(--gold); }
     .author-name { font-size: 0.875rem; font-weight: 500; color: var(--text-primary); }
     .author-role { font-size: 0.75rem; color: var(--text-muted); }
@@ -1346,7 +1434,7 @@
        WHATSAPP FLOATING BUTTON
     ============================================ */
     .whatsapp-float {
-      position: fixed; bottom: 28px; right: 28px; z-index: 1000;
+      position: fixed; bottom: 92px; right: 28px; z-index: 1000;
       display: flex; align-items: center; gap: 10px;
       padding: 12px 20px 12px 16px; border-radius: 9999px;
       background: linear-gradient(135deg, #25d366, #128c7e);
@@ -1538,7 +1626,7 @@
       .footer-trading-grid { display: none; }
 
       /* -- WhatsApp Float -- */
-      .whatsapp-float { bottom: 16px; right: 16px; padding: 12px 16px 12px 14px; border-radius: 50px; }
+      .whatsapp-float { bottom: 88px; right: 16px; padding: 12px 16px 12px 14px; border-radius: 50px; }
       .whatsapp-float svg { width: 22px; height: 22px; }
 
       /* -- Video Embeds -- */
@@ -1586,7 +1674,7 @@
       .accordion-title { font-size: 0.82rem; }
     }
 
-    /* --- v2.0 Highlight Tag --- */
+    /* --- v3.0 Highlight Tag --- */
     .v2-tag {
       color: #FFE08A;
       font-weight: 700;
@@ -1617,6 +1705,11 @@
       color: #F2C875;
       background: rgba(193,155,102,0.12);
       border: 1px solid rgba(193,155,102,0.45);
+    }
+    .set-file-tag.high {
+      color: #FF8A7A;
+      background: rgba(228,37,39,0.12);
+      border: 1px solid rgba(228,37,39,0.5);
     }
     .set-file-tag.priority {
       color: #FFD87A;
@@ -1653,11 +1746,12 @@
     .ticker-track {
       display: flex; align-items: center; white-space: nowrap;
       width: max-content;
-      animation: tickerScroll 30s linear infinite;
+      animation: tickerScroll 12s linear infinite;
+      will-change: transform;
     }
     .ticker-group {
-      display: inline-flex; align-items: center; gap: 20px;
-      padding-right: 20px;
+      display: inline-flex; align-items: center; gap: 7px;
+      padding-right: 44px;
     }
     @keyframes tickerScroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
     .tg-text {
@@ -1677,7 +1771,7 @@
     @media (max-width: 479px) {
       .tg-text { font-size: 0.72rem; letter-spacing: 0.04em; }
       .tg-feat { font-size: 0.72rem; letter-spacing: 0.04em; }
-      .ticker-group { gap: 14px; padding-right: 14px; }
+      .ticker-group { gap: 5px; padding-right: 28px; }
     }
 
     /* --- Pricing Sale: old price beside sale price, clearly visible --- */
@@ -1790,36 +1884,12 @@
     <div class="announce-ticker">
       <div class="ticker-track">
         <span class="ticker-group">
-          <span class="tg-text">AMRAX <span class="v2-tag">v2.0</span> Launch</span>
-          <span class="tg-dot"></span>
-          <span class="tg-text">4 Months Live Trading</span>
-          <span class="tg-dot"></span>
-          <span class="tg-feat">Live Market ROI 20%</span>
-          <span class="tg-dot"></span>
-          <span class="tg-feat">Max DD 30%</span>
-          <span class="tg-dot"></span>
-          <span class="tg-feat">Backtest DD Max 45% In Crash</span>
-          <span class="tg-dot"></span>
-          <span class="tg-feat">Avg DD 5-15% On Small Moves</span>
-          <span class="tg-dot"></span>
-          <span class="tg-text">Risk Controlled Grid Advance Strategy EA</span>
-          <span class="tg-dot"></span>
+          <span class="tg-text">📢 Finally 😊</span>
+          <span class="tg-text">AMRAX <span class="v2-tag">v3.0</span> is Launched 🎉</span>
         </span>
         <span class="ticker-group">
-          <span class="tg-text">AMRAX <span class="v2-tag">v2.0</span> Launch</span>
-          <span class="tg-dot"></span>
-          <span class="tg-text">4 Months Live Trading</span>
-          <span class="tg-dot"></span>
-          <span class="tg-feat">Live Market ROI 20%</span>
-          <span class="tg-dot"></span>
-          <span class="tg-feat">Max DD 30%</span>
-          <span class="tg-dot"></span>
-          <span class="tg-feat">Backtest DD Max 45% In Crash</span>
-          <span class="tg-dot"></span>
-          <span class="tg-feat">Avg DD 5-15% On Small Moves</span>
-          <span class="tg-dot"></span>
-          <span class="tg-text">Risk Controlled Grid Advance Strategy EA</span>
-          <span class="tg-dot"></span>
+          <span class="tg-text">📢 Finally 😊</span>
+          <span class="tg-text">AMRAX <span class="v2-tag">v3.0</span> is Launched 🎉</span>
         </span>
       </div>
     </div>
@@ -1834,7 +1904,7 @@
     <div class="nav-logo">
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="2"><polygon points="12 2 22 8.5 22 15.5 12 22 2 15.5 2 8.5"/><line x1="12" y1="22" x2="12" y2="15.5"/><polyline points="22 8.5 12 15.5 2 8.5"/></svg>
       <span class="nav-logo-text">AMRAX</span>
-        <span class="nav-badge v2-tag">v2.0</span>
+        <span class="nav-badge v2-tag">v3.0</span>
     </div>
 
     <!-- Desktop Nav Links -->
@@ -1847,7 +1917,7 @@
     </div>
 
     <!-- Desktop CTA -->
-    <a href="https://wa.link/kc40ms" target="_blank" rel="noopener noreferrer" class="nav-cta" style="padding:10px 20px;font-size:0.72rem;background:linear-gradient(135deg,#00D084,#00b377);color:#000;border-radius:10px;font-weight:700;letter-spacing:0.04em;align-items:center;gap:8px;text-decoration:none;transition:filter 0.2s,transform 0.15s;box-shadow:0 0 16px rgba(0,208,132,0.4),0 4px 20px rgba(0,208,132,0.25);">
+    <a href="https://wa.link/kc40ms" target="_blank" rel="noopener noreferrer" class="nav-cta" style="padding:10px 20px;font-size:0.72rem;background:linear-gradient(135deg,var(--gold-light) 0%,var(--gold) 60%,var(--gold-dim) 100%);color:#0a0804;border-radius:10px;font-weight:700;letter-spacing:0.04em;align-items:center;gap:8px;text-decoration:none;transition:filter 0.2s,transform 0.15s;box-shadow:0 0 16px rgba(201,168,76,0.45),0 4px 20px rgba(201,168,76,0.3);">
       GET AMRAX
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
     </a>
@@ -1867,7 +1937,7 @@
     <a href="#deployment" onclick="document.getElementById('mobileMenu').classList.remove('open')">Deployment</a>
     <a href="#free-trial" onclick="document.getElementById('mobileMenu').classList.remove('open')">Download EA</a>
     <a href="#pricing" onclick="document.getElementById('mobileMenu').classList.remove('open')">Pricing</a>
-    <a href="https://wa.link/kc40ms" target="_blank" rel="noopener noreferrer" class="btn-gold" onclick="document.getElementById('mobileMenu').classList.remove('open')" style="background:linear-gradient(135deg,#00D084,#00b377);color:#000;box-shadow:0 0 16px rgba(0,208,132,0.4),0 4px 20px rgba(0,208,132,0.25);font-weight:700;">
+    <a href="https://wa.link/kc40ms" target="_blank" rel="noopener noreferrer" class="btn-gold" onclick="document.getElementById('mobileMenu').classList.remove('open')" style="background:linear-gradient(135deg,var(--gold-light) 0%,var(--gold) 60%,var(--gold-dim) 100%);color:#0a0804;box-shadow:0 0 16px rgba(201,168,76,0.45),0 4px 20px rgba(201,168,76,0.3);font-weight:700;">
       GET AMRAX
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
     </a>
@@ -1892,7 +1962,7 @@
         </div>
 
         <div class="reveal delay-100" style="margin-bottom:4px;">
-          <h1 class="hero-title">AMRAX<span class="hero-v2sup">v2.0</span></h1>
+          <h1 class="hero-title">AMRAX<span class="hero-v2sup">v3.0</span></h1>
           <p class="hero-version">RISK CONTROLLED ADVANCE GRID STRATEGY<br>#1 EA OF THE WORLD</p>
         </div>
 
@@ -1949,94 +2019,62 @@
     </div>
   </section>
 
-  <!-- ============================================
-       SECTION: PERFORMANCE — 3 Month Live Results
-  ============================================ -->
-  <section id="performance" class="section-pad" style="padding-top:40px;">
-    <div class="container" style="max-width:1000px;">
+    <!-- ============================================
+         SECTION: PERFORMANCE — Expected ROI Table
+    ============================================ -->
+    <section id="performance" class="section-pad" style="padding-top:40px;">
+      <div class="container" style="max-width:1000px;">
 
-      <div style="text-align:center;margin-bottom:48px;">
-        <h2 class="hero-stats-heading reveal" style="font-size:clamp(1.8rem,4vw,2.8rem);margin-bottom:8px;">Expected &amp; Average <span class="text-gold-gradient">AMRAX ROI Per month</span></h2>
-      </div>
-
-      <div class="hero-stats-wrapper reveal delay-200">
-        <div class="hero-stats" style="justify-content:center;">
-          <div class="hero-stat-card green-card">
-            <svg class="hero-stat-chart" viewBox="0 0 200 120" preserveAspectRatio="none">
-              <path d="M0,100 C15,95 30,92 50,85 C70,78 85,82 100,72 C115,62 130,66 150,52 C170,38 185,42 200,28 L200,120 L0,120 Z" fill="rgba(0,208,132,0.2)"/>
-              <path d="M0,100 C15,95 30,92 50,85 C70,78 85,82 100,72 C115,62 130,66 150,52 C170,38 185,42 200,28" fill="none" stroke="rgba(0,208,132,0.8)" stroke-width="2.5" stroke-linecap="round"/>
-            </svg>
-            <div class="hero-stat-value">4-5%</div>
-            <div class="hero-stat-label">Avg ROI Per Month</div>
-          </div>
-          <div class="hero-stat-card green-card">
-            <svg class="hero-stat-chart" viewBox="0 0 200 120" preserveAspectRatio="none">
-              <rect x="20" y="60" width="24" height="60" rx="3" fill="rgba(0,208,132,0.2)"/>
-              <rect x="56" y="40" width="24" height="80" rx="3" fill="rgba(0,208,132,0.3)"/>
-              <rect x="92" y="50" width="24" height="70" rx="3" fill="rgba(0,208,132,0.25)"/>
-              <rect x="128" y="25" width="24" height="95" rx="3" fill="rgba(0,208,132,0.35)"/>
-              <rect x="164" y="15" width="24" height="105" rx="3" fill="rgba(0,208,132,0.4)"/>
-            </svg>
-            <div class="hero-stat-value">5-15%</div>
-            <div class="hero-stat-label">Avg DD · Small Moves</div>
-          </div>
-          <div class="hero-stat-card gold-card">
-            <svg class="hero-stat-chart" viewBox="0 0 200 120" preserveAspectRatio="none">
-              <path d="M0,80 C20,95 40,70 60,85 C80,100 100,60 120,75 C140,90 160,50 180,65 C190,72 200,55 200,55 L200,120 L0,120 Z" fill="rgba(193,155,102,0.15)"/>
-              <path d="M0,80 C20,95 40,70 60,85 C80,100 100,60 120,75 C140,90 160,50 180,65 C190,72 200,55 200,55" fill="none" stroke="rgba(193,155,102,0.7)" stroke-width="2.5" stroke-linecap="round"/>
-            </svg>
-            <div class="hero-stat-value">30%</div>
-            <div class="hero-stat-label">Max DD · Live Market</div>
-          </div>
-          <div class="hero-stat-card gold-card">
-            <svg class="hero-stat-chart" viewBox="0 0 200 120" preserveAspectRatio="none">
-              <path d="M0,70 C15,85 35,60 55,80 C75,100 95,55 115,70 C135,85 155,45 175,60 C188,68 200,50 200,50 L200,120 L0,120 Z" fill="rgba(193,155,102,0.15)"/>
-              <path d="M0,70 C15,85 35,60 55,80 C75,100 95,55 115,70 C135,85 155,45 175,60 C188,68 200,50 200,50" fill="none" stroke="rgba(193,155,102,0.65)" stroke-width="2.5" stroke-linecap="round"/>
-            </svg>
-            <div class="hero-stat-value">45%</div>
-            <div class="hero-stat-label">Max DD · Backtest Crash</div>
-          </div>
+        <div style="text-align:center;margin-bottom:40px;">
+          <p class="section-label reveal">Risk &amp; Returns</p>
+          <h2 class="hero-stats-heading reveal delay-100" style="font-size:clamp(1.8rem,4vw,2.8rem);margin-bottom:12px;">What You Can Expect <span class="text-gold-gradient">From AMRAX</span></h2>
+          <p class="section-desc reveal delay-200">Expected monthly ROI, risk-based drawdown and the minimum capital required to start with each risk profile.</p>
         </div>
-      </div>
 
-    </div>
-  </section>
-
-  <!-- ============================================
-       SECTION: CAPITAL — Minimum & Recommended Capital
-  ============================================ -->
-  <section class="section-pad" style="padding-top:0;">
-    <div class="container" style="max-width:1000px;">
-
-      <div style="text-align:center;margin-bottom:48px;">
-        <p class="section-label reveal" style="color:var(--gold-light);">Capital Guide</p>
-        <h2 class="hero-stats-heading reveal delay-100" style="font-size:clamp(1.8rem,4vw,2.8rem);margin-bottom:8px;">Capital <span class="text-gold-gradient">Requirements</span></h2>
-        <p class="section-desc reveal delay-200" style="font-size:0.8rem;color:#888;max-width:640px;margin:10px auto 4px;">Minimum and Recommended Capital Required to Start with AMRAX</p>
-        <p class="section-desc reveal delay-300" style="font-size:0.9rem;color:#888;max-width:620px;">Choose the account size that fits your risk profile — cents accounts fully supported.</p>
-      </div>
-
-      <div class="hero-stats-wrapper reveal delay-300">
-        <div class="hero-stats" style="justify-content:center;">
-
-          <div class="hero-stat-card gold-card" style="flex:1;min-width:240px;max-width:320px;">
-            <div class="hero-stat-caption">Low Risk</div>
-            <div class="hero-stat-value">$1,000</div>
-            <div class="hero-stat-label">Minimum Capital</div>
-            <div class="hero-stat-sub">= 100,000 Cents</div>
-          </div>
-
-          <div class="hero-stat-card green-card" style="flex:1;min-width:240px;max-width:340px;">
-            <div class="hero-stat-caption">Crazy Profits</div>
-            <div class="hero-stat-value">$5,000 - <span style="font-size:0.8em;">$10,000</span></div>
-            <div class="hero-stat-label">Recommended Capital</div>
-            <div class="hero-stat-sub">= 500,000 - 1,000,000 Cents</div>
-          </div>
-
+        <div class="expect-table-wrap reveal delay-300">
+          <table class="expect-table">
+            <thead>
+              <tr>
+                <th>Risk Profile</th>
+                <th>Expected ROI Per Month</th>
+                <th>Expected Max Drawdown</th>
+                <th>Minimum Capital Required</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  <span class="expect-risk"><span class="risk-dot low"></span>Low Risk</span>
+                  <span class="expect-note">Capital preservation focus</span>
+                </td>
+                <td><span class="expect-return low">5–10%</span></td>
+                <td><span class="expect-return low" style="font-size:1.05rem;">5–10%</span></td>
+                <td><span class="expect-capital">$500<small>= 50,000 Cents</small></span></td>
+              </tr>
+              <tr>
+                <td>
+                  <span class="expect-risk"><span class="risk-dot med"></span>Medium Risk</span>
+                  <span class="expect-note">Balanced growth &amp; control</span>
+                </td>
+                <td><span class="expect-return med">25–30%</span></td>
+                <td><span class="expect-return med" style="font-size:1.05rem;">25–35%</span></td>
+                <td><span class="expect-capital">$500<small>= 50,000 Cents</small></span></td>
+              </tr>
+              <tr>
+                <td>
+                  <span class="expect-risk"><span class="risk-dot high"></span>High Risk</span>
+                  <span class="expect-note">Aggressive growth potential</span>
+                </td>
+                <td><span class="expect-return high">50–70%</span></td>
+                <td><span class="expect-return high" style="font-size:1.05rem;">50–80%</span></td>
+                <td><span class="expect-capital">$500<small>= 50,000 Cents</small></span></td>
+              </tr>
+            </tbody>
+          </table>
         </div>
-      </div>
 
-    </div>
-  </section>
+      </div>
+    </section>
 
   <!-- ============================================
        SECTION: FEATURES — EA Unique Features
@@ -2061,7 +2099,7 @@
           </div>
           <div>
             <div class="metric-value gold" style="font-size:1.2rem;">Risk-Based Lot Sizing</div>
-            <div class="metric-label">Percentage-based lot sizing with drawdown-aware risk scaling — dedicated Low Risk &amp; Medium Risk profiles</div>
+            <div class="metric-label">Suggested scaling per +$500 account increase — Low Risk: +0.01 lot · Medium Risk: +0.02 lot · High Risk: +0.05 lot. Drawdown-aware, risk-scaled sizing.</div>
           </div>
           <div class="shimmer-line"></div>
         </div>
@@ -2164,6 +2202,48 @@
           <div class="shimmer-line"></div>
         </div>
 
+        <!-- Feature 9: Straddle Pyramids -->
+        <div class="metric-card gold-border reveal delay-500">
+          <div class="metric-card-top">
+            <div class="metric-icon green">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+            </div>
+          </div>
+          <div>
+            <div class="metric-value green" style="font-size:1.2rem;">Straddle Pyramids</div>
+            <div class="metric-label">Opens dual BUY &amp; SELL straddle entries and pyramids the winning side — compounding profit as the market trends</div>
+          </div>
+          <div class="shimmer-line"></div>
+        </div>
+
+        <!-- Feature 10: Recovery System -->
+        <div class="metric-card gold-border reveal delay-500">
+          <div class="metric-card-top">
+            <div class="metric-icon gold">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
+            </div>
+          </div>
+          <div>
+            <div class="metric-value gold" style="font-size:1.2rem;">Recovery System</div>
+            <div class="metric-label">Smart recovery ladder re-engages after drawdown with controlled lot steps to guide the basket back to profit</div>
+          </div>
+          <div class="shimmer-line"></div>
+        </div>
+
+        <!-- Feature 11: 2 Strategies in One EA -->
+        <div class="metric-card gold-border reveal delay-500">
+          <div class="metric-card-top">
+            <div class="metric-icon green">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="6" y1="3" x2="6" y2="15"/><circle cx="18" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M18 9a9 9 0 0 1-9 9"/></svg>
+            </div>
+          </div>
+          <div>
+            <div class="metric-value green" style="font-size:1.2rem;">2 Strategies in One EA</div>
+            <div class="metric-label">Two independent strategies inside a single EA — automatically switch them based on market condition or your specific trading style</div>
+          </div>
+          <div class="shimmer-line"></div>
+        </div>
+
       </div>
     </div>
   </section>
@@ -2216,27 +2296,11 @@
         </div>
 
         <!-- Row 4 -->
-        <div style="display:grid;grid-template-columns:2fr 1fr 1fr 1fr;border-bottom:1px solid var(--border);">
-          <div style="padding:16px 24px;font-size:0.875rem;color:var(--text-secondary);white-space:nowrap;">Max Drawdown</div>
-          <div style="padding:16px;text-align:center;font-size:0.85rem;color:var(--profit);font-weight:600;">5-15% Controlled</div>
-          <div style="padding:16px;text-align:center;font-size:0.85rem;color:#E42527;">Unlimited</div>
-          <div style="padding:16px;text-align:center;font-size:0.85rem;color:var(--gold);">Varies</div>
-        </div>
-
-        <!-- Row 5 -->
-        <div style="display:grid;grid-template-columns:2fr 1fr 1fr 1fr;border-bottom:1px solid var(--border);">
+        <div style="display:grid;grid-template-columns:2fr 1fr 1fr 1fr;">
           <div style="padding:16px 24px;font-size:0.875rem;color:var(--text-secondary);white-space:nowrap;">Lot Sizing</div>
-          <div style="padding:16px;text-align:center;font-size:0.85rem;color:var(--profit);font-weight:600;">Percent-Based</div>
+          <div style="padding:16px;text-align:center;font-size:0.85rem;color:var(--profit);font-weight:600;">Risk-Scaled</div>
           <div style="padding:16px;text-align:center;font-size:0.85rem;color:#E42527;">Manual</div>
           <div style="padding:16px;text-align:center;font-size:0.85rem;color:var(--gold);">Fixed Only</div>
-        </div>
-
-        <!-- Row 6 -->
-        <div style="display:grid;grid-template-columns:2fr 1fr 1fr 1fr;">
-          <div style="padding:16px 24px;font-size:0.875rem;color:var(--text-secondary);white-space:nowrap;">1-Year Return</div>
-          <div style="padding:16px;text-align:center;font-size:0.85rem;color:var(--profit);font-weight:600;">+40%</div>
-          <div style="padding:16px;text-align:center;font-size:0.85rem;color:#E42527;">Varies</div>
-          <div style="padding:16px;text-align:center;font-size:0.85rem;color:var(--gold);">Varies</div>
         </div>
 
         </div>
@@ -2265,7 +2329,7 @@
 
           </div>
           <div class="video-card-footer">
-            <span>AMRAX <span class="v2-tag">v2.0</span> Introduction </span>
+            <span>AMRAX <span class="v2-tag">v3.0</span> Introduction </span>
             <div style="flex:1;height:1px;background:rgba(201,168,76,0.08);"></div>
             <span>Ahmad Ka AMRAX</span>
           </div>
@@ -2312,7 +2376,7 @@
       <!-- Metric Cards -->
       <div class="metrics-grid">
 
-        <!-- Net Return (Low Risk) -->
+        <!-- ROI (Low Risk) -->
         <div class="metric-card gold-border reveal">
           <div class="metric-card-top">
             <div class="metric-icon green">
@@ -2321,8 +2385,8 @@
             <div class="pulse-dot" style="width:8px;height:8px;border-radius:50%;background:var(--profit);"></div>
           </div>
           <div>
-            <div class="metric-value green">4-5<span class="metric-suffix" style="color:var(--profit-dim);">%</span></div>
-            <div class="metric-label">Avg ROI Per Month</div>
+            <div class="metric-value green">5-10<span class="metric-suffix" style="color:var(--profit-dim);">%</span></div>
+            <div class="metric-label">Avg ROI / Month · Low Risk</div>
           </div>
           <div class="shimmer-line"></div>
         </div>
@@ -2336,28 +2400,28 @@
             <div class="pulse-dot" style="width:8px;height:8px;border-radius:50%;background:var(--gold);"></div>
           </div>
           <div>
-            <div class="metric-value gold">5-15<span class="metric-suffix" style="color:var(--gold-dim);">%</span></div>
-            <div class="metric-label">Avg DD · Small Moves</div>
+            <div class="metric-value gold">25-30<span class="metric-suffix" style="color:var(--gold-dim);">%</span></div>
+            <div class="metric-label">Avg ROI / Month · Medium Risk</div>
+          </div>
+          <div class="shimmer-line"></div>
+        </div>
+
+        <!-- ROI (High Risk) -->
+        <div class="metric-card gold-border reveal delay-200">
+          <div class="metric-card-top">
+            <div class="metric-icon gold">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            </div>
+            <div class="pulse-dot" style="width:8px;height:8px;border-radius:50%;background:var(--gold);"></div>
+          </div>
+          <div>
+            <div class="metric-value gold">50-70<span class="metric-suffix" style="color:var(--gold-dim);">%</span></div>
+            <div class="metric-label">Avg ROI / Month · High Risk</div>
           </div>
           <div class="shimmer-line"></div>
         </div>
 
         <!-- Max Drawdown (Low Risk) -->
-        <div class="metric-card gold-border reveal delay-200">
-          <div class="metric-card-top">
-            <div class="metric-icon gold">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
-            </div>
-            <div class="pulse-dot" style="width:8px;height:8px;border-radius:50%;background:var(--gold);"></div>
-          </div>
-          <div>
-            <div class="metric-value gold">30<span class="metric-suffix" style="color:var(--gold-dim);">%</span></div>
-            <div class="metric-label">Max DD · Live Market</div>
-          </div>
-          <div class="shimmer-line"></div>
-        </div>
-
-        <!-- Max Drawdown (Medium Risk) -->
         <div class="metric-card gold-border reveal delay-300">
           <div class="metric-card-top">
             <div class="metric-icon green">
@@ -2366,8 +2430,38 @@
             <div class="pulse-dot" style="width:8px;height:8px;border-radius:50%;background:var(--profit);"></div>
           </div>
           <div>
-            <div class="metric-value green">45<span class="metric-suffix" style="color:var(--gold-dim);">%</span></div>
-            <div class="metric-label">Max DD · Backtest Crash</div>
+            <div class="metric-value green">5-10<span class="metric-suffix" style="color:var(--gold-dim);">%</span></div>
+            <div class="metric-label">Avg DD · Low Risk</div>
+          </div>
+          <div class="shimmer-line"></div>
+        </div>
+
+        <!-- Max Drawdown (Medium Risk) -->
+        <div class="metric-card gold-border reveal delay-400">
+          <div class="metric-card-top">
+            <div class="metric-icon gold">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+            </div>
+            <div class="pulse-dot" style="width:8px;height:8px;border-radius:50%;background:var(--gold);"></div>
+          </div>
+          <div>
+            <div class="metric-value gold">25-35<span class="metric-suffix" style="color:var(--gold-dim);">%</span></div>
+            <div class="metric-label">Max DD · Medium Risk</div>
+          </div>
+          <div class="shimmer-line"></div>
+        </div>
+
+        <!-- Max Drawdown (High Risk) -->
+        <div class="metric-card gold-border reveal delay-500">
+          <div class="metric-card-top">
+            <div class="metric-icon gold">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+            </div>
+            <div class="pulse-dot" style="width:8px;height:8px;border-radius:50%;background:var(--gold);"></div>
+          </div>
+          <div>
+            <div class="metric-value gold">50-80<span class="metric-suffix" style="color:var(--gold-dim);">%</span></div>
+            <div class="metric-label">Max DD · High Risk · Crash</div>
           </div>
           <div class="shimmer-line"></div>
         </div>
@@ -2410,7 +2504,7 @@
         <div>
           <p class="insight-eyebrow">Institutional Insight</p>
           <p class="insight-text">
-            A <span style="color:var(--gold);">5-15% Average Drawdown</span> on small moves with a controlled <strong style="color:var(--gold-light);">30% Max Drawdown</strong> ceiling on live market — delivering an average 4-5% monthly ROI with 45% Max Drawdown max exposed only in crash backtests, backed by institutional-grade risk management.
+            Risk-based monthly returns: <span style="color:var(--gold);">5-10% (Low Risk)</span> with a <span style="color:var(--gold);">5-10% average drawdown</span>, <span style="color:var(--gold-light);">25-30% (Medium Risk)</span> with a <strong style="color:var(--gold-light);">25-35% max drawdown</strong> ceiling, and <strong style="color:var(--gold-light);">50-70% (High Risk)</strong> with 50-80% max drawdown exposed only in crash backtests — backed by institutional-grade risk management.
           </p>
         </div>
       </div>
@@ -2451,7 +2545,7 @@
           </p>
 
           <!-- CTA Button -->
-          <a href="AMRAX%20v2.0.ex5" class="free-trial-btn" download="AMRAX v2.0.ex5">
+          <a href="AMRAX%20v3.0.ex5" class="free-trial-btn" download="AMRAX v3.0.ex5">
             DOWNLOAD EA FILE
             <svg viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
               <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
@@ -2484,7 +2578,7 @@
         <!-- Lot Size Info -->
         <div class="reveal delay-300" style="max-width:600px;margin:20px auto 0;padding:14px 24px;border-radius:12px;background:rgba(0,208,132,0.06);border:1px solid rgba(0,208,132,0.15);display:flex;align-items:center;gap:12px;">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--profit)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
-          <span style="font-family:'DM Mono',monospace;font-size:0.7rem;letter-spacing:0.08em;color:var(--profit);">Position Sizing: Risk-based lot scaling — Low Risk &amp; Medium Risk profiles with drawdown-aware controls</span>
+          <span style="font-family:'DM Mono',monospace;font-size:0.7rem;letter-spacing:0.08em;color:var(--profit);">Position Sizing: Risk-based lot scaling — Low, Medium &amp; High Risk profiles with drawdown-aware controls</span>
         </div>
       </div>
 
@@ -2503,7 +2597,7 @@
           <!-- Account Title -->
           <h3 class="monitor-card-title" style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
             $1,000 Account
-            <span class="set-file-tag priority">Priority Account</span>
+            <span class="set-file-tag green">Low Risk · v3.0</span>
           </h3>
 
           <!-- Connection Status -->
@@ -2542,12 +2636,13 @@
           <!-- Live Feed Indicator -->
           <div class="live-feed" style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
             <span style="display:flex;align-items:center;gap:6px;"><span class="live-dot"></span>LIVE ACCOUNT 2</span>
-            <span class="running-time" data-start="2026-09-23" style="font-size:0.62rem;color:var(--profit);font-family:'DM Mono',monospace;letter-spacing:0.05em;"></span>
+            <span class="running-time" data-start="2026-10-09" style="font-size:0.62rem;color:var(--profit);font-family:'DM Mono',monospace;letter-spacing:0.05em;"></span>
           </div>
 
           <!-- Account Title -->
           <h3 class="monitor-card-title" style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
-            $10,000 Account
+            $500 Account
+            <span class="set-file-tag gold">Medium Risk · v3.0</span>
           </h3>
 
           <!-- Connection Status -->
@@ -2557,24 +2652,69 @@
           <div class="terminal">
             <div class="terminal-row">
               <span class="terminal-label">Balance</span>
-              <span class="terminal-value">$10,000 (1,000,000 Cents)</span>
+              <span class="terminal-value">$500 (50,000 Cents)</span>
             </div>
             <div class="terminal-row">
               <span class="terminal-label">Server</span>
-              <span class="terminal-value" id="server2">Exness-MT5Trial16</span>
+              <span class="terminal-value" id="server3">ICMarketsSC-Demo</span>
             </div>
             <div class="terminal-row">
               <span class="terminal-label">Login</span>
-              <span class="terminal-value" id="login2">472832953</span>
+              <span class="terminal-value" id="login3">53075433</span>
             </div>
             <div class="terminal-row">
               <span class="terminal-label">Investor Password</span>
-              <span class="terminal-value" id="pass2">Amrax$10000</span>
+              <span class="terminal-value" id="pass3">Amraxv3@</span>
             </div>
           </div>
 
           <!-- Copy Button -->
-          <button class="copy-creds-btn" onclick="copyCredentials('server2','login2','pass2')">
+          <button class="copy-creds-btn" onclick="copyCredentials('server3','login3','pass3')">
+            Copy MT5 Credentials
+          </button>
+
+        </div>
+
+        <!-- Live Account 3 -->
+        <div class="monitor-card reveal delay-300">
+
+          <!-- Live Feed Indicator -->
+          <div class="live-feed" style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
+            <span style="display:flex;align-items:center;gap:6px;"><span class="live-dot"></span>LIVE ACCOUNT 3</span>
+            <span class="running-time" data-start="2026-10-09" style="font-size:0.62rem;color:var(--profit);font-family:'DM Mono',monospace;letter-spacing:0.05em;"></span>
+          </div>
+
+          <!-- Account Title -->
+          <h3 class="monitor-card-title" style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
+            $500 Account
+            <span class="set-file-tag high">High Risk · v3.0</span>
+          </h3>
+
+          <!-- Connection Status -->
+          <div class="status-badge">● CONNECTED</div>
+
+          <!-- Credentials Terminal -->
+          <div class="terminal">
+            <div class="terminal-row">
+              <span class="terminal-label">Balance</span>
+              <span class="terminal-value">$500 (50,000 Cents)</span>
+            </div>
+            <div class="terminal-row">
+              <span class="terminal-label">Server</span>
+              <span class="terminal-value" id="server4">XMGlobal-MT5 2</span>
+            </div>
+            <div class="terminal-row">
+              <span class="terminal-label">Login</span>
+              <span class="terminal-value" id="login4">169455622</span>
+            </div>
+            <div class="terminal-row">
+              <span class="terminal-label">Investor Password</span>
+              <span class="terminal-value" id="pass4">Amraxv3@highrisk</span>
+            </div>
+          </div>
+
+          <!-- Copy Button -->
+          <button class="copy-creds-btn" onclick="copyCredentials('server4','login4','pass4')">
             Copy MT5 Credentials
           </button>
 
@@ -2645,7 +2785,7 @@
             1 MT5 Account Lock
           </div>
           <ul class="pricing-features">
-            <li><span class="check"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>Full AMRAX <span class="v2-tag">v2.0</span> EA file</li>
+            <li><span class="check"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>Full AMRAX <span class="v2-tag">v3.0</span> EA file</li>
             <li><span class="check"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>1 MT5 account activation</li>
             <li><span class="check"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>WhatsApp deployment support</li>
             <li><span class="check"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>Default parameter set</li>
@@ -2672,7 +2812,7 @@
             Unlimited MT5 Accounts
           </div>
           <ul class="pricing-features">
-            <li><span class="check"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>Full AMRAX <span class="v2-tag">v2.0</span> EA file</li>
+            <li><span class="check"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>Full AMRAX <span class="v2-tag">v3.0</span> EA file</li>
             <li><span class="check"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>Unlimited MT5 activations</li>
             <li><span class="check"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>VIP WhatsApp direct line</li>
             <li><span class="check"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>Custom parameter calibration</li>
@@ -2698,10 +2838,11 @@
           </div>
           <ul class="pricing-features">
             <li><span class="check"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>Zero upfront cost</li>
-            <li><span class="check"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>We deploy &amp; manage AMRAX for you</li>
+            <li><span class="check"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>We will give you the license key</li>
             <li><span class="check"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>50% profit share — you keep half</li>
             <li><span class="check"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>1 year minimum contract</li>
             <li><span class="check"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>Full transparency &amp; reporting</li>
+            <li><span class="check"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>Minimum $1000 required for this plan — so profits are bigger, and we split them</li>
           </ul>
           <a href="https://wa.link/1bhsm7" target="_blank" rel="noopener noreferrer" class="pricing-cta cta-outline" style="border-color:rgba(193,155,102,0.3);color:var(--gold);">
             <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
@@ -2722,17 +2863,17 @@
         <div class="trust-item">
           <div class="trust-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg></div>
           <div class="trust-label">Consistent Alpha</div>
-          <div class="trust-sub">40% net return (1 Year)</div>
+          <div class="trust-sub">5-10% · 25-30% · 50-70% Monthly</div>
         </div>
         <div class="trust-item">
           <div class="trust-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg></div>
           <div class="trust-label">Rapid Recovery</div>
-          <div class="trust-sub">20% ROI · Live Market</div>
+          <div class="trust-sub">25-30% ROI · Medium Risk</div>
         </div>
         <div class="trust-item">
           <div class="trust-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
           <div class="trust-label">Low Drawdown</div>
-          <div class="trust-sub">5-15% Avg DD</div>
+          <div class="trust-sub">5-10% Avg DD</div>
         </div>
         <div class="trust-item">
           <div class="trust-icon" style="background:rgba(76,175,125,0.08);border-color:rgba(76,175,125,0.2);color:var(--profit);"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
@@ -2873,64 +3014,42 @@
        Edit: testimonial text, author names, roles
   ============================================ -->
   <section id="testimonials">
-    <h2 class="section-title" style="text-align:center;margin-bottom:40px;">What Traders Are <span class="text-gold-gradient">Saying</span></h2>
+    <!-- Live WhatsApp Reviews -->
+    <div class="reveal" style="text-align:center;margin:0 auto 32px;">
+      <p class="section-label">Verified Proof</p>
+      <h2 class="section-title">AMRAX <span class="text-gold-gradient">Lovers</span></h2>
+    </div>
+
     <div class="testimonials-grid">
 
-      <!-- Testimonial 1 -->
+      <!-- WhatsApp Review 1 -->
       <div class="testimonial-card gold-border reveal delay-100">
-        <div class="stars">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        <div class="wa-badge-row">
+          <span class="wa-badge"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg> Live WhatsApp Review</span>
         </div>
-        <p class="testimonial-text">"4-5% average monthly ROI with just 5-15% average drawdown. AMRAX <span class="v2-tag">v2.0</span> delivered what my manual trading never managed in years."</p>
-        <div class="testimonial-author">
-          <div class="author-avatar">K</div>
-          <div>
-            <p class="author-name">Khalid M.</p>
-            <p class="author-role">Proprietary Trader, Dubai</p>
-          </div>
-        </div>
+        <a href="purchase1.jpeg" target="_blank" rel="noopener">
+          <img src="purchase1.jpeg" alt="Live WhatsApp review from an AMRAX client" class="wa-shot" loading="lazy">
+        </a>
       </div>
 
-      <!-- Testimonial 2 -->
+      <!-- WhatsApp Review 2 -->
       <div class="testimonial-card gold-border reveal delay-200">
-        <div class="stars">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        <div class="wa-badge-row">
+          <span class="wa-badge"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg> Live WhatsApp Review</span>
         </div>
-        <p class="testimonial-text">"I run it on three accounts with the Professional Bundle. Consistent, disciplined, and predictable — exactly what institutional capital requires."</p>
-        <div class="testimonial-author">
-          <div class="author-avatar">U</div>
-          <div>
-            <p class="author-name">Usman R.</p>
-            <p class="author-role">Fund Manager, Karachi</p>
-          </div>
-        </div>
+        <a href="purchase2.jpeg" target="_blank" rel="noopener">
+          <img src="purchase2.jpeg" alt="Live WhatsApp review from an AMRAX client" class="wa-shot" loading="lazy">
+        </a>
       </div>
 
-      <!-- Testimonial 3 -->
+      <!-- WhatsApp Review 3 -->
       <div class="testimonial-card gold-border reveal delay-300">
-        <div class="stars">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        <div class="wa-badge-row">
+          <span class="wa-badge"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg> Live WhatsApp Review</span>
         </div>
-        <p class="testimonial-text">"I was skeptical at first. After seeing the consistent performance hold across 6 months, I upgraded to the institutional tier."</p>
-        <div class="testimonial-author">
-          <div class="author-avatar">F</div>
-          <div>
-            <p class="author-name">Fahad A.</p>
-            <p class="author-role">Retail Investor, Lahore</p>
-          </div>
-        </div>
+        <a href="purchase3.jpeg" target="_blank" rel="noopener">
+          <img src="purchase3.jpeg" alt="Live WhatsApp review from an AMRAX client" class="wa-shot" loading="lazy">
+        </a>
       </div>
 
     </div>
@@ -3112,16 +3231,6 @@
       animate();
     })();
   </script>
-
-
-  <!-- ============================================
-       WHATSAPP FLOATING BUTTON
-       Edit: WhatsApp number link
-  ============================================ -->
-  <a href="https://wa.me/923179897517" target="_blank" rel="noopener noreferrer" class="whatsapp-float">
-    <svg width="22" height="22" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-    <span class="whatsapp-label">Chat on WhatsApp</span>
-  </a>
 
 
   <!-- ============================================
@@ -3319,6 +3428,43 @@
         }
       }, 30000);
     }
+
+    // --- Announcement Bar: Seamless Infinite Fast Ticker ---
+    (function() {
+      const track = document.querySelector('.ticker-track');
+      if (!track) return;
+      const original = track.querySelector('.ticker-group');
+      if (!original) return;
+
+      const SPEED = 150; // px per second — higher = faster marquee
+
+      function build() {
+        const template = original.cloneNode(true);
+        track.innerHTML = '';
+        track.appendChild(template);
+
+        const groupW = template.getBoundingClientRect().width;
+        const viewportW = track.parentElement.clientWidth;
+        if (groupW <= 0 || viewportW <= 0) return;
+
+        // Fill at least 2x the viewport so the loop never shows a gap
+        const perHalf = Math.max(2, Math.ceil(viewportW / groupW) + 1);
+        const frag = document.createDocumentFragment();
+        for (let i = 0; i < perHalf * 2 - 1; i++) frag.appendChild(template.cloneNode(true));
+        track.appendChild(frag);
+
+        const half = track.scrollWidth / 2;
+        track.style.animationDuration = (half / SPEED) + 's';
+      }
+
+      build();
+      let resizeTimer;
+      window.addEventListener('resize', () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(build, 200);
+      });
+      if (document.fonts && document.fonts.ready) document.fonts.ready.then(build);
+    })();
 
   </script>
 
