@@ -281,6 +281,12 @@
       white-space: nowrap;
     }
     .nav-links a:hover { color: var(--gold); }
+    /* Tighten nav on tablet widths so 6 links + logo + CTA fit */
+    @media (min-width: 768px) and (max-width: 1080px) {
+      nav { padding: 12px 18px; }
+      .nav-links { gap: 13px; }
+      .nav-links a { font-size: 0.76rem; letter-spacing: 0; }
+    }
 
     /* --- Nav CTA (Right) --- */
     .nav-cta { display: none; flex-shrink: 0; white-space: nowrap; }
@@ -1909,6 +1915,112 @@
     @keyframes tagPulse { 0%,100% { opacity: 1; } 50% { opacity: 0.75; } }
     .v2-tag { animation: tagPulse 2.8s ease-in-out infinite; }
 
+
+    /* ============================================
+       BACKTEST SCREENSHOT GALLERY + LIGHTBOX
+       (Low / Medium / High Risk mode charts)
+    ============================================ */
+    .backtest-gallery { display: flex; flex-direction: column; gap: 30px; max-width: 1100px; margin: 0 auto 48px; }
+    .backtest-item { margin: 0; display: flex; flex-direction: column; gap: 12px; }
+
+    .risk-tag {
+      align-self: flex-start;
+      display: inline-flex; align-items: center; gap: 9px;
+      font-family: 'DM Mono', monospace; font-size: 0.68rem; font-weight: 700;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      padding: 8px 16px; border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.18);
+      color: #0a0804;
+      background: linear-gradient(135deg,var(--gold-light),var(--gold));
+      box-shadow: 0 6px 20px rgba(0,0,0,0.35);
+    }
+    .risk-tag::before { content: ''; width: 8px; height: 8px; border-radius: 50%; background: currentColor; opacity: 0.65; }
+    .risk-tag.low { color: #06170e; background: linear-gradient(135deg,#63d79a,#2f9e63); box-shadow: 0 6px 20px rgba(76,175,125,0.4); }
+    .risk-tag.medium { color: #1a1206; background: linear-gradient(135deg,var(--gold-light),var(--gold)); box-shadow: 0 6px 20px rgba(201,168,76,0.45); }
+    .risk-tag.high { color: #1a0a07; background: linear-gradient(135deg,#f2a68e,#d1614a); box-shadow: 0 6px 20px rgba(224,131,107,0.45); }
+
+    .backtest-thumb {
+      position: relative; display: block; width: 100%;
+      padding: 0; margin: 0; border: 1px solid rgba(193,155,102,0.25);
+      border-radius: 16px; overflow: hidden; cursor: zoom-in;
+      background: rgba(0,0,0,0.35);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.4);
+      -webkit-tap-highlight-color: transparent;
+      font: inherit; color: inherit;
+    }
+    .backtest-thumb img { display: block; width: 100%; height: auto; transition: transform 0.5s cubic-bezier(.2,.8,.2,1); }
+    .backtest-thumb:hover img { transform: scale(1.06); }
+    .backtest-thumb:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+    .thumb-zoom-badge {
+      position: absolute; right: 14px; bottom: 14px;
+      display: inline-flex; align-items: center; gap: 6px;
+      font-family: 'DM Mono', monospace; font-size: 0.62rem; font-weight: 700; letter-spacing: 0.1em;
+      color: #0a0804; background: linear-gradient(135deg,var(--gold-light),var(--gold));
+      padding: 6px 12px; border-radius: 999px;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.45);
+      pointer-events: none;
+    }
+    @media (max-width: 640px) {
+      .backtest-gallery { gap: 22px; }
+      .risk-tag { font-size: 0.6rem; padding: 6px 12px; }
+      .backtest-thumb:hover img { transform: none; }
+    }
+
+    /* --- Lightbox (popup with pinch / scroll / button zoom) --- */
+    .amrax-lightbox {
+      position: fixed; inset: 0; z-index: 3000;
+      display: none; align-items: center; justify-content: center;
+      background: rgba(4,4,6,0.93);
+      backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+      touch-action: none;
+      opacity: 0; transition: opacity 0.25s ease;
+    }
+    .amrax-lightbox.open { display: flex; opacity: 1; }
+    .lb-stage {
+      position: absolute; inset: 0; overflow: hidden; touch-action: none;
+      cursor: grab; display: flex; align-items: center; justify-content: center;
+    }
+    .lb-stage.dragging { cursor: grabbing; }
+    .lb-img {
+      max-width: 92vw; max-height: 80vh; width: auto; height: auto;
+      border-radius: 10px; box-shadow: 0 24px 80px rgba(0,0,0,0.7);
+      user-select: none; -webkit-user-drag: none;
+      transform-origin: center center; will-change: transform;
+    }
+    .lb-tag {
+      position: absolute; top: 18px; left: 18px; z-index: 2;
+      font-family: 'DM Mono', monospace; font-size: 0.68rem; font-weight: 600;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--gold-light); background: rgba(0,0,0,0.55);
+      border: 1px solid rgba(201,168,76,0.35);
+      padding: 8px 14px; border-radius: 999px;
+    }
+    .lb-controls { position: absolute; top: 16px; right: 16px; z-index: 2; display: flex; gap: 8px; }
+    .lb-btn {
+      width: 44px; height: 44px; border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.25rem; line-height: 1; color: #fff; cursor: pointer;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.14);
+      transition: background 0.2s, transform 0.15s;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .lb-btn:hover { background: rgba(201,168,76,0.25); }
+    .lb-btn:active { transform: scale(0.94); }
+    .lb-hint {
+      position: absolute; bottom: 16px; left: 50%; transform: translateX(-50%);
+      z-index: 2; font-family: 'DM Mono', monospace; font-size: 0.6rem;
+      letter-spacing: 0.1em; color: rgba(255,255,255,0.6);
+      background: rgba(0,0,0,0.5); padding: 7px 14px; border-radius: 999px;
+      white-space: nowrap; pointer-events: none;
+    }
+    @media (max-width: 640px) {
+      .lb-img { max-width: 96vw; max-height: 76vh; }
+      .lb-btn { width: 40px; height: 40px; font-size: 1.1rem; }
+      .lb-hint { font-size: 0.54rem; }
+      .lb-tag { font-size: 0.6rem; padding: 6px 11px; }
+    }
+
   </style>
 </head>
 <body>
@@ -1947,6 +2059,7 @@
     <!-- Desktop Nav Links -->
     <div class="nav-links">
       <a href="#features">Features</a>
+      <a href="#performance-dashboard">Performance</a>
       <a href="#live-monitoring">Live Accounts</a>
       <a href="#testimonials">Reviews</a>
       <a href="#free-trial">Download EA</a>
@@ -1970,6 +2083,7 @@
   <!-- Mobile Dropdown Menu -->
   <div id="mobileMenu" class="mobile-menu">
     <a href="#features" onclick="document.getElementById('mobileMenu').classList.remove('open')">Features</a>
+    <a href="#performance-dashboard" onclick="document.getElementById('mobileMenu').classList.remove('open')">Performance</a>
     <a href="#live-monitoring" onclick="document.getElementById('mobileMenu').classList.remove('open')">Live Accounts</a>
     <a href="#testimonials" onclick="document.getElementById('mobileMenu').classList.remove('open')">Reviews</a>
     <a href="#free-trial" onclick="document.getElementById('mobileMenu').classList.remove('open')">Download EA</a>
@@ -2131,6 +2245,213 @@
           <span>Ahmad Ka AMRAX</span>
         </div>
       </div>
+    </div>
+  </section>
+
+  <!-- ============================================
+       SECTION: PERFORMANCE DASHBOARD
+       1-month live-market backtest results
+  ============================================ -->
+  <section id="performance-dashboard" class="section-pad">
+    <div class="container">
+
+      <!-- Section Header -->
+      <div style="text-align:center;margin-bottom:48px;">
+        <p class="section-label reveal">Verified Backtested Metrics</p>
+        <h2 class="section-title reveal delay-100">Performance <span class="text-gold-gradient">Dashboard</span></h2>
+        <p class="section-desc reveal delay-200">1-month live-market backtest. Every metric independently verified — no curve-fitting, no overfitted results.</p>
+      </div>
+
+      <!-- Backtest Screenshots (Low / Medium / High Risk — click to open zoom popup) -->
+      <div class="backtest-gallery reveal delay-100">
+
+        <!-- Low Risk -->
+        <figure class="backtest-item">
+          <span class="risk-tag low">Low Risk Mode Settings</span>
+          <button type="button" class="backtest-thumb" data-full="backtest.png" data-tag="Low Risk Mode Settings" aria-label="Open Low Risk backtest chart">
+            <img src="backtest.png" alt="AMRAX 1-month backtest chart — Low Risk mode settings" loading="lazy">
+            <span class="thumb-zoom-badge">Zoom 🔍</span>
+          </button>
+        </figure>
+
+        <!-- Medium Risk -->
+        <figure class="backtest-item">
+          <span class="risk-tag medium">Medium Risk Mode Settings</span>
+          <button type="button" class="backtest-thumb" data-full="backtest-medium.png" data-tag="Medium Risk Mode Settings" aria-label="Open Medium Risk backtest chart">
+            <img src="backtest-medium.png" alt="AMRAX backtest chart — Medium Risk mode settings" loading="lazy">
+            <span class="thumb-zoom-badge">Zoom 🔍</span>
+          </button>
+        </figure>
+
+        <!-- High Risk -->
+        <figure class="backtest-item">
+          <span class="risk-tag high">High Risk Mode Settings</span>
+          <button type="button" class="backtest-thumb" data-full="backtest-high.png" data-tag="High Risk Mode Settings" aria-label="Open High Risk backtest chart">
+            <img src="backtest-high.png" alt="AMRAX backtest chart — High Risk mode settings" loading="lazy">
+            <span class="thumb-zoom-badge">Zoom 🔍</span>
+          </button>
+        </figure>
+
+      </div>
+
+      <!-- Metric Cards -->
+      <div class="metrics-grid">
+
+        <!-- Initial Deposit -->
+        <div class="metric-card gold-border reveal delay-100">
+          <div class="metric-card-top">
+            <div class="metric-icon gold"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg></div>
+          </div>
+          <div>
+            <div class="metric-value gold" style="font-size:1.5rem;">$50,000</div>
+            <div class="metric-label">Initial Deposit</div>
+          </div>
+          <div class="shimmer-line"></div>
+        </div>
+
+        <!-- Total Net Profit -->
+        <div class="metric-card gold-border reveal delay-100">
+          <div class="metric-card-top">
+            <div class="metric-icon green"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg></div>
+          </div>
+          <div>
+            <div class="metric-value green" style="font-size:1.5rem;">$9,048.17</div>
+            <div class="metric-label">Total Net Profit</div>
+          </div>
+          <div class="shimmer-line"></div>
+        </div>
+
+        <!-- Max Equity Drawdown -->
+        <div class="metric-card gold-border reveal delay-100">
+          <div class="metric-card-top">
+            <div class="metric-icon gold"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+          </div>
+          <div>
+            <div class="metric-value gold" style="font-size:1.5rem;">9.24%</div>
+            <div class="metric-label">Max Equity Drawdown</div>
+          </div>
+          <div class="shimmer-line"></div>
+        </div>
+
+        <!-- Profit Factor -->
+        <div class="metric-card gold-border reveal delay-200">
+          <div class="metric-card-top">
+            <div class="metric-icon green"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
+          </div>
+          <div>
+            <div class="metric-value green" style="font-size:1.5rem;">1.48</div>
+            <div class="metric-label">Profit Factor</div>
+          </div>
+          <div class="shimmer-line"></div>
+        </div>
+
+        <!-- Total Trades -->
+        <div class="metric-card gold-border reveal delay-300">
+          <div class="metric-card-top">
+            <div class="metric-icon gold"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="20" x2="12" y2="10"/><line x1="18" y1="20" x2="18" y2="4"/><line x1="6" y1="20" x2="6" y2="16"/></svg></div>
+          </div>
+          <div>
+            <div class="metric-value gold" style="font-size:1.5rem;">1,399</div>
+            <div class="metric-label">Total Trades</div>
+          </div>
+          <div class="shimmer-line"></div>
+        </div>
+
+        <!-- Recovery Factor -->
+        <div class="metric-card gold-border reveal delay-400">
+          <div class="metric-card-top">
+            <div class="metric-icon gold"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg></div>
+          </div>
+          <div>
+            <div class="metric-value gold" style="font-size:1.5rem;">1.86</div>
+            <div class="metric-label">Recovery Factor</div>
+          </div>
+          <div class="shimmer-line"></div>
+        </div>
+
+        <!-- Sharpe Ratio -->
+        <div class="metric-card gold-border reveal delay-500">
+          <div class="metric-card-top">
+            <div class="metric-icon green"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg></div>
+          </div>
+          <div>
+            <div class="metric-value green" style="font-size:1.5rem;">3.69</div>
+            <div class="metric-label">Sharpe Ratio</div>
+          </div>
+          <div class="shimmer-line"></div>
+        </div>
+
+        <!-- Gross Profit -->
+        <div class="metric-card gold-border reveal delay-200">
+          <div class="metric-card-top">
+            <div class="metric-icon green"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
+          </div>
+          <div>
+            <div class="metric-value green" style="font-size:1.5rem;">$27,841.19</div>
+            <div class="metric-label">Gross Profit</div>
+          </div>
+          <div class="shimmer-line"></div>
+        </div>
+
+        <!-- Expected Payoff -->
+        <div class="metric-card gold-border reveal delay-300">
+          <div class="metric-card-top">
+            <div class="metric-icon gold"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
+          </div>
+          <div>
+            <div class="metric-value gold" style="font-size:1.5rem;">$6.47</div>
+            <div class="metric-label">Expected Payoff</div>
+          </div>
+          <div class="shimmer-line"></div>
+        </div>
+
+        <!-- Win Rate Short -->
+        <div class="metric-card gold-border reveal delay-400">
+          <div class="metric-card-top">
+            <div class="metric-icon green"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="5" x2="5" y2="19"/><circle cx="6.5" cy="6.5" r="2.5"/><circle cx="17.5" cy="17.5" r="2.5"/></svg></div>
+          </div>
+          <div>
+            <div class="metric-value green" style="font-size:1.5rem;">80.79%</div>
+            <div class="metric-label">Win Rate · Short</div>
+          </div>
+          <div class="shimmer-line"></div>
+        </div>
+
+        <!-- Win Rate Long -->
+        <div class="metric-card gold-border reveal delay-500">
+          <div class="metric-card-top">
+            <div class="metric-icon gold"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="5" x2="5" y2="19"/><circle cx="6.5" cy="6.5" r="2.5"/><circle cx="17.5" cy="17.5" r="2.5"/></svg></div>
+          </div>
+          <div>
+            <div class="metric-value gold" style="font-size:1.5rem;">72.45%</div>
+            <div class="metric-label">Win Rate · Long</div>
+          </div>
+          <div class="shimmer-line"></div>
+        </div>
+
+        <!-- History Quality -->
+        <div class="metric-card gold-border reveal delay-200">
+          <div class="metric-card-top">
+            <div class="metric-icon green"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
+          </div>
+          <div>
+            <div class="metric-value green" style="font-size:1.5rem;">100%</div>
+            <div class="metric-label">History Quality</div>
+          </div>
+          <div class="shimmer-line"></div>
+        </div>
+
+      </div>
+
+      <!-- Insight -->
+      <div class="insight-block reveal">
+        <div class="insight-icon">✓</div>
+        <div>
+          <p class="insight-eyebrow">1-Month Backtest Summary</p>
+          <p class="insight-text">"In 1 month on a <strong>$50,000</strong> account, AMRAX grew equity by <strong>+$9,048</strong> across <strong>1,399 trades</strong> — a <strong>1.48 profit factor</strong>, <strong>3.69 Sharpe</strong> and just <strong>9.24% max equity drawdown</strong>."</p>
+        </div>
+      </div>
+
     </div>
   </section>
 
@@ -2306,10 +2627,7 @@
     </div>
   </section>
 
-
-
   <div class="divider-gold"></div>
-
 
   <!-- ============================================
        SECTION 4: FREE TRIAL CTA
@@ -2955,6 +3273,23 @@
 
 
   <!-- ============================================
+       BACKTEST LIGHTBOX (popup viewer with zoom)
+  ============================================ -->
+  <div class="amrax-lightbox" id="amraxLightbox" role="dialog" aria-modal="true" aria-label="Backtest chart viewer">
+    <div class="lb-stage" id="lbStage">
+      <img class="lb-img" id="lbImg" alt="" />
+    </div>
+    <span class="lb-tag" id="lbTag"></span>
+    <div class="lb-controls">
+      <button type="button" class="lb-btn" data-act="in" aria-label="Zoom in">+</button>
+      <button type="button" class="lb-btn" data-act="out" aria-label="Zoom out">−</button>
+      <button type="button" class="lb-btn" data-act="reset" aria-label="Reset zoom">⟲</button>
+      <button type="button" class="lb-btn" data-act="close" aria-label="Close viewer">✕</button>
+    </div>
+    <span class="lb-hint">Pinch / scroll to zoom · drag to pan · double-tap to zoom · Esc to close</span>
+  </div>
+
+  <!-- ============================================
        JAVASCRIPT
        Scroll Reveal + Accordion Toggle + Copy Credentials
   ============================================ -->
@@ -3185,6 +3520,152 @@
         resizeTimer = setTimeout(build, 200);
       });
       if (document.fonts && document.fonts.ready) document.fonts.ready.then(build);
+    })();
+
+    // --- Backtest Lightbox (click chart -> popup, zoom via buttons / scroll / pinch) ---
+    (function () {
+      const root  = document.getElementById('amraxLightbox');
+      const stage = document.getElementById('lbStage');
+      const img   = document.getElementById('lbImg');
+      const tagEl = document.getElementById('lbTag');
+      if (!root || !stage || !img) return;
+
+      const MIN = 1, MAX = 6;
+      let scale = 1, tx = 0, ty = 0, isOpen = false;
+
+      function apply() {
+        img.style.transform = 'translate(' + tx + 'px,' + ty + 'px) scale(' + scale + ')';
+      }
+      function reset() { scale = 1; tx = 0; ty = 0; apply(); }
+      function zoomTo(next, cx, cy) {
+        next = Math.min(MAX, Math.max(MIN, next));
+        if (cx == null) {
+          scale = next;
+          if (scale === 1) { tx = 0; ty = 0; }
+          apply();
+          return;
+        }
+        const r = stage.getBoundingClientRect();
+        const ox = cx - r.left - r.width / 2;
+        const oy = cy - r.top - r.height / 2;
+        const ratio = next / scale;
+        tx = ox - ratio * (ox - tx);
+        ty = oy - ratio * (oy - ty);
+        scale = next;
+        if (scale === 1) { tx = 0; ty = 0; }
+        apply();
+      }
+
+      function openViewer(src, tag) {
+        img.src = src;
+        img.alt = tag || '';
+        tagEl.textContent = tag || '';
+        reset();
+        root.classList.add('open');
+        document.body.style.overflow = 'hidden';
+        isOpen = true;
+      }
+      function closeViewer() {
+        root.classList.remove('open');
+        document.body.style.overflow = '';
+        isOpen = false;
+      }
+
+      document.querySelectorAll('.backtest-thumb').forEach(function (t) {
+        t.addEventListener('click', function () {
+          openViewer(t.getAttribute('data-full'), t.getAttribute('data-tag'));
+        });
+      });
+
+      root.querySelectorAll('.lb-btn').forEach(function (b) {
+        b.addEventListener('click', function (e) {
+          e.stopPropagation();
+          const act = b.getAttribute('data-act');
+          if (act === 'in') zoomTo(scale + 0.5);
+          else if (act === 'out') zoomTo(scale - 0.5);
+          else if (act === 'reset') reset();
+          else closeViewer();
+        });
+      });
+
+      // Click the dark backdrop to close (ignore clicks that were part of a drag)
+      root.addEventListener('click', function (e) {
+        if (dragMoved) { dragMoved = false; return; }
+        if (e.target === root || e.target === stage) closeViewer();
+      });
+      img.addEventListener('click', function (e) { e.stopPropagation(); });
+
+      // Wheel zoom (desktop)
+      stage.addEventListener('wheel', function (e) {
+        if (!isOpen) return;
+        e.preventDefault();
+        zoomTo(scale + (e.deltaY < 0 ? 0.4 : -0.4), e.clientX, e.clientY);
+      }, { passive: false });
+
+      // Drag to pan (mouse)
+      let dragMoved = false, dragging = false, sx = 0, sy = 0, stx = 0, sty = 0;
+      stage.addEventListener('mousedown', function (e) {
+        if (scale <= 1) return;
+        dragging = true; dragMoved = false;
+        sx = e.clientX; sy = e.clientY; stx = tx; sty = ty;
+        stage.classList.add('dragging');
+      });
+      window.addEventListener('mousemove', function (e) {
+        if (!dragging) return;
+        tx = stx + (e.clientX - sx);
+        ty = sty + (e.clientY - sy);
+        if (Math.abs(e.clientX - sx) > 3 || Math.abs(e.clientY - sy) > 3) dragMoved = true;
+        apply();
+      });
+      window.addEventListener('mouseup', function () {
+        dragging = false; stage.classList.remove('dragging');
+      });
+
+      // Touch: pinch-zoom + drag-pan + double-tap zoom
+      let pinch = null, lastTap = 0;
+      stage.addEventListener('touchstart', function (e) {
+        if (e.touches.length === 2) {
+          dragging = false;
+          pinch = {
+            d: Math.hypot(e.touches[0].clientX - e.touches[1].clientX, e.touches[0].clientY - e.touches[1].clientY),
+            s: scale,
+            cx: (e.touches[0].clientX + e.touches[1].clientX) / 2,
+            cy: (e.touches[0].clientY + e.touches[1].clientY) / 2
+          };
+        } else if (e.touches.length === 1 && scale > 1) {
+          dragging = true; dragMoved = false;
+          sx = e.touches[0].clientX; sy = e.touches[0].clientY; stx = tx; sty = ty;
+        }
+      }, { passive: true });
+      stage.addEventListener('touchmove', function (e) {
+        if (e.touches.length === 2 && pinch) {
+          e.preventDefault();
+          const d = Math.hypot(e.touches[0].clientX - e.touches[1].clientX, e.touches[0].clientY - e.touches[1].clientY);
+          zoomTo(pinch.s * (d / pinch.d), pinch.cx, pinch.cy);
+        } else if (dragging && e.touches.length === 1) {
+          e.preventDefault();
+          tx = stx + (e.touches[0].clientX - sx);
+          ty = sty + (e.touches[0].clientY - sy);
+          if (Math.abs(e.touches[0].clientX - sx) > 3 || Math.abs(e.touches[0].clientY - sy) > 3) dragMoved = true;
+          apply();
+        }
+      }, { passive: false });
+      stage.addEventListener('touchend', function (e) {
+        if (e.touches.length < 2) pinch = null;
+        if (e.touches.length === 0) {
+          dragging = false;
+          const now = Date.now();
+          if (now - lastTap < 300) {
+            if (scale > 1) reset(); else zoomTo(2.4);
+          }
+          lastTap = now;
+        }
+      }, { passive: true });
+
+      // Esc closes the viewer
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && isOpen) closeViewer();
+      });
     })();
 
   </script>
