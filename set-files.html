@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover" />
-  <meta name="theme-color" content="#0A0A0B" />
+  <meta name="theme-color" content="#0A0A0C" />
   <meta name="color-scheme" content="dark" />
   <title>AMRAX v2.0 — Set Files | Verified Risk Profiles</title>
   <meta name="description" content="Download AMRAX v2.0 verified .set files. Low, Medium and High risk profiles grouped by max drawdown, with real-tick backtest results." />
@@ -16,226 +16,307 @@
       --gold: #D9AE63;
       --gold-light: #F2D9AC;
       --gold-dim: #8A6A3A;
-      --bg: #0A0A0B;
-      --surface: #141416;
-      --surface-2: #1C1C20;
-      --border: rgba(255, 255, 255, 0.16);
-      --border-gold: rgba(217, 174, 99, 0.45);
-      --text: #F4F4F5;
-      --text-2: #C6C6CB;
-      --text-3: #9B9BA3;
+      --obsidian: #0A0A0C;
+      --obsidian-2: #0F0F12;
+      --surface: #161618;
+      --surface-2: #1D1D21;
+      --surface-3: #26262B;
+      --border: rgba(217, 174, 99, 0.18);
+      --border-strong: rgba(217, 174, 99, 0.45);
+      --text-primary: #F4F4F5;
+      --text-secondary: #C6C6CB;
+      --text-muted: #8E8E96;
       --profit: #2BE39B;
       --danger: #FF8585;
     }
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; -webkit-overflow-scrolling: touch; scroll-padding-top: 150px; }
     body {
-      min-height: 100vh;
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-      font-size: 16px;
-      line-height: 1.6;
-      color: var(--text);
-      background:
-        radial-gradient(1000px 520px at 86% -14%, rgba(217,174,99,0.08), transparent 64%),
-        var(--bg);
+      background: var(--obsidian);
+      color: var(--text-primary);
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      font-weight: 300;
       -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
       overflow-x: hidden;
+      -webkit-overflow-scrolling: touch;
+      padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+    }
+    body::before {
+      content: "";
+      pointer-events: none;
+      z-index: 9999;
+      opacity: 0.4;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      position: fixed;
+      inset: 0;
     }
     a { color: inherit; text-decoration: none; }
-    ::selection { background: rgba(217,174,99,0.35); color: #fff; }
+    img, svg { display: block; }
+    button { background: none; border: none; cursor: pointer; font: inherit; color: inherit; }
 
-    /* Announcement */
-    .announce {
-      text-align: center;
-      padding: 10px 14px;
-      font-family: 'DM Mono', monospace;
-      font-size: 0.68rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--gold-light);
-      background: var(--surface);
-      border-bottom: 1px solid var(--border);
+    /* ---------- Announcement bar ---------- */
+    .announce-bar {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 60;
+      height: 58px; display: flex; align-items: center;
+      background: #171109;
+      border-bottom: 1px solid rgba(255,224,138,0.25);
+      color: #f3e6c6;
+      overflow: hidden; contain: paint;
+      font-family: 'Space Grotesk', sans-serif;
+    }
+    .announce-ticker { flex: 1; min-width: 0; height: 100%; display: flex; align-items: center; overflow: hidden; }
+    .ticker-track {
+      display: flex; align-items: center; white-space: nowrap;
+      width: max-content;
+      animation: tickerScroll 12s linear infinite;
+      will-change: transform;
+    }
+    .ticker-group { display: inline-flex; align-items: center; gap: 7px; padding-right: 44px; }
+    @keyframes tickerScroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+    .tg-text {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.95rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase;
+      color: #ffe9c2;
+    }
+    .v2-tag {
+      color: #FFE08A; font-weight: 700;
+      background: rgba(255,224,138,0.14);
+      padding: 1px 7px; border-radius: 6px;
+      letter-spacing: 0.05em; white-space: nowrap;
+      box-shadow: inset 0 0 0 1px rgba(255,224,138,0.35);
+    }
+    @media (max-width: 479px) {
+      .tg-text { font-size: 0.72rem; letter-spacing: 0.04em; }
+      .ticker-group { gap: 5px; padding-right: 28px; }
     }
 
-    /* Nav */
-    .nav {
-      position: sticky; top: 0; z-index: 80;
-      display: flex; align-items: center; justify-content: space-between; gap: 14px;
-      padding: 12px 22px;
-      background: rgba(12,12,14,0.96);
-      backdrop-filter: blur(18px);
-      -webkit-backdrop-filter: blur(18px);
-      border-bottom: 1px solid var(--border);
+    /* ---------- Navbar (same liquid glass as home) ---------- */
+    nav {
+      position: fixed; top: 66px; left: 12px; right: 12px; z-index: 50;
+      display: flex; align-items: center; justify-content: space-between; gap: 12px;
+      max-width: 1080px; margin: 0 auto;
+      padding: 12px 24px;
+      background: linear-gradient(135deg, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0.02) 100%);
+      backdrop-filter: blur(24px) saturate(1.4);
+      -webkit-backdrop-filter: blur(24px) saturate(1.4);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 16px;
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.06),
+        inset 0 -1px 0 rgba(0,0,0,0.1),
+        0 8px 32px rgba(0,0,0,0.3),
+        0 0 0 1px rgba(193,155,102,0.05);
+      transition: all 0.3s ease;
+    }
+    nav.scrolled {
+      background: linear-gradient(135deg, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0.01) 100%);
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.04),
+        inset 0 -1px 0 rgba(0,0,0,0.1),
+        0 12px 40px rgba(0,0,0,0.4),
+        0 0 0 1px rgba(193,155,102,0.08);
+    }
+    @media (min-width: 768px) {
+      nav { left: 50%; right: auto; width: fit-content; max-width: none; transform: translateX(-50%); padding: 12px 28px; gap: 24px; justify-content: center; flex-wrap: nowrap; }
     }
     .nav-logo { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
-    .nav-logo-text { font-family: 'Space Grotesk', sans-serif; font-size: 1.08rem; font-weight: 700; letter-spacing: 0.13em; color: var(--gold-light); }
-    .nav-badge { font-family: 'DM Mono', monospace; font-size: 0.6rem; font-weight: 500; padding: 2px 7px; border-radius: 6px; color: var(--gold-light); border: 1px solid var(--border-gold); background: rgba(217,174,99,0.12); }
-    .nav-links { display: none; align-items: center; gap: 20px; }
-    .nav-links a { position: relative; font-size: 0.82rem; font-weight: 500; color: var(--text-2); white-space: nowrap; transition: color 0.2s; }
-    .nav-links a:hover { color: var(--gold-light); }
-    .nav-links a.active { color: var(--gold-light); }
-    .nav-links a.active::after { content: ''; position: absolute; left: 0; right: 0; bottom: -7px; height: 2px; border-radius: 2px; background: var(--gold); }
-    .nav-cta {
-      display: none; align-items: center; gap: 8px;
-      padding: 10px 18px; border-radius: 10px;
-      font-size: 0.74rem; font-weight: 700; letter-spacing: 0.03em;
-      color: #1A1206;
-      background: linear-gradient(180deg, #F2D9AC 0%, #D9AE63 60%, #C99A4E 100%);
-      border: 1px solid rgba(255,255,255,0.22);
-      box-shadow: 0 2px 0 rgba(0,0,0,0.3);
-      flex-shrink: 0; white-space: nowrap;
-      transition: filter 0.2s, transform 0.15s;
-    }
-    .nav-cta:hover { filter: brightness(1.06); transform: translateY(-1px); }
-    .mobile-menu-btn { display: flex; padding: 8px; color: var(--gold-light); background: none; border: none; cursor: pointer; }
-    .mobile-menu {
-      display: none; position: fixed; top: 108px; left: 12px; right: 12px; z-index: 79;
-      padding: 20px 24px;
-      background: #16161A;
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      box-shadow: 0 16px 48px rgba(0,0,0,0.7);
-    }
-    .mobile-menu.open { display: block; }
-    .mobile-menu a { display: block; padding: 13px 0; font-size: 0.92rem; font-weight: 500; color: var(--text-2); border-bottom: 1px solid rgba(255,255,255,0.09); }
-    .mobile-menu a:hover, .mobile-menu a.active { color: var(--gold-light); }
-    .mobile-menu .m-cta { margin-top: 18px; padding: 13px; text-align: center; border-radius: 10px; color: #1A1206; font-weight: 700; background: linear-gradient(180deg, #F2D9AC 0%, #D9AE63 60%, #C99A4E 100%); border: 1px solid rgba(255,255,255,0.22); border-bottom: 1px solid rgba(255,255,255,0.22); }
-    @media (min-width: 920px) {
-      .nav-links { display: flex; }
-      .nav-cta { display: inline-flex; }
-      .mobile-menu-btn { display: none; }
-      .mobile-menu { display: none !important; }
-    }
+    .nav-logo-text { font-family: 'Space Grotesk', sans-serif; font-weight: 600; font-size: 1.1rem; letter-spacing: 0.15em; color: var(--gold); }
+    .nav-badge { font-family: 'DM Mono', monospace; font-size: 0.6rem; padding: 2px 6px; border-radius: 6px; background: rgba(193,155,102,0.1); color: var(--gold-dim); border: 1px solid rgba(193,155,102,0.15); }
+    .nav-links { display: none; gap: 20px; }
+    @media (min-width: 920px) { .nav-links { display: flex; align-items: center; justify-content: center; } }
+    .nav-links a { font-size: 0.8rem; color: var(--text-secondary); transition: color 0.2s; letter-spacing: 0.02em; white-space: nowrap; }
+    .nav-links a:hover { color: var(--gold); }
+    .nav-links a.active { color: var(--gold); }
     @media (min-width: 920px) and (max-width: 1180px) {
-      .nav { padding: 12px 18px; }
+      nav { padding: 12px 18px; }
       .nav-links { gap: 13px; }
-      .nav-links a { font-size: 0.76rem; }
+      .nav-links a { font-size: 0.75rem; letter-spacing: 0; }
     }
+    .nav-cta { display: none; flex-shrink: 0; white-space: nowrap; }
+    @media (min-width: 920px) { .nav-cta { display: inline-flex; align-items: center; } }
+    .mobile-menu-btn { display: flex; padding: 8px; color: var(--gold); }
+    @media (min-width: 920px) { .mobile-menu-btn { display: none; } }
+    .mobile-menu {
+      display: none; position: fixed; top: 140px; left: 12px; right: 12px; z-index: 55;
+      padding: 24px;
+      background: linear-gradient(135deg, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0.02) 100%);
+      backdrop-filter: blur(24px) saturate(1.4);
+      -webkit-backdrop-filter: blur(24px) saturate(1.4);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 16px;
+      box-shadow: 0 12px 40px rgba(0,0,0,0.4);
+      animation: menuSlideDown 0.3s cubic-bezier(0.16,1,0.3,1);
+    }
+    @keyframes menuSlideDown { from { opacity: 0; transform: translateY(-8px); } to { opacity: 1; transform: translateY(0); } }
+    .mobile-menu.open { display: block; }
+    .mobile-menu a { display: block; padding: 14px 0; font-size: 0.875rem; color: var(--text-secondary); border-bottom: 1px solid rgba(201,168,76,0.06); transition: color 0.2s; }
+    .mobile-menu a:hover, .mobile-menu a:active { color: var(--gold); }
+    .mobile-menu .btn-gold { display: flex; justify-content: center; margin-top: 20px; padding: 14px; width: 100%; border-radius: 12px; }
 
-    /* Layout */
-    .container { width: 100%; max-width: 1120px; margin: 0 auto; padding: 0 22px; }
-
-    /* Hero */
-    .page-hero { max-width: 860px; margin: 0 auto; padding: 70px 22px 26px; text-align: center; }
-    .eyebrow { font-family: 'DM Mono', monospace; font-size: 0.68rem; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); }
-    .page-hero h1 { font-family: 'Space Grotesk', sans-serif; font-size: clamp(2.5rem, 6.4vw, 4.1rem); font-weight: 700; line-height: 1.02; letter-spacing: -0.02em; margin: 16px 0 18px; color: #FFFFFF; }
-    .gold-text { background: linear-gradient(135deg, var(--gold-light), var(--gold) 58%, #C99A4E); -webkit-background-clip: text; background-clip: text; color: transparent; }
-    .page-hero .lead { max-width: 640px; margin: 0 auto; font-size: 1rem; line-height: 1.75; color: var(--text-2); }
-    .page-hero .lead strong { color: var(--text); }
-    .hero-chips { display: flex; flex-wrap: wrap; justify-content: center; gap: 9px; margin-top: 26px; }
-    .chip { font-family: 'DM Mono', monospace; font-size: 0.64rem; font-weight: 500; letter-spacing: 0.06em; color: var(--gold-light); padding: 8px 14px; border-radius: 999px; border: 1px solid var(--border-gold); background: var(--surface-2); }
-
-    /* Notes */
-    .load-note {
-      display: flex; gap: 14px; align-items: flex-start;
-      margin: 20px 0 14px; padding: 18px 20px;
-      border: 1px solid var(--border); border-left: 3px solid var(--gold);
+    /* ---------- Shared buttons / typography ---------- */
+    .btn-gold {
+      background: linear-gradient(135deg, var(--gold-light) 0%, var(--gold) 60%, var(--gold-dim) 100%);
+      color: #0a0804;
+      letter-spacing: 0.04em;
+      font-weight: 600;
+      transition: filter 0.2s, transform 0.15s, box-shadow 0.2s;
+      box-shadow: 0 4px 20px rgba(201,168,76,0.3);
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 32px;
       border-radius: 12px;
-      background: var(--surface);
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      border: none;
+      cursor: pointer;
     }
-    .load-note .ln-icon { flex-shrink: 0; color: var(--gold-light); margin-top: 2px; }
-    .load-note p { font-size: 0.86rem; line-height: 1.7; color: var(--text-2); }
-    .load-note strong { color: var(--text); }
-    .load-note code { font-family: 'DM Mono', monospace; font-size: 0.78rem; color: var(--gold-light); background: rgba(217,174,99,0.15); border: 1px solid rgba(217,174,99,0.3); padding: 1px 6px; border-radius: 4px; }
-    .risk-note { margin: 0 0 28px; padding: 14px 20px; border: 1px solid rgba(255,133,133,0.35); border-radius: 10px; background: rgba(255,133,133,0.08); }
-    .risk-note p { font-size: 0.82rem; line-height: 1.65; color: var(--text-2); }
-    .risk-note strong { color: #FFFFFF; }
+    .btn-gold:hover { filter: brightness(1.12); transform: translateY(-1px); box-shadow: 0 8px 32px rgba(201,168,76,0.4); }
+    .btn-gold:active { filter: brightness(0.95); transform: translateY(0); }
+    @media (max-width: 919px) { .nav-cta { display: none !important; } }
+    .container { max-width: 1280px; margin: 0 auto; padding: 0 24px; }
+    @media (max-width: 768px) { .container { padding: 0 16px; } }
+    .section-label { font-family: 'Space Grotesk', sans-serif; font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold-dim); margin-bottom: 16px; }
+    .section-title { font-family: 'Space Grotesk', sans-serif; font-size: clamp(2rem, 5vw, 3.75rem); font-weight: 600; color: var(--text-primary); margin-bottom: 24px; }
+    .section-desc { font-size: 0.95rem; color: var(--text-secondary); line-height: 1.8; max-width: 640px; margin: 0 auto; }
+    @media (max-width: 768px) {
+      .section-title { font-size: clamp(1.6rem, 6vw, 2.2rem); }
+      .section-desc { font-size: 0.85rem; padding: 0 8px; }
+    }
+    .text-gold-gradient {
+      background: linear-gradient(135deg, var(--gold-light) 0%, var(--gold) 50%, var(--gold-dim) 100%);
+      -webkit-text-fill-color: transparent;
+      -webkit-background-clip: text;
+      background-clip: text;
+    }
 
-    /* Category */
-    .cat { margin: 30px 0; }
-    .cat-head { display: flex; align-items: baseline; flex-wrap: wrap; gap: 10px 14px; margin-bottom: 8px; }
-    .cat-head h2 { display: flex; align-items: center; gap: 10px; font-family: 'Space Grotesk', sans-serif; font-size: 1.35rem; font-weight: 700; color: var(--text); }
-    .dot { width: 11px; height: 11px; border-radius: 50%; flex-shrink: 0; }
-    .cat-low .dot    { background: var(--profit); box-shadow: 0 0 0 4px rgba(43,227,155,0.18); }
-    .cat-medium .dot { background: #F0B64D;       box-shadow: 0 0 0 4px rgba(240,182,77,0.18); }
-    .cat-high .dot   { background: var(--danger); box-shadow: 0 0 0 4px rgba(255,133,133,0.18); }
-    .cat-badge { font-family: 'DM Mono', monospace; font-size: 0.6rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; padding: 4px 9px; border-radius: 6px; }
-    .cat-low .cat-badge    { color: #6DF0BE; background: rgba(43,227,155,0.14);  border: 1px solid rgba(43,227,155,0.45); }
-    .cat-medium .cat-badge { color: #F7CB7A; background: rgba(240,182,77,0.14); border: 1px solid rgba(240,182,77,0.45); }
-    .cat-high .cat-badge   { color: #FFA3A3; background: rgba(255,133,133,0.14); border: 1px solid rgba(255,133,133,0.45); }
-    .cat-range { font-family: 'DM Mono', monospace; font-size: 0.68rem; letter-spacing: 0.03em; color: var(--text-3); }
-    .cat-desc { font-size: 0.86rem; line-height: 1.65; color: var(--text-2); margin-bottom: 14px; }
+    /* ---------- Hero ---------- */
+    .page-hero { padding: 178px 24px 34px; text-align: center; }
+    .hero-chips { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 28px; }
+    .chip { font-family: 'DM Mono', monospace; font-size: 0.64rem; font-weight: 500; letter-spacing: 0.06em; color: var(--gold); padding: 8px 14px; border-radius: 999px; border: 1px solid var(--border); background: var(--surface); }
 
-    /* Table */
-    .table-wrap { border: 1px solid var(--border); border-radius: 14px; overflow: hidden; background: var(--surface); box-shadow: 0 12px 34px rgba(0,0,0,0.4); }
-    table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
-    thead th { text-align: left; padding: 14px 16px; font-family: 'DM Mono', monospace; font-size: 0.62rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-3); background: var(--surface-2); border-bottom: 1px solid var(--border); white-space: nowrap; }
-    tbody td { padding: 15px 16px; border-bottom: 1px solid rgba(255,255,255,0.09); color: var(--text-2); vertical-align: middle; }
+    /* ---------- Notes ---------- */
+    .note-card {
+      display: flex; gap: 14px; align-items: flex-start;
+      margin-bottom: 14px; padding: 20px 22px;
+      border: 1px solid var(--border); border-left: 3px solid var(--gold);
+      border-radius: 14px; background: var(--surface);
+    }
+    .note-card svg { flex-shrink: 0; color: var(--gold); margin-top: 2px; }
+    .note-card p { font-size: 0.86rem; line-height: 1.7; color: var(--text-secondary); }
+    .note-card strong { color: var(--text-primary); }
+    .note-card code { font-family: 'DM Mono', monospace; font-size: 0.78rem; color: var(--gold); background: rgba(217,174,99,0.12); border: 1px solid rgba(217,174,99,0.25); padding: 1px 6px; border-radius: 4px; }
+    .risk-card { border-color: rgba(255,133,133,0.3); border-left-color: var(--danger); background: rgba(255,133,133,0.06); }
+    .risk-card svg { color: var(--danger); }
+    .mode-legend { display: flex; flex-wrap: wrap; gap: 8px 20px; margin: 18px 0 6px; font-size: 0.75rem; line-height: 1.6; color: var(--text-muted); }
+    .mode-legend strong { color: var(--gold); font-weight: 600; }
+    .mode-legend code { font-family: 'DM Mono', monospace; font-size: 0.72rem; color: var(--gold); background: rgba(217,174,99,0.12); border: 1px solid rgba(217,174,99,0.25); padding: 1px 5px; border-radius: 4px; }
+
+    /* ---------- Categories ---------- */
+    .cat { margin: 54px 0; }
+    .cat-head { display: flex; align-items: flex-end; justify-content: space-between; flex-wrap: wrap; gap: 10px 20px; margin-bottom: 16px; }
+    .cat-title { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; font-family: 'Space Grotesk', sans-serif; font-size: 1.45rem; font-weight: 600; color: var(--text-primary); }
+    .dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+    .cat-low .dot { background: var(--profit); box-shadow: 0 0 0 4px rgba(43,227,155,0.16); }
+    .cat-med .dot { background: #F0B64D; box-shadow: 0 0 0 4px rgba(240,182,77,0.16); }
+    .cat-high .dot { background: var(--danger); box-shadow: 0 0 0 4px rgba(255,133,133,0.16); }
+    .cat-badge { font-family: 'DM Mono', monospace; font-size: 0.58rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; padding: 4px 9px; border-radius: 6px; }
+    .cat-low .cat-badge { color: #6DF0BE; background: rgba(43,227,155,0.12); border: 1px solid rgba(43,227,155,0.4); }
+    .cat-med .cat-badge { color: #F7CB7A; background: rgba(240,182,77,0.12); border: 1px solid rgba(240,182,77,0.4); }
+    .cat-high .cat-badge { color: #FFA3A3; background: rgba(255,133,133,0.12); border: 1px solid rgba(255,133,133,0.4); }
+    .cat-range { font-family: 'DM Mono', monospace; font-size: 0.66rem; letter-spacing: 0.03em; color: var(--text-muted); }
+    .cat-desc { font-size: 0.86rem; line-height: 1.65; color: var(--text-secondary); margin-top: 7px; max-width: 720px; }
+
+    /* ---------- Table ---------- */
+    .table-wrap { border: 1px solid var(--border); border-radius: 16px; overflow: hidden; overflow-x: auto; -webkit-overflow-scrolling: touch; background: var(--surface); box-shadow: 0 16px 48px rgba(0,0,0,0.35); }
+    table { width: 100%; border-collapse: collapse; font-size: 0.86rem; }
+    thead th { text-align: left; padding: 13px 14px; font-family: 'DM Mono', monospace; font-size: 0.6rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); background: var(--surface-2); border-bottom: 1px solid var(--border); white-space: nowrap; }
+    tbody td { padding: 14px; border-bottom: 1px solid rgba(255,255,255,0.06); color: var(--text-secondary); vertical-align: middle; }
     tbody tr:last-child td { border-bottom: none; }
     tbody tr { transition: background 0.18s; }
-    tbody tr:hover { background: rgba(217,174,99,0.08); }
-    .file-name { display: flex; align-items: center; gap: 9px; flex-wrap: wrap; }
-    .fname { color: var(--text); font-weight: 600; line-height: 1.45; }
-    .ext { font-family: 'DM Mono', monospace; font-size: 0.56rem; font-weight: 500; letter-spacing: 0.05em; color: var(--gold-light); border: 1px solid var(--border-gold); background: rgba(217,174,99,0.14); border-radius: 4px; padding: 2px 6px; flex-shrink: 0; }
-    .mono { font-family: 'DM Mono', monospace; font-size: 0.84rem; color: var(--text-2); white-space: nowrap; }
-    .roi { font-family: 'DM Mono', monospace; font-size: 0.88rem; font-weight: 700; color: var(--profit); white-space: nowrap; }
-    .dd  { font-family: 'DM Mono', monospace; font-size: 0.88rem; font-weight: 700; color: var(--danger); white-space: nowrap; }
-    .dl-btn {
-      display: inline-flex; align-items: center; justify-content: center; gap: 7px;
-      padding: 9px 15px; border-radius: 9px;
-      font-size: 0.74rem; font-weight: 700; letter-spacing: 0.02em; white-space: nowrap;
-      color: #1A1206;
-      background: linear-gradient(180deg, #F2D9AC 0%, #D9AE63 58%, #C99A4E 100%);
-      border: 1px solid rgba(255,255,255,0.25);
-      box-shadow: 0 2px 0 rgba(0,0,0,0.32), inset 0 1px 0 rgba(255,255,255,0.55);
-      transition: filter 0.18s, transform 0.14s;
-    }
-    .dl-btn:hover { filter: brightness(1.07); transform: translateY(-1px); }
-    .dl-btn:active { transform: translateY(0); filter: brightness(0.98); }
-    .dl-tip { margin-top: 18px; padding: 12px 16px; border: 1px dashed var(--border-gold); border-radius: 10px; background: var(--surface); }
-    .dl-tip p { font-size: 0.8rem; line-height: 1.6; color: var(--text-2); }
-    .dl-tip strong { color: var(--gold-light); }
+    tbody tr:hover { background: rgba(217,174,99,0.05); }
+    .file-name { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+    .fname { color: var(--text-primary); font-weight: 600; line-height: 1.4; white-space: nowrap; }
+    .ext { font-family: 'DM Mono', monospace; font-size: 0.54rem; font-weight: 500; letter-spacing: 0.05em; color: var(--gold); border: 1px solid var(--border-strong); background: rgba(217,174,99,0.12); border-radius: 4px; padding: 2px 5px; flex-shrink: 0; }
+    .mode-badge { display: inline-flex; align-items: center; font-family: 'DM Mono', monospace; font-size: 0.64rem; font-weight: 500; letter-spacing: 0.04em; padding: 4px 9px; border-radius: 6px; white-space: nowrap; }
+    .mode-fixed { color: var(--gold); background: rgba(217,174,99,0.12); border: 1px solid rgba(217,174,99,0.32); }
+    .mode-seq { color: var(--profit); background: rgba(43,227,155,0.1); border: 1px solid rgba(43,227,155,0.32); }
+    .mono { font-family: 'DM Mono', monospace; font-size: 0.8rem; color: var(--text-secondary); white-space: nowrap; }
+    .roi { font-family: 'DM Mono', monospace; font-size: 0.84rem; font-weight: 700; color: var(--profit); white-space: nowrap; }
+    .dd { font-family: 'DM Mono', monospace; font-size: 0.84rem; font-weight: 700; color: var(--danger); white-space: nowrap; }
+    .dl-btn { padding: 10px 16px; font-size: 0.7rem; border-radius: 10px; gap: 7px; justify-content: center; }
 
-    /* Mobile: table -> cards */
-    @media (max-width: 780px) {
-      .page-hero { padding: 50px 18px 16px; }
+    /* ---------- Download tip ---------- */
+    .dl-tip { margin-top: 24px; padding: 14px 18px; border: 1px dashed var(--border-strong); border-radius: 12px; background: var(--surface); }
+    .dl-tip p { font-size: 0.8rem; line-height: 1.6; color: var(--text-secondary); }
+    .dl-tip strong { color: var(--gold); }
+
+    /* ---------- Mobile: table -> cards ---------- */
+    @media (max-width: 1000px) {
+      .page-hero { padding: 150px 18px 24px; }
+      .cat { margin: 40px 0; }
+      .cat-title { font-size: 1.18rem; }
+      .cat-head { align-items: flex-start; flex-direction: column; gap: 8px; }
       thead { display: none; }
       table, tbody, tr, td { display: block; width: 100%; }
-      tbody tr { padding: 16px; border-bottom: 1px solid rgba(255,255,255,0.09); }
-      tbody tr:last-child { border-bottom: none; }
-      tbody td { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; padding: 5px 0; border: none; text-align: right; }
-      tbody td::before { content: attr(data-label); font-family: 'DM Mono', monospace; font-size: 0.62rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-3); text-align: left; flex-shrink: 0; }
-      tbody td.cell-file { display: block; text-align: left; padding: 0 0 12px; }
+      .table-wrap { background: transparent; border: none; box-shadow: none; border-radius: 0; }
+      tbody tr { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 16px; margin-bottom: 12px; }
+      tbody tr:last-child { margin-bottom: 0; }
+      tbody tr:hover { background: var(--surface); }
+      tbody td { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 6px 0; border: none; text-align: right; }
+      tbody td::before { content: attr(data-label); font-family: 'DM Mono', monospace; font-size: 0.6rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); text-align: left; flex-shrink: 0; }
+      tbody td.cell-file { display: block; text-align: left; padding: 0 0 12px; border-bottom: 1px solid rgba(255,255,255,0.08); margin-bottom: 6px; }
       tbody td.cell-file::before { content: none; }
       tbody td.cell-dl { display: block; padding-top: 12px; }
       tbody td.cell-dl::before { content: none; }
-      .dl-btn { width: 100%; padding: 12px; font-size: 0.8rem; }
-      .cat-head h2 { font-size: 1.18rem; }
-      .load-note, .risk-note { padding: 16px; }
+      .dl-btn { width: 100%; padding: 13px; font-size: 0.78rem; }
     }
 
-    /* Footer */
-    footer { position: relative; margin-top: 64px; border-top: 1px solid var(--border); background: #0F0F11; }
-    .footer-inner { max-width: 1120px; margin: 0 auto; padding: 46px 22px 30px; }
-    .footer-grid { display: grid; grid-template-columns: 1.3fr 1fr; gap: 36px; margin-bottom: 36px; }
-    .footer-brand { display: flex; align-items: center; gap: 9px; margin-bottom: 13px; font-family: 'Space Grotesk', sans-serif; font-size: 1.15rem; font-weight: 700; letter-spacing: 0.08em; color: var(--text); }
-    .footer-tag { max-width: 320px; font-size: 0.82rem; line-height: 1.7; color: var(--text-2); }
-    .socials { display: flex; gap: 10px; margin-top: 18px; }
-    .social-btn { width: 38px; height: 38px; display: flex; align-items: center; justify-content: center; border-radius: 10px; border: 1px solid var(--border); background: var(--surface-2); color: var(--text-2); transition: all 0.22s; }
-    .social-btn:hover { border-color: var(--gold); color: var(--gold-light); background: #202024; }
+    /* ---------- Footer ---------- */
+    footer { border-top: 1px solid var(--border); background: var(--obsidian-2); margin-top: 80px; }
+    .footer-inner { max-width: 1200px; margin: 0 auto; padding: 60px 24px 40px; }
+    .footer-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; margin-bottom: 48px; }
+    @media (max-width: 700px) { .footer-grid { grid-template-columns: 1fr; gap: 28px; } }
+    .footer-brand { display: flex; align-items: center; gap: 10px; margin-bottom: 16px; font-family: 'Space Grotesk', sans-serif; font-size: 1.2rem; font-weight: 600; color: var(--text-primary); letter-spacing: 0.08em; }
+    .footer-tag { font-size: 0.75rem; color: var(--text-secondary); line-height: 1.8; max-width: 300px; }
+    .socials { display: flex; gap: 10px; margin-top: 20px; }
+    .social-btn { width: 36px; height: 36px; border-radius: 10px; display: flex; align-items: center; justify-content: center; background: rgba(255,255,255,0.05); border: 1px solid var(--border); color: var(--text-secondary); transition: all 0.3s; }
+    .social-btn:hover { border-color: var(--gold); color: var(--gold); }
     .footer-links { display: flex; flex-direction: column; align-items: flex-end; gap: 10px; }
-    .footer-links .fl-title { font-family: 'DM Mono', monospace; font-size: 0.62rem; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase; color: var(--text-3); margin-bottom: 4px; }
-    .footer-links a { font-size: 0.84rem; font-weight: 500; color: var(--text-2); transition: color 0.2s; }
-    .footer-links a:hover { color: var(--gold-light); }
-    .footer-bottom { display: flex; flex-direction: column; align-items: center; gap: 10px; padding-top: 22px; border-top: 1px solid rgba(255,255,255,0.1); }
-    .footer-bottom p { max-width: 620px; text-align: center; font-size: 0.76rem; line-height: 1.7; color: var(--text-3); }
-    .footer-bottom .copy { font-family: 'DM Mono', monospace; font-size: 0.6rem; letter-spacing: 0.08em; }
-    @media (max-width: 700px) {
-      .footer-grid { grid-template-columns: 1fr; gap: 26px; }
-      .footer-links { align-items: flex-start; }
-    }
+    @media (max-width: 700px) { .footer-links { align-items: flex-start; } }
+    .fl-title { font-family: 'DM Mono', monospace; font-size: 0.6rem; color: var(--text-muted); letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 6px; }
+    .footer-links a:not(.btn-gold) { font-size: 0.8rem; color: var(--text-secondary); transition: all 0.3s; }
+    .footer-links a:not(.btn-gold):hover { color: var(--gold); padding-left: 4px; }
+    .footer-bottom { padding-top: 24px; border-top: 1px solid rgba(255,255,255,0.08); display: flex; flex-direction: column; align-items: center; gap: 12px; }
+    .footer-bottom p { font-size: 0.65rem; color: var(--text-muted); text-align: center; line-height: 1.7; max-width: 600px; opacity: 0.6; }
+    .footer-bottom .copy { font-family: 'DM Mono', monospace; font-size: 0.55rem; letter-spacing: 0.1em; opacity: 0.4; }
+
     @media (prefers-reduced-motion: reduce) {
       html { scroll-behavior: auto; }
-      * { transition: none !important; }
+      *, *::before, *::after { animation: none !important; transition: none !important; }
     }
   </style>
 </head>
 <body>
 
-  <div class="announce">📢 AMRAX v2.0 is Launched 🎉</div>
+  <!-- Announcement bar (same as home) -->
+  <div class="announce-bar">
+    <div class="announce-ticker">
+      <div class="ticker-track">
+        <span class="ticker-group">
+          <span class="tg-text">📢 Finally 😊</span>
+          <span class="tg-text">AMRAX <span class="v2-tag">v2.0</span> is Launched 🎉</span>
+        </span>
+        <span class="ticker-group">
+          <span class="tg-text">📢 Finally 😊</span>
+          <span class="tg-text">AMRAX <span class="v2-tag">v2.0</span> is Launched 🎉</span>
+        </span>
+      </div>
+    </div>
+  </div>
 
-  <nav class="nav">
+  <!-- Navbar (same liquid glass as home) -->
+  <nav>
     <a class="nav-logo" href="index.html" aria-label="AMRAX home">
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="2"><polygon points="12 2 22 8.5 22 15.5 12 22 2 15.5 2 8.5"/><line x1="12" y1="22" x2="12" y2="15.5"/><polyline points="22 8.5 12 15.5 2 8.5"/></svg>
       <span class="nav-logo-text">AMRAX</span>
@@ -245,14 +326,13 @@
     <div class="nav-links">
       <a href="index.html#features">Features</a>
       <a href="set-files.html" class="active">Set Files</a>
-      <a href="index.html#performance-dashboard">Performance</a>
       <a href="index.html#live-monitoring">Live Accounts</a>
       <a href="index.html#testimonials">Reviews</a>
       <a href="index.html#free-trial">Download EA</a>
       <a href="index.html#pricing">Pricing</a>
     </div>
 
-    <a href="https://wa.link/kc40ms" target="_blank" rel="noopener noreferrer" class="nav-cta">
+    <a href="https://wa.link/kc40ms" target="_blank" rel="noopener noreferrer" class="btn-gold nav-cta" style="padding:10px 20px;font-size:0.72rem;border-radius:10px;box-shadow:0 0 16px rgba(201,168,76,0.45),0 4px 20px rgba(201,168,76,0.3);">
       GET AMRAX
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
     </a>
@@ -265,153 +345,227 @@
   <div id="mobileMenu" class="mobile-menu">
     <a href="index.html#features">Features</a>
     <a href="set-files.html" class="active">Set Files</a>
-    <a href="index.html#performance-dashboard">Performance</a>
     <a href="index.html#live-monitoring">Live Accounts</a>
     <a href="index.html#testimonials">Reviews</a>
     <a href="index.html#free-trial">Download EA</a>
     <a href="index.html#pricing">Pricing</a>
-    <a href="https://wa.link/kc40ms" target="_blank" rel="noopener noreferrer" class="m-cta">GET AMRAX</a>
+    <a href="https://wa.link/kc40ms" target="_blank" rel="noopener noreferrer" class="btn-gold">GET AMRAX</a>
   </div>
 
+  <!-- Hero -->
   <header class="page-hero">
-    <p class="eyebrow">AMRAX v2.0 · Verified Profiles</p>
-    <h1>Set <span class="gold-text">Files</span></h1>
-    <p class="lead">Download ready-to-use <strong>.set</strong> configurations for MetaTrader 5. Every profile is grouped by risk and backed by a real-tick backtest.</p>
+    <p class="section-label">AMRAX v2.0 · Verified Profiles</p>
+    <h1 class="section-title">Set <span class="text-gold-gradient">Files</span></h1>
+    <p class="section-desc">Download ready-to-use <strong style="color:var(--text-primary);">.set</strong> configurations for MetaTrader 5. Every profile is grouped by risk and backed by a real-tick backtest.</p>
     <div class="hero-chips">
       <span class="chip">11 SET FILES</span>
       <span class="chip">3 RISK CATEGORIES</span>
-      <span class="chip">DIRECT .SET DOWNLOAD</span>
+      <span class="chip">LOT MODE VERIFIED</span>
       <span class="chip">MT5 READY</span>
     </div>
   </header>
 
   <main class="container">
-    <div class="load-note">
-      <span class="ln-icon">
-        <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
-      </span>
+    <div class="note-card">
+      <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
       <p><strong>How to load a set file:</strong> Open MT5 → right-click your chart → <code>Expert Advisors</code> → <code>Load</code> → select the downloaded <code>.set</code> file. Alternatively: EA properties → <code>Inputs</code> → <code>Load</code>.</p>
     </div>
-    <div class="risk-note">
+    <div class="note-card risk-card">
+      <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
       <p><strong>Risk notice:</strong> Higher ROI profiles carry higher drawdown. Always test on a demo account first. Past performance is not indicative of future results.</p>
+    </div>
+    <div class="mode-legend">
+      <span><strong>Lot Mode</strong> is read directly from each <code>.set</code> file.</span>
+      <span><strong>Fixed</strong> = manual fixed lot.</span>
+      <span><strong>Sequence</strong> = starts at 0.01 and adds 0.01 after every N trades (N = repeat count).</span>
     </div>
 
       <section class="cat cat-low">
         <div class="cat-head">
-          <h2><span class="dot"></span>Low Risk<span class="cat-badge">Capital Preservation</span></h2>
+          <div>
+            <h2 class="cat-title"><span class="dot"></span>Low Risk<span class="cat-badge">Capital Preservation</span></h2>
+            <p class="cat-desc">Slow and steady profiles built to protect capital. Best starting point for new users.</p>
+          </div>
           <span class="cat-range">Max drawdown up to 20% · 4 profiles</span>
         </div>
-        <p class="cat-desc">Slow and steady profiles built to protect capital. Best starting point for new users.</p>
         <div class="table-wrap">
           <table>
             <thead>
               <tr>
                 <th>Set File</th>
+                <th>Lot Mode</th>
+                <th>Lot Size</th>
                 <th>ROI / Month</th>
                 <th>Max DD</th>
                 <th>Avg DD</th>
                 <th>Period</th>
-                <th>Lot</th>
                 <th>Download</th>
               </tr>
             </thead>
             <tbody>
             <tr>
-              <td data-label="Set File" class="cell-file"><span class="file-name"><span class="fname">AMRAX v2 Low Risk - 11% Max - DD 18.6% ROI - 10 Months</span><span class="ext">.set</span></span></td>
-              <td data-label="ROI / Month"><span class="roi">~1.8%</span></td>
+              <td data-label="Set File" class="cell-file">
+                <span class="file-name"><span class="fname">Seq 0.01 · 11% DD</span><span class="ext">.set</span></span>
+              </td>
+              <td data-label="Lot Mode"><span class="mode-badge mode-seq">Sequence</span></td>
+              <td data-label="Lot Size"><span class="mono">0.01 ×6 → 0.02 …</span></td>
+              <td data-label="ROI / Month"><span class="roi">1.8%</span></td>
               <td data-label="Max DD"><span class="dd">11%</span></td>
               <td data-label="Avg DD"><span class="mono">2–3%</span></td>
               <td data-label="Period"><span class="mono">10 months</span></td>
-              <td data-label="Lot"><span class="mono">—</span></td>
-              <td data-label="Download" class="cell-dl"><a class="dl-btn" href="amrax-v2-low-risk-11pct-dd-10m.set" download="AMRAX v2 Low Risk - 11% Max - DD 18.6% ROI - 10 Months.set" aria-label="Download AMRAX v2 Low Risk - 11% Max - DD 18.6% ROI - 10 Months.set"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>Download</a></td>
+              <td data-label="Download" class="cell-dl">
+                <a class="btn-gold dl-btn" href="amrax-v2-low-risk-11pct-dd-10m.set" download="Seq 0.01 - 11% DD.set" aria-label="Download Seq 0.01 · 11% DD set file">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                  Download
+                </a>
+              </td>
             </tr>
             <tr>
-              <td data-label="Set File" class="cell-file"><span class="file-name"><span class="fname">Fixed 0.01 lot - 2.5% Per Month ROI - DD 12% - 10 Months </span><span class="ext">.set</span></span></td>
+              <td data-label="Set File" class="cell-file">
+                <span class="file-name"><span class="fname">Fixed 0.01 · 12% DD</span><span class="ext">.set</span></span>
+              </td>
+              <td data-label="Lot Mode"><span class="mode-badge mode-fixed">Fixed</span></td>
+              <td data-label="Lot Size"><span class="mono">0.01</span></td>
               <td data-label="ROI / Month"><span class="roi">2.5%</span></td>
               <td data-label="Max DD"><span class="dd">12%</span></td>
-              <td data-label="Avg DD"><span class="mono">—</span></td>
+              <td data-label="Avg DD"><span class="mono">3–5%</span></td>
               <td data-label="Period"><span class="mono">10 months</span></td>
-              <td data-label="Lot"><span class="mono">Fixed 0.01</span></td>
-              <td data-label="Download" class="cell-dl"><a class="dl-btn" href="amrax-v2-fixed-001-2-5pct-roi-12pct-dd-10m.set" download="Fixed 0.01 lot - 2.5% Per Month ROI - DD 12% - 10 Months .set" aria-label="Download Fixed 0.01 lot - 2.5% Per Month ROI - DD 12% - 10 Months .set"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>Download</a></td>
+              <td data-label="Download" class="cell-dl">
+                <a class="btn-gold dl-btn" href="amrax-v2-fixed-001-2-5pct-roi-12pct-dd-10m.set" download="Fixed 0.01 - 12% DD.set" aria-label="Download Fixed 0.01 · 12% DD set file">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                  Download
+                </a>
+              </td>
             </tr>
             <tr>
-              <td data-label="Set File" class="cell-file"><span class="file-name"><span class="fname">fixed lot 0.01 - 1.5% ROi - 17% max DD</span><span class="ext">.set</span></span></td>
+              <td data-label="Set File" class="cell-file">
+                <span class="file-name"><span class="fname">Fixed 0.01 · 17% DD</span><span class="ext">.set</span></span>
+              </td>
+              <td data-label="Lot Mode"><span class="mode-badge mode-fixed">Fixed</span></td>
+              <td data-label="Lot Size"><span class="mono">0.01</span></td>
               <td data-label="ROI / Month"><span class="roi">1.5%</span></td>
               <td data-label="Max DD"><span class="dd">17%</span></td>
-              <td data-label="Avg DD"><span class="mono">—</span></td>
+              <td data-label="Avg DD"><span class="mono">3–5%</span></td>
               <td data-label="Period"><span class="mono">—</span></td>
-              <td data-label="Lot"><span class="mono">Fixed 0.01</span></td>
-              <td data-label="Download" class="cell-dl"><a class="dl-btn" href="amrax-v2-fixed-001-1-5pct-roi-17pct-dd.set" download="fixed lot 0.01 - 1.5% ROi - 17% max DD.set" aria-label="Download fixed lot 0.01 - 1.5% ROi - 17% max DD.set"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>Download</a></td>
+              <td data-label="Download" class="cell-dl">
+                <a class="btn-gold dl-btn" href="amrax-v2-fixed-001-1-5pct-roi-17pct-dd.set" download="Fixed 0.01 - 17% DD.set" aria-label="Download Fixed 0.01 · 17% DD set file">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                  Download
+                </a>
+              </td>
             </tr>
             <tr>
-              <td data-label="Set File" class="cell-file"><span class="file-name"><span class="fname">Fixed 0.01 Lot - 4% Per month - max 20% DD  -10 months backtest</span><span class="ext">.set</span></span></td>
+              <td data-label="Set File" class="cell-file">
+                <span class="file-name"><span class="fname">Fixed 0.01 · 20% DD</span><span class="ext">.set</span></span>
+              </td>
+              <td data-label="Lot Mode"><span class="mode-badge mode-fixed">Fixed</span></td>
+              <td data-label="Lot Size"><span class="mono">0.01</span></td>
               <td data-label="ROI / Month"><span class="roi">4%</span></td>
               <td data-label="Max DD"><span class="dd">20%</span></td>
               <td data-label="Avg DD"><span class="mono">6–8%</span></td>
               <td data-label="Period"><span class="mono">10 months</span></td>
-              <td data-label="Lot"><span class="mono">Fixed 0.01</span></td>
-              <td data-label="Download" class="cell-dl"><a class="dl-btn" href="amrax-v2-fixed-001-4pct-roi-20pct-dd-10m.set" download="Fixed 0.01 Lot - 4% Per month - max 20% DD  -10 months backtest.set" aria-label="Download Fixed 0.01 Lot - 4% Per month - max 20% DD  -10 months backtest.set"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>Download</a></td>
+              <td data-label="Download" class="cell-dl">
+                <a class="btn-gold dl-btn" href="amrax-v2-fixed-001-4pct-roi-20pct-dd-10m.set" download="Fixed 0.01 - 20% DD.set" aria-label="Download Fixed 0.01 · 20% DD set file">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                  Download
+                </a>
+              </td>
             </tr>
             </tbody>
           </table>
         </div>
       </section>
 
-      <section class="cat cat-medium">
+      <section class="cat cat-med">
         <div class="cat-head">
-          <h2><span class="dot"></span>Medium Risk<span class="cat-badge">Balanced Growth</span></h2>
+          <div>
+            <h2 class="cat-title"><span class="dot"></span>Medium Risk<span class="cat-badge">Balanced Growth</span></h2>
+            <p class="cat-desc">Balanced profiles that combine growth with controlled drawdown.</p>
+          </div>
           <span class="cat-range">Max drawdown 21–35% · 4 profiles</span>
         </div>
-        <p class="cat-desc">Balanced profiles that combine growth with controlled drawdown.</p>
         <div class="table-wrap">
           <table>
             <thead>
               <tr>
                 <th>Set File</th>
+                <th>Lot Mode</th>
+                <th>Lot Size</th>
                 <th>ROI / Month</th>
                 <th>Max DD</th>
                 <th>Avg DD</th>
                 <th>Period</th>
-                <th>Lot</th>
                 <th>Download</th>
               </tr>
             </thead>
             <tbody>
             <tr>
-              <td data-label="Set File" class="cell-file"><span class="file-name"><span class="fname">seq 3 - 23% DD - 2.9% ROI - 6 Months</span><span class="ext">.set</span></span></td>
+              <td data-label="Set File" class="cell-file">
+                <span class="file-name"><span class="fname">Seq 0.01 · 23% DD</span><span class="ext">.set</span></span>
+              </td>
+              <td data-label="Lot Mode"><span class="mode-badge mode-seq">Sequence</span></td>
+              <td data-label="Lot Size"><span class="mono">0.01 ×3 → 0.02 …</span></td>
               <td data-label="ROI / Month"><span class="roi">2.9%</span></td>
               <td data-label="Max DD"><span class="dd">23%</span></td>
               <td data-label="Avg DD"><span class="mono">6–8%</span></td>
               <td data-label="Period"><span class="mono">6 months</span></td>
-              <td data-label="Lot"><span class="mono">—</span></td>
-              <td data-label="Download" class="cell-dl"><a class="dl-btn" href="amrax-v2-seq3-2-9pct-roi-23pct-dd-6m.set" download="seq 3 - 23% DD - 2.9% ROI - 6 Months.set" aria-label="Download seq 3 - 23% DD - 2.9% ROI - 6 Months.set"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>Download</a></td>
+              <td data-label="Download" class="cell-dl">
+                <a class="btn-gold dl-btn" href="amrax-v2-seq3-2-9pct-roi-23pct-dd-6m.set" download="Seq 0.01 - 23% DD.set" aria-label="Download Seq 0.01 · 23% DD set file">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                  Download
+                </a>
+              </td>
             </tr>
             <tr>
-              <td data-label="Set File" class="cell-file"><span class="file-name"><span class="fname">Fixed 0.01 lot - 29% dd - 2.5% Per month roi -</span><span class="ext">.set</span></span></td>
+              <td data-label="Set File" class="cell-file">
+                <span class="file-name"><span class="fname">Fixed 0.01 · 29% DD</span><span class="ext">.set</span></span>
+              </td>
+              <td data-label="Lot Mode"><span class="mode-badge mode-fixed">Fixed</span></td>
+              <td data-label="Lot Size"><span class="mono">0.01</span></td>
               <td data-label="ROI / Month"><span class="roi">2.5%</span></td>
               <td data-label="Max DD"><span class="dd">29%</span></td>
-              <td data-label="Avg DD"><span class="mono">—</span></td>
+              <td data-label="Avg DD"><span class="mono">8–10%</span></td>
               <td data-label="Period"><span class="mono">—</span></td>
-              <td data-label="Lot"><span class="mono">Fixed 0.01</span></td>
-              <td data-label="Download" class="cell-dl"><a class="dl-btn" href="amrax-v2-fixed-001-2-5pct-roi-29pct-dd.set" download="Fixed 0.01 lot - 29% dd - 2.5% Per month roi -.set" aria-label="Download Fixed 0.01 lot - 29% dd - 2.5% Per month roi -.set"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>Download</a></td>
+              <td data-label="Download" class="cell-dl">
+                <a class="btn-gold dl-btn" href="amrax-v2-fixed-001-2-5pct-roi-29pct-dd.set" download="Fixed 0.01 - 29% DD.set" aria-label="Download Fixed 0.01 · 29% DD set file">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                  Download
+                </a>
+              </td>
             </tr>
             <tr>
-              <td data-label="Set File" class="cell-file"><span class="file-name"><span class="fname">83% ROI - 34% DD - 10 Months</span><span class="ext">.set</span></span></td>
-              <td data-label="ROI / Month"><span class="roi">~8.3%</span></td>
+              <td data-label="Set File" class="cell-file">
+                <span class="file-name"><span class="fname">Seq 0.01 · 34% DD</span><span class="ext">.set</span></span>
+              </td>
+              <td data-label="Lot Mode"><span class="mode-badge mode-seq">Sequence</span></td>
+              <td data-label="Lot Size"><span class="mono">0.01 ×3 → 0.02 …</span></td>
+              <td data-label="ROI / Month"><span class="roi">8.3%</span></td>
               <td data-label="Max DD"><span class="dd">34%</span></td>
               <td data-label="Avg DD"><span class="mono">10–12%</span></td>
               <td data-label="Period"><span class="mono">10 months</span></td>
-              <td data-label="Lot"><span class="mono">—</span></td>
-              <td data-label="Download" class="cell-dl"><a class="dl-btn" href="amrax-v2-83pct-roi-34pct-dd-10m.set" download="83% ROI - 34% DD - 10 Months.set" aria-label="Download 83% ROI - 34% DD - 10 Months.set"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>Download</a></td>
+              <td data-label="Download" class="cell-dl">
+                <a class="btn-gold dl-btn" href="amrax-v2-83pct-roi-34pct-dd-10m.set" download="Seq 0.01 - 34% DD.set" aria-label="Download Seq 0.01 · 34% DD set file">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                  Download
+                </a>
+              </td>
             </tr>
             <tr>
-              <td data-label="Set File" class="cell-file"><span class="file-name"><span class="fname">AMRAX v2.0 Fixed 0.02 Lot - 8% Per Month - 34% DD - 10 months</span><span class="ext">.set</span></span></td>
+              <td data-label="Set File" class="cell-file">
+                <span class="file-name"><span class="fname">Fixed 0.02 · 34% DD</span><span class="ext">.set</span></span>
+              </td>
+              <td data-label="Lot Mode"><span class="mode-badge mode-fixed">Fixed</span></td>
+              <td data-label="Lot Size"><span class="mono">0.02</span></td>
               <td data-label="ROI / Month"><span class="roi">8%</span></td>
               <td data-label="Max DD"><span class="dd">34%</span></td>
-              <td data-label="Avg DD"><span class="mono">—</span></td>
+              <td data-label="Avg DD"><span class="mono">10–15%</span></td>
               <td data-label="Period"><span class="mono">10 months</span></td>
-              <td data-label="Lot"><span class="mono">Fixed 0.02</span></td>
-              <td data-label="Download" class="cell-dl"><a class="dl-btn" href="amrax-v2-fixed-002-8pct-roi-34pct-dd-10m.set" download="AMRAX v2.0 Fixed 0.02 Lot - 8% Per Month - 34% DD - 10 months.set" aria-label="Download AMRAX v2.0 Fixed 0.02 Lot - 8% Per Month - 34% DD - 10 months.set"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>Download</a></td>
+              <td data-label="Download" class="cell-dl">
+                <a class="btn-gold dl-btn" href="amrax-v2-fixed-002-8pct-roi-34pct-dd-10m.set" download="Fixed 0.02 - 34% DD.set" aria-label="Download Fixed 0.02 · 34% DD set file">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                  Download
+                </a>
+              </td>
             </tr>
             </tbody>
           </table>
@@ -420,50 +574,77 @@
 
       <section class="cat cat-high">
         <div class="cat-head">
-          <h2><span class="dot"></span>High Risk<span class="cat-badge">Aggressive</span></h2>
+          <div>
+            <h2 class="cat-title"><span class="dot"></span>High Risk<span class="cat-badge">Aggressive</span></h2>
+            <p class="cat-desc">Aggressive profiles with higher drawdown tolerance. Experienced traders only.</p>
+          </div>
           <span class="cat-range">Max drawdown 36%+ · 3 profiles</span>
         </div>
-        <p class="cat-desc">Aggressive profiles with higher drawdown tolerance. Experienced traders only.</p>
         <div class="table-wrap">
           <table>
             <thead>
               <tr>
                 <th>Set File</th>
+                <th>Lot Mode</th>
+                <th>Lot Size</th>
                 <th>ROI / Month</th>
                 <th>Max DD</th>
                 <th>Avg DD</th>
                 <th>Period</th>
-                <th>Lot</th>
                 <th>Download</th>
               </tr>
             </thead>
             <tbody>
             <tr>
-              <td data-label="Set File" class="cell-file"><span class="file-name"><span class="fname">38% DD 29% ROI - 4 Months</span><span class="ext">.set</span></span></td>
-              <td data-label="ROI / Month"><span class="roi">~7.3%</span></td>
+              <td data-label="Set File" class="cell-file">
+                <span class="file-name"><span class="fname">Fixed 0.02 · 38% DD</span><span class="ext">.set</span></span>
+              </td>
+              <td data-label="Lot Mode"><span class="mode-badge mode-fixed">Fixed</span></td>
+              <td data-label="Lot Size"><span class="mono">0.02</span></td>
+              <td data-label="ROI / Month"><span class="roi">7.3%</span></td>
               <td data-label="Max DD"><span class="dd">38%</span></td>
               <td data-label="Avg DD"><span class="mono">7–10%</span></td>
               <td data-label="Period"><span class="mono">4 months</span></td>
-              <td data-label="Lot"><span class="mono">—</span></td>
-              <td data-label="Download" class="cell-dl"><a class="dl-btn" href="amrax-v2-7-3pct-roi-38pct-dd-4m.set" download="38% DD 29% ROI - 4 Months.set" aria-label="Download 38% DD 29% ROI - 4 Months.set"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>Download</a></td>
+              <td data-label="Download" class="cell-dl">
+                <a class="btn-gold dl-btn" href="amrax-v2-7-3pct-roi-38pct-dd-4m.set" download="Fixed 0.02 - 38% DD.set" aria-label="Download Fixed 0.02 · 38% DD set file">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                  Download
+                </a>
+              </td>
             </tr>
             <tr>
-              <td data-label="Set File" class="cell-file"><span class="file-name"><span class="fname">amrax v2 - 10 months - low risk mode - 44% DD - 69% ROI</span><span class="ext">.set</span></span></td>
-              <td data-label="ROI / Month"><span class="roi">~6.9%</span></td>
+              <td data-label="Set File" class="cell-file">
+                <span class="file-name"><span class="fname">Seq 0.01 · 44% DD</span><span class="ext">.set</span></span>
+              </td>
+              <td data-label="Lot Mode"><span class="mode-badge mode-seq">Sequence</span></td>
+              <td data-label="Lot Size"><span class="mono">0.01 → 0.02 …</span></td>
+              <td data-label="ROI / Month"><span class="roi">6.9%</span></td>
               <td data-label="Max DD"><span class="dd">44%</span></td>
               <td data-label="Avg DD"><span class="mono">8–10%</span></td>
               <td data-label="Period"><span class="mono">10 months</span></td>
-              <td data-label="Lot"><span class="mono">—</span></td>
-              <td data-label="Download" class="cell-dl"><a class="dl-btn" href="amrax-v2-6-9pct-roi-44pct-dd-10m.set" download="amrax v2 - 10 months - low risk mode - 44% DD - 69% ROI.set" aria-label="Download amrax v2 - 10 months - low risk mode - 44% DD - 69% ROI.set"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>Download</a></td>
+              <td data-label="Download" class="cell-dl">
+                <a class="btn-gold dl-btn" href="amrax-v2-6-9pct-roi-44pct-dd-10m.set" download="Seq 0.01 - 44% DD.set" aria-label="Download Seq 0.01 · 44% DD set file">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                  Download
+                </a>
+              </td>
             </tr>
             <tr>
-              <td data-label="Set File" class="cell-file"><span class="file-name"><span class="fname">49% DD - 68% ROI 10 Months</span><span class="ext">.set</span></span></td>
-              <td data-label="ROI / Month"><span class="roi">~6.8%</span></td>
+              <td data-label="Set File" class="cell-file">
+                <span class="file-name"><span class="fname">Seq 0.01 · 49% DD</span><span class="ext">.set</span></span>
+              </td>
+              <td data-label="Lot Mode"><span class="mode-badge mode-seq">Sequence</span></td>
+              <td data-label="Lot Size"><span class="mono">0.01 → 0.02 …</span></td>
+              <td data-label="ROI / Month"><span class="roi">6.8%</span></td>
               <td data-label="Max DD"><span class="dd">49%</span></td>
               <td data-label="Avg DD"><span class="mono">8–10%</span></td>
               <td data-label="Period"><span class="mono">10 months</span></td>
-              <td data-label="Lot"><span class="mono">—</span></td>
-              <td data-label="Download" class="cell-dl"><a class="dl-btn" href="amrax-v2-6-8pct-roi-49pct-dd-10m.set" download="49% DD - 68% ROI 10 Months.set" aria-label="Download 49% DD - 68% ROI 10 Months.set"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>Download</a></td>
+              <td data-label="Download" class="cell-dl">
+                <a class="btn-gold dl-btn" href="amrax-v2-6-8pct-roi-49pct-dd-10m.set" download="Seq 0.01 - 49% DD.set" aria-label="Download Seq 0.01 · 49% DD set file">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                  Download
+                </a>
+              </td>
             </tr>
             </tbody>
           </table>
@@ -480,7 +661,7 @@
       <div class="footer-grid">
         <div>
           <div class="footer-brand">
-            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5"><polygon points="12 2 22 8.5 22 15.5 12 22 2 15.5 2 8.5"/><line x1="12" y1="22" x2="12" y2="15.5"/><polyline points="22 8.5 12 15.5 2 8.5"/></svg>
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5"><polygon points="12 2 22 8.5 22 15.5 12 22 2 15.5 2 8.5"/><line x1="12" y1="22" x2="12" y2="15.5"/><polyline points="22 8.5 12 15.5 2 8.5"/></svg>
             AMRAX
           </div>
           <p class="footer-tag">Institutional-grade Expert Advisor for MetaTrader 5. Engineered for consistent alpha generation on gold.</p>
@@ -497,9 +678,9 @@
           <span class="fl-title">Quick Links</span>
           <a href="index.html">Home</a>
           <a href="set-files.html">Set Files</a>
-          <a href="index.html#performance-dashboard">Performance</a>
           <a href="index.html#pricing">Pricing</a>
           <a href="index.html#live-monitoring">Live Accounts</a>
+          <a href="index.html#pricing" class="btn-gold" style="margin-top:14px;padding:12px 28px;font-size:0.72rem;border-radius:10px;">Get Started</a>
         </div>
       </div>
       <div class="footer-bottom">
@@ -510,6 +691,13 @@
   </footer>
 
   <script>
+    // Nav scroll state
+    const navEl = document.querySelector('nav');
+    window.addEventListener('scroll', function () {
+      navEl.classList.toggle('scrolled', window.scrollY > 10);
+    }, { passive: true });
+
+    // Close mobile menu on link tap
     document.querySelectorAll('#mobileMenu a').forEach(function (a) {
       a.addEventListener('click', function () {
         document.getElementById('mobileMenu').classList.remove('open');

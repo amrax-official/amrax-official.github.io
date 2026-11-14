@@ -565,7 +565,9 @@
       -webkit-background-clip: text;
       background-clip: text;
       -webkit-text-fill-color: transparent;
-      text-shadow: 0 1px 2px rgba(0,0,0,0.55);
+      background-size: 220% auto;
+      text-shadow: 0 0 16px rgba(201,168,76,0.55), 0 0 42px rgba(201,168,76,0.3);
+      animation: titleShine 7s linear infinite;
       margin-bottom: 16px;
     }
     @keyframes titleShine {
@@ -588,7 +590,7 @@
       background-clip: initial;
       -webkit-text-fill-color: #ffd87a;
       -webkit-text-stroke: 0;
-      text-shadow: none;
+      text-shadow: 0 0 14px rgba(201,168,76,0.6), 0 0 30px rgba(201,168,76,0.35);
     }
     .hero-version {
       font-family: 'DM Mono', monospace;
@@ -1520,6 +1522,7 @@
     @media (prefers-reduced-motion: reduce) {
       .reveal { opacity: 1 !important; transform: none !important; transition: none !important; }
       .shimmer-line { animation: none !important; }
+      .hero-title { animation: none !important; }
       .pulse-dot { animation: none !important; }
       .live-dot { animation: none !important; }
       .live-pulse-green { animation: none !important; }
@@ -2059,7 +2062,6 @@
     <!-- Desktop Nav Links -->
     <div class="nav-links">
       <a href="#features">Features</a>
-      <a href="#performance-dashboard">Performance</a>
       <a href="set-files.html">Set Files</a>
       <a href="#live-monitoring">Live Accounts</a>
       <a href="#testimonials">Reviews</a>
@@ -2084,7 +2086,6 @@
   <!-- Mobile Dropdown Menu -->
   <div id="mobileMenu" class="mobile-menu">
     <a href="#features" onclick="document.getElementById('mobileMenu').classList.remove('open')">Features</a>
-    <a href="#performance-dashboard" onclick="document.getElementById('mobileMenu').classList.remove('open')">Performance</a>
     <a href="set-files.html" onclick="document.getElementById('mobileMenu').classList.remove('open')">Set Files</a>
     <a href="#live-monitoring" onclick="document.getElementById('mobileMenu').classList.remove('open')">Live Accounts</a>
     <a href="#testimonials" onclick="document.getElementById('mobileMenu').classList.remove('open')">Reviews</a>
@@ -2132,8 +2133,8 @@
             <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
             Acquire License
           </a>
-          <a href="#performance-dashboard" class="btn-outline">
-            View Performance Data
+          <a href="set-files.html" class="btn-outline">
+            Browse Set Files
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
           </a>
         </div>
@@ -2169,55 +2170,6 @@
           <animate attributeName="opacity" values="1;0.3;1" dur="2s" repeatCount="indefinite"/>
         </circle>
       </svg>
-    </div>
-  </section>
-
-  <!-- ============================================
-       SECTION: PERFORMANCE DASHBOARD
-       1-month live-market backtest results
-  ============================================ -->
-  <section id="performance-dashboard" class="section-pad">
-    <div class="container">
-
-      <!-- Section Header -->
-      <div style="text-align:center;margin-bottom:48px;">
-        <p class="section-label reveal">Verified Backtested Metrics</p>
-        <h2 class="section-title reveal delay-100">Performance <span class="text-gold-gradient">Dashboard</span></h2>
-        <p class="section-desc reveal delay-200">1-month live-market backtest. Every metric independently verified — no curve-fitting, no overfitted results.</p>
-      </div>
-
-      <!-- Backtest Screenshots (Low / Medium / High Risk — click to open zoom popup) -->
-      <div class="backtest-gallery reveal delay-100">
-
-        <!-- Low Risk -->
-        <figure class="backtest-item">
-          <span class="risk-tag low">Low Risk Mode Settings</span>
-          <button type="button" class="backtest-thumb" data-full="AMRAX v2.0 Low Risk Backtest.png" data-tag="Low Risk Mode Settings" aria-label="Open Low Risk backtest chart">
-            <img src="AMRAX v2.0 Low Risk Backtest.png" alt="AMRAX 1-month backtest chart — Low Risk mode settings (v2.0)" loading="lazy">
-            <span class="thumb-zoom-badge">Zoom 🔍</span>
-          </button>
-        </figure>
-
-        <!-- Medium Risk -->
-        <figure class="backtest-item">
-          <span class="risk-tag medium">Medium Risk Mode Settings</span>
-          <button type="button" class="backtest-thumb" data-full="AMRAX v2.0 Medium Risk Backtest.png" data-tag="Medium Risk Mode Settings" aria-label="Open Medium Risk backtest chart">
-            <img src="AMRAX v2.0 Medium Risk Backtest.png" alt="AMRAX backtest chart — Medium Risk mode settings (v2.0)" loading="lazy">
-            <span class="thumb-zoom-badge">Zoom 🔍</span>
-          </button>
-        </figure>
-
-        <!-- High Risk -->
-        <figure class="backtest-item">
-          <span class="risk-tag high">High Risk Mode Settings</span>
-          <button type="button" class="backtest-thumb" data-full="AMRAX v2.0 High Risk Backtest.png" data-tag="High Risk Mode Settings" aria-label="Open High Risk backtest chart">
-            <img src="AMRAX v2.0 High Risk Backtest.png" alt="AMRAX backtest chart — High Risk mode settings (v2.0)" loading="lazy">
-            <span class="thumb-zoom-badge">Zoom 🔍</span>
-          </button>
-        </figure>
-
-      </div>
-
     </div>
   </section>
 
@@ -2920,7 +2872,6 @@
         <div style="display:flex;flex-direction:column;align-items:flex-end;text-align:right;">
           <p style="font-family:'DM Mono',monospace;font-size:0.6rem;color:var(--text-muted);letter-spacing:0.2em;text-transform:uppercase;margin-bottom:16px;">Quick Links</p>
           <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:24px;">
-            <a href="#performance-dashboard" class="footer-link" style="font-size:0.8rem;color:var(--text-secondary);text-decoration:none;transition:all 0.3s;">Performance</a>
             <a href="set-files.html" class="footer-link" style="font-size:0.8rem;color:var(--text-secondary);text-decoration:none;transition:all 0.3s;">Set Files</a>
             <a href="#features" class="footer-link" style="font-size:0.8rem;color:var(--text-secondary);text-decoration:none;transition:all 0.3s;">Features</a>
             <a href="#pricing" class="footer-link" style="font-size:0.8rem;color:var(--text-secondary);text-decoration:none;transition:all 0.3s;">Pricing</a>
