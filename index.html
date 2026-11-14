@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover" />
-  <meta name="theme-color" content="#000000" />
+  <meta name="theme-color" content="#0A0A0C" />
   <meta name="mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <title>AMRAX v2.0 — Institutional EA | Automated Forex Trading</title>
-  <meta name="description" content="AMRAX v2.0 — Fully-automated institutional-grade Expert Advisor for MetaTrader 5. Risk-based monthly ROI: 5-10% Low, 15-20% Medium, 40-45% High, with 5-10% / 25-35% / 40-60% max drawdown. Start trading today." />
+  <meta name="description" content="AMRAX v2.0 — Fully-automated institutional-grade Expert Advisor for MetaTrader 5. Risk-based .set profiles, verified real-tick backtests and live accounts. Start trading today." />
   <meta name="keywords" content="AMRAX, forex EA, MetaTrader 5, automated trading, institutional EA, expert advisor, gold trading, XAUUSD" />
   <meta name="author" content="AMRAX Trading Systems" />
 
@@ -16,7 +16,7 @@
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://amrax-official.github.io/" />
   <meta property="og:title" content="AMRAX v2.0 — Institutional EA | Automated Forex Trading" />
-  <meta property="og:description" content="Fully-automated trading system built for sophisticated investors. Risk-based monthly ROI: 5-10% Low, 15-20% Medium, 40-45% High, with 5-10% / 25-35% / 40-60% max drawdown." />
+  <meta property="og:description" content="Fully-automated trading system built for sophisticated investors. Risk-based .set profiles with verified real-tick backtests." />
   <meta property="og:image" content="https://amrax-official.github.io/Amrax%20founder.png" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
@@ -24,7 +24,7 @@
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="AMRAX v2.0 — Institutional EA" />
-  <meta name="twitter:description" content="Fully-automated trading system. Risk-based monthly ROI: 5-10% Low, 15-20% Medium, 40-45% High, with 5-10% / 25-35% / 40-60% max drawdown. Start trading today." />
+  <meta name="twitter:description" content="Fully-automated trading system. Risk-based .set profiles with verified real-tick backtests. Start trading today." />
   <meta name="twitter:image" content="https://amrax-official.github.io/Amrax%20founder.png" />
 
   <!-- Favicon -->
@@ -39,22 +39,22 @@
        CSS VARIABLES — Global Theme
     ============================================ */
 :root {
-  --gold: #C19B66; /* Muted Gold */
-  --gold-light: #D4BA95;
-  --gold-dim: #6E5334;
-  --obsidian: #000000; /* Absolute Black */
-  --obsidian-2: #080808;
-  --surface: #111111;
-  --surface-2: #181818;
-  --surface-3: #222222;
-  --glass-bg: rgba(0, 0, 0, 0.9);
-  --glass-border: rgba(193, 155, 102, 0.15);
-  --border: rgba(193, 155, 102, 0.08);
-  --border-strong: rgba(193, 155, 102, 0.25);
-  --text-primary: #E5E5E5;
-  --text-secondary: #888888;
-  --text-muted: #444444;
-  --profit: #00D084;
+  --gold: #D9AE63; /* Bright Gold */
+  --gold-light: #F2D9AC;
+  --gold-dim: #8A6A3A;
+  --obsidian: #0A0A0C; /* Soft Black */
+  --obsidian-2: #0F0F12;
+  --surface: #161618;
+  --surface-2: #1D1D21;
+  --surface-3: #26262B;
+  --glass-bg: rgba(10, 10, 12, 0.92);
+  --glass-border: rgba(217, 174, 99, 0.28);
+  --border: rgba(217, 174, 99, 0.18);
+  --border-strong: rgba(217, 174, 99, 0.45);
+  --text-primary: #F4F4F5;
+  --text-secondary: #C6C6CB;
+  --text-muted: #8E8E96;
+  --profit: #2BE39B;
   --profit-dim: #003321;
 }
 
@@ -272,7 +272,7 @@
 
     /* --- Nav Links (Center) --- */
     .nav-links { display: none; gap: 20px; }
-    @media (min-width: 768px) { .nav-links { display: flex; align-items: center; justify-content: center; } }
+    @media (min-width: 920px) { .nav-links { display: flex; align-items: center; justify-content: center; } }
     .nav-links a {
       font-size: 0.8rem;
       color: var(--text-secondary);
@@ -281,20 +281,20 @@
       white-space: nowrap;
     }
     .nav-links a:hover { color: var(--gold); }
-    /* Tighten nav on tablet widths so 6 links + logo + CTA fit */
-    @media (min-width: 768px) and (max-width: 1080px) {
+    /* Tighten nav on tablet widths so 7 links + logo + CTA fit */
+    @media (min-width: 920px) and (max-width: 1180px) {
       nav { padding: 12px 18px; }
       .nav-links { gap: 13px; }
-      .nav-links a { font-size: 0.76rem; letter-spacing: 0; }
+      .nav-links a { font-size: 0.75rem; letter-spacing: 0; }
     }
 
     /* --- Nav CTA (Right) --- */
     .nav-cta { display: none; flex-shrink: 0; white-space: nowrap; }
-    @media (min-width: 768px) { .nav-cta { display: inline-flex; align-items: center; } }
+    @media (min-width: 920px) { .nav-cta { display: inline-flex; align-items: center; } }
 
     /* --- Mobile Menu Button --- */
     .mobile-menu-btn { display: flex; padding: 8px; color: var(--gold); }
-    @media (min-width: 768px) { .mobile-menu-btn { display: none; } }
+    @media (min-width: 920px) { .mobile-menu-btn { display: none; } }
 
     /* --- Mobile Menu --- */
     .mobile-menu {
@@ -454,7 +454,7 @@
       font-size: 0.55rem;
       letter-spacing: 0.22em;
       text-transform: uppercase;
-      color: rgba(255,255,255,0.45);
+      color: rgba(255,255,255,0.72);
     }
     .dev-badge-name {
       font-family: 'Space Grotesk', sans-serif;
@@ -565,7 +565,7 @@
       -webkit-background-clip: text;
       background-clip: text;
       -webkit-text-fill-color: transparent;
-      text-shadow: 0 0 16px rgba(201,168,76,0.55), 0 0 42px rgba(201,168,76,0.3);
+      text-shadow: 0 1px 2px rgba(0,0,0,0.55);
       margin-bottom: 16px;
     }
     @keyframes titleShine {
@@ -588,7 +588,7 @@
       background-clip: initial;
       -webkit-text-fill-color: #ffd87a;
       -webkit-text-stroke: 0;
-      text-shadow: 0 0 14px rgba(201,168,76,0.6), 0 0 30px rgba(201,168,76,0.35);
+      text-shadow: none;
     }
     .hero-version {
       font-family: 'DM Mono', monospace;
@@ -1029,7 +1029,7 @@
     }
     .free-trial-note {
       font-size: 0.85rem;
-      color: #666666;
+      color: #A8A8B0;
       margin-bottom: 35px;
       font-style: italic;
     }
@@ -2060,6 +2060,7 @@
     <div class="nav-links">
       <a href="#features">Features</a>
       <a href="#performance-dashboard">Performance</a>
+      <a href="set-files.html">Set Files</a>
       <a href="#live-monitoring">Live Accounts</a>
       <a href="#testimonials">Reviews</a>
       <a href="#free-trial">Download EA</a>
@@ -2084,6 +2085,7 @@
   <div id="mobileMenu" class="mobile-menu">
     <a href="#features" onclick="document.getElementById('mobileMenu').classList.remove('open')">Features</a>
     <a href="#performance-dashboard" onclick="document.getElementById('mobileMenu').classList.remove('open')">Performance</a>
+    <a href="set-files.html" onclick="document.getElementById('mobileMenu').classList.remove('open')">Set Files</a>
     <a href="#live-monitoring" onclick="document.getElementById('mobileMenu').classList.remove('open')">Live Accounts</a>
     <a href="#testimonials" onclick="document.getElementById('mobileMenu').classList.remove('open')">Reviews</a>
     <a href="#free-trial" onclick="document.getElementById('mobileMenu').classList.remove('open')">Download EA</a>
@@ -2130,7 +2132,7 @@
             <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
             Acquire License
           </a>
-          <a href="#performance" class="btn-outline">
+          <a href="#performance-dashboard" class="btn-outline">
             View Performance Data
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
           </a>
@@ -2169,63 +2171,6 @@
       </svg>
     </div>
   </section>
-
-    <!-- ============================================
-         SECTION: PERFORMANCE — Expected ROI Table
-    ============================================ -->
-    <section id="performance" class="section-pad" style="padding-top:40px;">
-      <div class="container" style="max-width:1000px;">
-
-        <div style="text-align:center;margin-bottom:40px;">
-          <p class="section-label reveal">Risk &amp; Returns</p>
-          <h2 class="hero-stats-heading reveal delay-100" style="font-size:clamp(1.8rem,4vw,2.8rem);margin-bottom:12px;">What You Can Expect <span class="text-gold-gradient">From AMRAX</span></h2>
-          <p class="section-desc reveal delay-200">Expected monthly ROI, risk-based drawdown and the minimum capital required to start with each risk profile.</p>
-        </div>
-
-        <div class="expect-table-wrap reveal delay-300">
-          <table class="expect-table">
-            <thead>
-              <tr>
-                <th>Risk Profile</th>
-                <th>Expected ROI Per Month</th>
-                <th>Expected Max Drawdown</th>
-                <th>Minimum Capital Required</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>
-                  <span class="expect-risk"><span class="risk-dot low"></span>Low Risk</span>
-                  <span class="expect-note">Capital preservation focus</span>
-                </td>
-                <td data-label="Expected ROI / Month"><span class="expect-return low">5–10%</span></td>
-                <td data-label="Expected Max Drawdown"><span class="expect-return low" style="font-size:1.05rem;">5–10%</span></td>
-                <td data-label="Minimum Capital"><span class="expect-capital">$1,000<small>= 100,000 Cents</small></span></td>
-              </tr>
-              <tr>
-                <td>
-                  <span class="expect-risk"><span class="risk-dot med"></span>Medium Risk</span>
-                  <span class="expect-note">Balanced growth &amp; control</span>
-                </td>
-                <td data-label="Expected ROI / Month"><span class="expect-return med">15–20%</span></td>
-                <td data-label="Expected Max Drawdown"><span class="expect-return med" style="font-size:1.05rem;">25–35%</span></td>
-                <td data-label="Minimum Capital"><span class="expect-capital">$1,000<small>= 100,000 Cents</small></span></td>
-              </tr>
-              <tr>
-                <td>
-                  <span class="expect-risk"><span class="risk-dot high"></span>High Risk</span>
-                  <span class="expect-note">Aggressive growth potential</span>
-                </td>
-                <td data-label="Expected ROI / Month"><span class="expect-return high">40–45%</span></td>
-                <td data-label="Expected Max Drawdown"><span class="expect-return high" style="font-size:1.05rem;">40–60%</span></td>
-                <td data-label="Minimum Capital"><span class="expect-capital">$1,000<small>= 100,000 Cents</small></span></td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-
-      </div>
-    </section>
 
   <!-- ============================================
        SECTION: PERFORMANCE DASHBOARD
@@ -2975,7 +2920,8 @@
         <div style="display:flex;flex-direction:column;align-items:flex-end;text-align:right;">
           <p style="font-family:'DM Mono',monospace;font-size:0.6rem;color:var(--text-muted);letter-spacing:0.2em;text-transform:uppercase;margin-bottom:16px;">Quick Links</p>
           <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:24px;">
-            <a href="#performance" class="footer-link" style="font-size:0.8rem;color:var(--text-secondary);text-decoration:none;transition:all 0.3s;">Performance</a>
+            <a href="#performance-dashboard" class="footer-link" style="font-size:0.8rem;color:var(--text-secondary);text-decoration:none;transition:all 0.3s;">Performance</a>
+            <a href="set-files.html" class="footer-link" style="font-size:0.8rem;color:var(--text-secondary);text-decoration:none;transition:all 0.3s;">Set Files</a>
             <a href="#features" class="footer-link" style="font-size:0.8rem;color:var(--text-secondary);text-decoration:none;transition:all 0.3s;">Features</a>
             <a href="#pricing" class="footer-link" style="font-size:0.8rem;color:var(--text-secondary);text-decoration:none;transition:all 0.3s;">Pricing</a>
             <a href="#live-monitoring" class="footer-link" style="font-size:0.8rem;color:var(--text-secondary);text-decoration:none;transition:all 0.3s;">Live Accounts</a>
