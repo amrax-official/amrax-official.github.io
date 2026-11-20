@@ -274,6 +274,25 @@
     .basis-note p { margin: 0; }
     .basis-note strong { color: var(--text-primary); }
 
+    /* ---------- How-to video ---------- */
+    .video-section { max-width: 1000px; margin: 0 auto 34px; }
+    .video-title {
+      display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(1.25rem, 3vw, 1.8rem); font-weight: 600;
+      color: var(--text-primary); margin-bottom: 14px;
+    }
+    .video-title::before { content: ''; width: 4px; height: 1.1em; border-radius: 4px; background: linear-gradient(180deg, var(--gold-light), var(--gold-dim)); }
+    .video-frame {
+      position: relative; width: 100%; aspect-ratio: 16 / 9;
+      border: 1px solid var(--border-strong); border-radius: 16px; overflow: hidden;
+      background: #000;
+      box-shadow: 0 16px 48px rgba(0,0,0,0.45), 0 0 30px rgba(217,174,99,0.08);
+    }
+    .video-frame video { display: block; width: 100%; height: 100%; object-fit: contain; background: #000; }
+    .video-caption { margin-top: 10px; font-family: 'DM Mono', monospace; font-size: 0.78rem; letter-spacing: 0.03em; color: var(--text-muted); text-align: center; }
+    .video-caption a { color: var(--gold); text-decoration: underline; }
+
 
     /* ---------- Mobile: table -> cards ---------- */
     @media (max-width: 1000px) {
@@ -391,6 +410,19 @@
   </header>
 
   <main class="container">
+
+    <!-- How-to Video -->
+    <section class="video-section" aria-labelledby="howto-video-title">
+      <h2 class="video-title" id="howto-video-title">How to Use and Load Set Files on AMRAX v2.0</h2>
+      <div class="video-frame">
+        <video controls preload="metadata" playsinline>
+          <source src="setfiles.mp4" type="video/mp4" />
+          Your browser does not support HTML5 video. <a href="setfiles.mp4">Download the video</a>.
+        </video>
+      </div>
+      <p class="video-caption">2:49 min · Watch once, then follow the steps below.</p>
+    </section>
+
     <div class="note-card">
       <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
       <p><strong>How to load a set file:</strong> Open MT5 → right-click your chart → <code>Expert Advisors</code> → <code>Load</code> → select the downloaded <code>.set</code> file. Alternatively: EA properties → <code>Inputs</code> → <code>Load</code>.</p>
