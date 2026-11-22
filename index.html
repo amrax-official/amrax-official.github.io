@@ -1976,9 +1976,15 @@
       box-shadow: 0 0 18px rgba(217,174,99,0.4);
     }
     @media (max-width: 640px) {
-      .announce-bar { height: auto; padding: 8px 0; }
-      .announce-inner { gap: 8px; }
-      .announce-text { font-size: 0.8rem; white-space: normal; text-align: center; }
+      .announce-bar { height: 56px; padding: 0; }
+      .announce-inner { flex-wrap: nowrap; gap: 8px; }
+      .announce-text { font-size: 0.75rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+      .announce-pill { font-size: 0.55rem; padding: 3px 6px; }
+      .announce-btn { padding: 4px 8px; font-size: 0.68rem; }
+    }
+    @media (max-width: 479px) {
+      .announce-pill { display: none; }
+      .announce-text { font-size: 0.7rem; }
     }
     .announce-ticker {
       flex: 1; min-width: 0;
