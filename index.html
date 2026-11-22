@@ -249,6 +249,10 @@
         0 12px 40px rgba(0,0,0,0.4),
         0 0 0 1px rgba(193,155,102,0.08);
     }
+    @media (max-width: 640px) {
+      nav { top: 92px; }
+      .mobile-menu { top: 168px; }
+    }
     @media (min-width: 768px) { nav { left: 50%; right: auto; width: fit-content; max-width: none; transform: translateX(-50%); padding: 12px 28px; gap: 24px; justify-content: center; flex-wrap: nowrap; } }
 
     /* --- Nav Logo --- */
@@ -1950,7 +1954,9 @@
       font-size: 0.9rem; font-weight: 600; letter-spacing: 0.02em;
       color: #f3e6c6;
       white-space: nowrap;
+      text-decoration: none;
     }
+    .announce-text:hover { color: #fff; }
     .announce-text .g {
       color: var(--profit); font-weight: 800;
       text-shadow: 0 0 10px rgba(43,227,155,0.5);
@@ -1976,15 +1982,15 @@
       box-shadow: 0 0 18px rgba(217,174,99,0.4);
     }
     @media (max-width: 640px) {
-      .announce-bar { height: 56px; padding: 0; }
-      .announce-inner { flex-wrap: nowrap; gap: 8px; }
-      .announce-text { font-size: 0.75rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-      .announce-pill { font-size: 0.55rem; padding: 3px 6px; }
-      .announce-btn { padding: 4px 8px; font-size: 0.68rem; }
+      .announce-bar { height: auto; min-height: 52px; padding: 8px 0; }
+      .announce-inner { flex-wrap: wrap; justify-content: center; gap: 8px 12px; }
+      .announce-text { font-size: 0.85rem; white-space: normal; text-align: center; }
+      .announce-pill { font-size: 0.6rem; padding: 3px 8px; }
+      .announce-btn { display: none; }
     }
     @media (max-width: 479px) {
       .announce-pill { display: none; }
-      .announce-text { font-size: 0.7rem; }
+      .announce-text { font-size: 0.8rem; }
     }
     .announce-ticker {
       flex: 1; min-width: 0;
@@ -2369,7 +2375,7 @@
   <div class="announce-bar">
     <div class="announce-inner">
       <span class="announce-pill"><span class="dot"></span>Live Results</span>
-      <span class="announce-text">Last month: <span class="g">18% ROI</span> &amp; <span class="a">18% Max DD</span> on a <span class="g">$100</span> account</span>
+      <a href="#live-monitoring" class="announce-text">1 month: <span class="g">18% ROI</span> &amp; <span class="a">18% Max DD</span> on a <span class="g">$100</span> account</a>
       <a href="#live-monitoring" class="announce-btn">View Account →</a>
     </div>
   </div>
